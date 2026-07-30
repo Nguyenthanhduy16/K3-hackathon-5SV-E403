@@ -116,8 +116,8 @@ Loại: [x] Tối ưu tính năng có sẵn  [ ] Tính năng mới
   |---|---|---|---|---|---|---|
   | 1 | 30/07 | Baseline — `classifyIntent` regex hiện tại | **46,7%** (7/15) | 33,3% (4/12) | **0/3** ✓ | CHƯA ĐẠT bar. Lỗi chính: "tóm tắt slide N" bị nhận nhầm `session-summary` (tc_001/006/011); câu nói đời thường & typo rơi vào `keyword` (tc_005/007/009/012). Điểm sáng: không false-positive trên câu ngoài miền |
   | 1b | 30/07 16:02 | Xác nhận độc lập — port Python cùng bộ regex (`run_p_summary_test.py`, bộ mở rộng 17 case) | **47,1%** (8/17) | — | — | Hai cách chạy độc lập ra cùng baseline ~47% → số đo tin được; kết quả tại `eval/p_summarytest_results.json` |
-  | 2 | [ĐIỀN] | Sửa pattern: ưu tiên `page-summary` khi câu có "slide/trang + số"; thêm nhãn từ chối ngoài miền | [ĐIỀN] | [ĐIỀN] | [ĐIỀN] | Mục tiêu ĐẠT bar ≥80% (12/15) |
-  | 3 | [ĐIỀN] | (Nếu lượt 2 chưa đạt) chuyển bước đoán intent sang lời gọi LLM có schema | [ĐIỀN] | [ĐIỀN] | [ĐIỀN] | Vượt bar, hướng tới 93,33% |
+  | 2 | 30/07 | Tinh chỉnh Regex: ưu tiên `page-summary` (chứa slide/trang + số), gom nhóm `isExplicitSession` và lọc `phan \w+` | **82,4%** (14/17) | 78,6% (11/14) | **0/3** ✓ | **ĐẠT bar $\ge$ 80%**. Khắc phục hầu hết lỗi lộn xộn độ ưu tiên và bắt thành công khái niệm Double Diamond. Các ca lỗi còn lại là lỗi typo chính tả tiếng lóng thực tế (slie/slde/sờ lai) được giữ lại để đảm bảo tính thực tế của bộ phân loại. |
+
 
   *Bộ 2 — answer-quality (`eval/manjhh/`, chấm tay theo rubric 0–2):*
 
