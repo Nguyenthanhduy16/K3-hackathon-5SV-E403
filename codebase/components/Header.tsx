@@ -3,6 +3,7 @@
 import { ArrowLeft, BookOpen, Moon, PanelLeft, Sun, UserRound } from "lucide-react";
 import AIAssistantButton from "./AIAssistantButton";
 import Tooltip from "./Tooltip";
+import VLearnLogo from "./VLearnLogo";
 import type { Dict } from "@/lib/i18n";
 import type { Lang, Theme } from "@/lib/types";
 
@@ -19,27 +20,6 @@ interface Props {
   onToggleTheme: () => void;
   onToggleChat: () => void;
   onToggleMobileSidebar: () => void;
-}
-
-function VLearnLogo() {
-  return (
-    <span className="flex items-center gap-2">
-      <svg
-        viewBox="0 0 32 32"
-        aria-hidden="true"
-        className="h-7 w-7 text-brand-700 dark:text-brand-300"
-      >
-        <path
-          d="M3.5 4h6.2l6.3 12.4L22.3 4h6.2L16 28.4 3.5 4Z"
-          fill="currentColor"
-        />
-        <path d="M12.9 4h6.2L16 10.1 12.9 4Z" fill="currentColor" opacity="0.45" />
-      </svg>
-      <span className="text-[19px] font-bold tracking-tight text-brand-900 dark:text-white">
-        VLearn
-      </span>
-    </span>
-  );
 }
 
 export default function Header({

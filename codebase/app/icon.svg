@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="124.5 113 363 363" width="363" height="363">
+  <title>VLearn</title>
+  <!--
+    Nguyên bản https://vlearn.dev/brand/vinuni-mark.svg — giữ đúng toạ độ và
+    mã màu, nền trong suốt. Khác duy nhất: viewBox cắt sát khung hình
+    (bbox 126,113 → 486,476) để icon không bị thu nhỏ giữa vùng trắng thừa.
+  -->
+  <polygon fill="#c72127" points="126,115 213.5,202.5 126,290"/>
+  <polygon fill="#134d8b" points="486,113 486,296 306,476 133.5,303.5 225,212 306,293 387,212"/>
+</svg>

@@ -703,12 +703,16 @@ export function getSlide(page: number, doc: CourseDoc): Slide {
   };
 }
 
+const ACRONYMS = new Set(["ai", "jtbd", "ux", "api"]);
+
 function prettifyDocName(name: string): string {
   return name
     .replace(/\.pdf$/i, "")
     .replace(/^day\d+-/i, "")
     .split("-")
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .map((w) =>
+      ACRONYMS.has(w) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1),
+    )
     .join(" ");
 }
 

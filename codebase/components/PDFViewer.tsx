@@ -1,6 +1,7 @@
 "use client";
 
 import type { MouseEvent } from "react";
+import { VLearnMark } from "./VLearnLogo";
 import { getSlide } from "@/lib/mock-data";
 import type { Dict } from "@/lib/i18n";
 import type { Annotation, CourseDoc, Slide, ToolId } from "@/lib/types";
@@ -59,9 +60,7 @@ function CoverSlide({ slide }: { slide: Slide }) {
 
       <div className="relative flex h-full flex-col items-center justify-center px-[8cqw] text-center text-white">
         <div className="flex items-center gap-[1.6cqw]">
-          <svg viewBox="0 0 32 32" className="h-[5cqw] w-[5cqw]" aria-hidden="true">
-            <path d="M3.5 4h6.2l6.3 12.4L22.3 4h6.2L16 28.4 3.5 4Z" fill="#fff" />
-          </svg>
+          <VLearnMark className="h-[5cqw] w-auto" reversed />
           <span className="text-[3.4cqw] font-bold tracking-[0.1em]">
             VINUNIVERSITY
           </span>

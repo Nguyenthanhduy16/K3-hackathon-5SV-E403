@@ -31,22 +31,27 @@ components/
   DocumentToolbar.tsx  Đọc/Bút/Highlight · menu ba chấm · badge trang·note · zoom · hành động
   PDFViewer.tsx        khung giấy + slide dựng bằng CSS + lớp ghi chú của người dùng
   PageNavigation.tsx   chuyển trang trước/sau, nhập số trang để nhảy
-  AIChatPanel.tsx      panel chat: header, dòng ngữ cảnh, luồng tin nhắn, ô nhập
-  ChatMessage.tsx      bong bóng tin nhắn + nguồn tham khảo + thích/không thích/copy/tạo lại
-  SuggestedQuestions.tsx  5 chip câu hỏi gợi ý
+  AIChatPanel.tsx      panel chat: header, thanh phạm vi, luồng tin nhắn, ô nhập
+  ChatMessage.tsx      bong bóng tin nhắn + chip phạm vi + trích dẫn trang bấm được
+  AnswerBlocks.tsx     render câu trả lời có cấu trúc: dàn ý, bảng, thuật ngữ, kết quả tìm
+  SuggestedQuestions.tsx  chip câu hỏi gợi ý, mỗi chip gắn nhãn cấp độ
   Toasts.tsx           thông báo nổi
   Tooltip.tsx, IconButton.tsx  thành phần dùng chung
 lib/
   types.ts             kiểu dữ liệu dùng chung
-  mock-data.ts         6 Day · 12 tài liệu · thư viện slide · trạng thái khởi tạo
+  mock-data.ts         6 Day · 12 tài liệu · bộ slide riêng cho từng buổi
+  session-data.ts      dữ liệu CẤP BUỔI: dàn ý, takeaway, thuật ngữ, vận hành lớp, tìm kiếm
   i18n.ts              từ điển VI/EN cho toàn bộ chữ trên giao diện
-  ai-mock.ts           bộ trả lời giả lập theo từ khoá, có ghép nội dung slide đang mở
+  ai-mock.ts           đoán ý định → chọn phạm vi → dựng câu trả lời có cấu trúc
 ```
 
 ## Trạng thái mặc định
 
 Day 6 đang mở · tài liệu `day06-ai-product-project-management.pdf` (37 trang) · đang xem
-**trang 2** · zoom 111% · trang 2 có sẵn 1 ghi chú · chatbot **đóng**.
+**trang 2** · zoom 111% · trang 2 có sẵn 1 ghi chú · chatbot **đóng** · phạm vi tìm **Tự động**.
+
+Đường demo ngắn nhất cho P1: mở Trợ lý AI → bấm chip **"Tóm tắt buổi học hôm nay"** → xem dòng
+nới phạm vi và dàn ý 6 mục → bấm một khoảng trang để nhảy tới slide đó.
 
 ## Những gì bấm được
 
@@ -62,19 +67,53 @@ Tải xuống / Lưu / Undo / Xoá ghi chú đều đổi trạng thái thật v
 
 **Trang** — nút trước/sau, hoặc gõ số trang rồi Enter (1–37). Mỗi trang render một slide khác nhau.
 
-**Chatbot** — 5 câu hỏi gợi ý · gõ và nhấn Enter để gửi (Shift+Enter xuống dòng) · hiện animation
-đang nhập rồi trả lời sau 0,9–1,9 giây · mỗi câu trả lời kèm nguồn "Trang X" và nút thích /
-không thích / sao chép / tạo lại · thu nhỏ thành cửa sổ góc dưới phải · xoá cuộc trò chuyện ·
-dòng ngữ cảnh cập nhật theo trang PDF đang xem. Lịch sử chat lưu trong state, mất khi reload.
+**Chatbot** — 8 câu hỏi gợi ý (mỗi chip ghi rõ cấp trang / buổi / môn) · gõ và nhấn Enter để gửi
+(Shift+Enter xuống dòng) · hiện animation đang nhập rồi trả lời sau 0,9–1,9 giây · thích /
+không thích / sao chép / tạo lại · thu nhỏ thành cửa sổ góc dưới phải · xoá cuộc trò chuyện.
+Lịch sử chat lưu trong state, mất khi reload.
+
+## Xử lý P1 — retrieval neo theo trang, học viên hỏi theo buổi
+
+Bằng chứng từ chatlog: 29,1% (367/1.261) lượt tutor trả lời "không tìm thấy", trong đó nhóm
+**tóm tắt / tổng hợp buổi học bí tới 62,6%** (97/155) — cao gấp gần ba lần nhóm "giải thích đoạn
+đang đọc" (22,9%). Nguyên nhân: mỗi lượt hỏi chỉ nhìn thấy đúng một trang.
+
+Mockup xử lý bằng **thang phạm vi truy xuất** đặt ngay dưới header chatbot:
+
+| Phạm vi | Đọc gì | Trả lời nhóm câu nào |
+|---|---|---|
+| Tự động *(mặc định)* | tự đoán theo câu hỏi | — |
+| Trang này | slide đang mở | giải thích đoạn đang đọc, ôn tập, ví dụ |
+| Cả buổi | toàn bộ 37 slide của Day 6 | tóm tắt buổi, dàn ý, thuật ngữ, so sánh, từ khoá |
+| Cả môn | 12 tài liệu + dữ liệu vận hành lớp | lịch, checkpoint, cách nộp, cách chấm, thăm dò tutor |
+
+Mỗi lượt hỏi đi qua hai bước trong `lib/ai-mock.ts`: đoán ý định (12 nhóm, phủ đủ 8 loại trong
+bảng khảo sát) → chọn phạm vi. Khi hệ thống tự nới phạm vi, câu trả lời hiện dòng
+*"Câu hỏi ở cấp buổi học — đã tự nới phạm vi từ trang 2 ra Cả buổi · Day 6"*, để người dùng thấy
+được vì sao lần này trả lời được.
+
+Câu trả lời cấp buổi **không phải văn xuôi** mà là khối có cấu trúc: dàn ý 6 mục kèm khoảng trang
+bấm được (bấm là nhảy tới đúng slide), ba takeaway, danh sách thuật ngữ, và trích dẫn trang ở cuối.
+Phạm vi "Cả môn" trả kết quả kèm nhãn buổi + tên file, bấm vào là đổi luôn tài liệu đang đọc.
+
+Khi không tìm thấy, tutor nói rõ đã quét bao nhiêu slide và gợi ý nới phạm vi — thay vì
+"rất tiếc, ngoài phạm vi".
 
 ## Phần nào là mock
 
-- **Không đọc PDF thật.** Mỗi trang là một slide dựng bằng CSS từ `lib/mock-data.ts`
-  (trang 1–16 soạn tay, 17–36 lấy từ bộ nội dung xoay vòng, trang cuối là slide kết).
-  Cỡ chữ trong slide dùng đơn vị container query (`cqw`) nên co giãn đúng theo mức zoom.
-- **Không gọi AI thật.** `lib/ai-mock.ts` bắt từ khoá trong câu hỏi rồi ghép câu trả lời với
-  nội dung slide đang mở, nên chatbot "biết" đang ở trang nào — nhưng đó là chuỗi dựng sẵn.
-  Đây là chỗ cần thay bằng lời gọi API thật để đạt yêu cầu ≥1 lời gọi AI của đề bài.
+- **Không đọc PDF thật.** Mỗi trang là một slide dựng bằng CSS từ `lib/mock-data.ts`. Day 6 có
+  bộ 16 slide soạn tay + phần xoay vòng; Day 1–5 mỗi buổi có bộ slide riêng để tìm kiếm ở phạm vi
+  "Cả môn" trả về kết quả thật sự khác nhau. Cỡ chữ dùng đơn vị container query (`cqw`) nên co
+  giãn đúng theo mức zoom.
+- **Dữ liệu cấp buổi là hardcode** — dàn ý, takeaway và 7 thuật ngữ của Day 6 nằm trong
+  `lib/session-data.ts`. Trong bản thật, đây là chỗ cần một job tóm tắt chạy sẵn sau mỗi buổi
+  (offline summarisation) rồi lưu cạnh tài liệu, chứ không tóm tắt lại mỗi lần có người hỏi.
+- **Tìm kiếm là thật, trong phạm vi mock.** `searchSession` / `searchCourse` quét thật nội dung
+  slide, bỏ dấu tiếng Việt, chấm điểm theo tiêu đề và thân slide — không phải kết quả dựng sẵn.
+- **Dữ liệu vận hành lớp là thật**, lấy từ `README.md` và `04-rubric.md` của repo này.
+- **Không gọi AI thật.** Phần sinh câu chữ trong `lib/ai-mock.ts` là chuỗi dựng sẵn. Đây là chỗ
+  cần thay bằng lời gọi API thật để đạt yêu cầu ≥1 lời gọi AI của đề bài — điểm thay là hàm
+  `buildAnswer()`, đã tách sẵn phần "chọn phạm vi" ra khỏi phần "sinh câu trả lời".
 - Tải xuống, lưu, đính kèm, in: chỉ hiện toast.
 
 ## Responsive
