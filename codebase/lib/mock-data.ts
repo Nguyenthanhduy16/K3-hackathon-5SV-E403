@@ -1450,8 +1450,10 @@ export const SEED_ANNOTATIONS: Annotation[] = [
     tool: "highlight",
     color: "#facc15",
     size: 2,
-    x: 26,
-    y: 52,
+    points: [
+      { x: 22, y: 52 },
+      { x: 30, y: 52 },
+    ],
   },
 ];
 
