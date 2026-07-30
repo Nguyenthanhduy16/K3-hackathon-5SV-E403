@@ -20,7 +20,7 @@ const vi = {
     subtitle: "Chương, slide và tài liệu đã upload",
     docsCount: (n: number) => `${n} TÀI LIỆU`,
     pages: (n: number) => `${n} trang`,
-    active: "ACTIVE",
+    active: "PUBLISHED",
     studying: "STUDYING",
     collapse: "Thu gọn học liệu",
     expand: "Mở rộng học liệu",
@@ -55,7 +55,7 @@ const vi = {
   },
   viewer: {
     pageOf: (page: number, total: number) => `Trang ${page} / ${total}`,
-    drawHint: "Bấm vào slide để đặt ghi chú",
+    drawHint: "Giữ và kéo để vẽ lên slide",
     noteCount: (n: number) => `${n} ghi chú trên trang này`,
   },
   nav: {
@@ -172,7 +172,7 @@ const en: typeof vi = {
     subtitle: "Chapters, slides and uploaded files",
     docsCount: (n: number) => `${n} FILES`,
     pages: (n: number) => `${n} pages`,
-    active: "ACTIVE",
+    active: "PUBLISHED",
     studying: "STUDYING",
     collapse: "Collapse materials",
     expand: "Expand materials",
@@ -207,7 +207,7 @@ const en: typeof vi = {
   },
   viewer: {
     pageOf: (page: number, total: number) => `Page ${page} / ${total}`,
-    drawHint: "Click the slide to drop a note",
+    drawHint: "Press and drag to draw on the slide",
     noteCount: (n: number) => `${n} notes on this page`,
   },
   nav: {

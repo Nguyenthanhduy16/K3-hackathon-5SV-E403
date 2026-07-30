@@ -26,6 +26,7 @@ interface Props {
   page: number;
   /** Nhãn buổi đang mở, ví dụ "Day 6". */
   dayLabel: string;
+  docName: string;
   sessionPages: number;
   courseDocs: number;
   scope: ScopeChoice;
@@ -79,6 +80,7 @@ export default function AIChatPanel(props: Props) {
     state,
     page,
     dayLabel,
+    docName,
     sessionPages,
     courseDocs,
     scope,
@@ -311,6 +313,8 @@ export default function AIChatPanel(props: Props) {
           t={t}
           message={m}
           text={resolveText(m)}
+          docName={docName}
+          dayLabel={dayLabel}
           onFeedback={onFeedback}
           onCopy={onCopy}
           onRegenerate={onRegenerate}

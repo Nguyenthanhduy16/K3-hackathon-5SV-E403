@@ -97,7 +97,7 @@ const INTENT_SCOPE: Record<Intent, ScopeLevel> = {
   "session-summary": "session",
   "session-outline": "session",
   ops: "course",
-  "tutor-probe": "course",
+  "tutor-probe": "page",
   compare: "session",
   keyword: "session",
   definition: "session",
@@ -348,51 +348,34 @@ function opsAnswer(question: string, lang: Lang): AnswerBlock[] {
   ];
 }
 
-function tutorProbe(doc: CourseDoc, lang: Lang): AnswerBlock[] {
-  const pack = getSessionPack(doc);
+function tutorProbe(lang: Lang): AnswerBlock[] {
   const vi = lang === "vi";
   return [
     {
       kind: "text",
       text: vi
-        ? `Mình là VLearn Tutor. Mình đọc được cả ${pack.totalPages} slide của ${pack.dayLabel} và ${COURSE_STATS.docs} tài liệu của môn ${COURSE_OPS.code} — không chỉ trang bạn đang mở.`
-        : `I'm VLearn Tutor. I can read all ${pack.totalPages} slides of ${pack.dayLabel} plus the ${COURSE_STATS.docs} files in ${COURSE_OPS.code} — not just the page you're on.`,
+        ? "Mình là VLearn Tutor, trợ lý học tập trong màn hình đọc học liệu VLearn. Mình giúp bạn hiểu nội dung đang đọc và tìm lại phần liên quan trong học liệu khi cần."
+        : "I'm VLearn Tutor, the study assistant inside the VLearn reader. I help you understand what you're reading and find relevant material when needed.",
     },
     {
       kind: "bullets",
-      title: vi ? "Mình làm được" : "What I can do",
+      title: vi ? "Mình có thể giúp" : "I can help with",
       items: vi
         ? [
-            "Tóm tắt cả buổi học, không chỉ trang đang mở.",
-            "Chỉ ra một nội dung nằm ở slide nào trong buổi.",
-            "Giải thích lại slide hiện tại theo cách dễ hiểu hơn.",
-            "Trả lời về lịch, checkpoint, cách nộp bài và cách chấm điểm.",
-            "Tạo câu hỏi ôn tập từ nội dung đang học.",
+            "Tóm tắt hoặc giải thích trang đang mở.",
+            "Tóm tắt cả buổi học khi câu hỏi cần nhìn rộng hơn.",
+            "Tìm slide/tài liệu liên quan và đưa trích dẫn để bạn kiểm chứng.",
+            "Tạo câu hỏi ôn tập từ nội dung học liệu.",
           ]
         : [
-            "Summarise a whole session, not just the open page.",
-            "Tell you which slide covers a given topic.",
-            "Re-explain the current slide in simpler terms.",
-            "Answer about schedule, checkpoints, submission and grading.",
-            "Generate revision questions from what you're reading.",
-          ],
-    },
-    {
-      kind: "bullets",
-      title: vi ? "Mình chưa làm được" : "What I can't do",
-      items: vi
-        ? [
-            "Chấm điểm bài của bạn hoặc dự đoán điểm.",
-            "Trả lời về tài liệu chưa được upload lên VLearn.",
-          ]
-        : [
-            "Grade your work or predict a score.",
-            "Answer about files that haven't been uploaded to VLearn.",
+            "Summarising or explaining the open page.",
+            "Summarising a whole session when the question needs broader context.",
+            "Finding relevant slides or files with citations you can check.",
+            "Creating revision questions from the learning material.",
           ],
     },
   ];
 }
-
 function compareAnswer(
   doc: CourseDoc,
   question: string,
@@ -677,9 +660,8 @@ export function buildAnswer(
 ): Answer {
   const intent = classifyIntent(question);
   const wanted = INTENT_SCOPE[intent];
-  // Câu hỏi vận hành lớp và câu thăm dò tutor không có phiên bản "cấp trang",
-  // nên luôn trả lời ở cấp môn kể cả khi người dùng ép phạm vi hẹp hơn.
-  const pinnedToCourse = intent === "ops" || intent === "tutor-probe";
+  // Câu hỏi vận hành lớp không có phiên bản "cấp trang", nên luôn trả lời ở cấp môn.
+  const pinnedToCourse = intent === "ops";
   const level: ScopeLevel = pinnedToCourse
     ? "course"
     : choice === "auto"
@@ -690,8 +672,10 @@ export function buildAnswer(
   let blocks: AnswerBlock[] = [];
   let citations: number[] = [];
 
-  if (pinnedToCourse) {
-    blocks = intent === "ops" ? opsAnswer(question, lang) : tutorProbe(doc, lang);
+  if (intent === "tutor-probe") {
+    blocks = tutorProbe(lang);
+  } else if (pinnedToCourse) {
+    blocks = opsAnswer(question, lang);
   } else if (level === "page") {
     blocks = pageAnswer(doc, page, intent, lang);
     citations = [page];

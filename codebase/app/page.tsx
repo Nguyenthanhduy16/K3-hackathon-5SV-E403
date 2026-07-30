@@ -19,13 +19,13 @@ import {
   DEFAULT_PAGE,
   DEFAULT_ZOOM,
   SEED_ANNOTATIONS,
-  SEED_MESSAGES,
   ZOOM_STEPS,
   findDayOfDoc,
   findDoc,
 } from "@/lib/mock-data";
 import type {
   Annotation,
+  AnnotationPoint,
   Answer,
   ChatMsg,
   ChatState,
@@ -66,7 +66,7 @@ export default function ReaderPage() {
   /* ---------------- trợ lý AI ---------------- */
   const [chatState, setChatState] = useState<ChatState>("closed");
   const [scopeChoice, setScopeChoice] = useState<ScopeChoice>("auto");
-  const [messages, setMessages] = useState<ChatMsg[]>(SEED_MESSAGES);
+  const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
@@ -155,24 +155,26 @@ export default function ReaderPage() {
     setPage(Math.min(Math.max(next, 1), doc.pages));
   }
 
-  function addAnnotation(x: number, y: number) {
-    if (tool === "read") return;
-    const style = tool === "pen" ? penStyle : highlightStyle;
+  function addAnnotation(
+    points: AnnotationPoint[],
+    annotationTool: Exclude<ToolId, "read">,
+    style: MarkStyle,
+  ) {
+    if (points.length === 0) return;
     setAnnotations((prev) => [
       ...prev,
       {
         id: nextId("note"),
         docId: doc.id,
         page,
-        tool,
+        tool: annotationTool,
         color: style.color,
         size: style.size,
-        x,
-        y,
+        points,
       },
     ]);
+    setSaved(false);
   }
-
   function undoAnnotation() {
     const last = [...annotations]
       .reverse()
@@ -182,6 +184,7 @@ export default function ReaderPage() {
       return;
     }
     setAnnotations((prev) => prev.filter((a) => a.id !== last.id));
+    setSaved(false);
     pushToast(t.toast.undone, "success");
   }
 
@@ -194,6 +197,7 @@ export default function ReaderPage() {
     setAnnotations((prev) =>
       prev.filter((a) => !(a.docId === doc.id && a.page === page)),
     );
+    setSaved(false);
     pushToast(t.toast.notesCleared(count), "danger");
   }
 
@@ -233,7 +237,7 @@ export default function ReaderPage() {
       role: "assistant",
       content: answer.plain,
       blocks: answer.blocks,
-      scope: answer.scope,
+      scope: answer.intent === "tutor-probe" ? undefined : answer.scope,
       citations: answer.citations,
       intent: answer.intent,
       time: stamp(),
@@ -265,8 +269,10 @@ export default function ReaderPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           question,
-          context: buildScopeContext(question, doc, page, answer.scope.level),
-          scopeLabel: answer.scope.label,
+          context: answer.intent === "tutor-probe"
+            ? "The student is asking who VLearn Tutor is and what it can do. Answer as a short self-introduction. Do not tie the answer to a course code unless the student explicitly asks about a course."
+            : buildScopeContext(question, doc, page, answer.scope.level),
+          scopeLabel: answer.intent === "tutor-probe" ? "VLearn Tutor introduction" : answer.scope.label,
           lang,
           history,
           rephrase: doRephrase,
@@ -330,7 +336,7 @@ export default function ReaderPage() {
               sourcePage: undefined,
               content: answer.plain,
               blocks: answer.blocks,
-              scope: answer.scope,
+              scope: answer.intent === "tutor-probe" ? undefined : answer.scope,
               citations: answer.citations,
               intent: answer.intent,
               feedback: undefined,
@@ -418,7 +424,6 @@ export default function ReaderPage() {
       <div className="relative flex min-h-0 flex-1">
         <CourseSidebar
           t={t}
-          lang={lang}
           days={COURSE_DAYS}
           expandedDays={expandedDays}
           activeDocId={activeDocId}
@@ -428,7 +433,7 @@ export default function ReaderPage() {
           onSelectDoc={selectDoc}
           onToggleCollapsed={() => {
             setFocusMode(false);
-            setUserCollapsedSidebar((v) => !v);
+            setUserCollapsedSidebar(!sidebarCollapsed);
           }}
           onCloseMobile={() => setMobileSidebarOpen(false)}
         />
@@ -475,6 +480,8 @@ export default function ReaderPage() {
               page={page}
               zoom={zoom}
               tool={tool}
+              penStyle={penStyle}
+              highlightStyle={highlightStyle}
               annotations={pageAnnotations}
               onAddAnnotation={addAnnotation}
               baseWidth={focusMode ? 1180 : 900}
@@ -489,6 +496,7 @@ export default function ReaderPage() {
           state={chatState}
           page={page}
           dayLabel={pack.dayLabel}
+          docName={doc.name}
           sessionPages={pack.totalPages}
           courseDocs={COURSE_STATS.docs}
           scope={scopeChoice}

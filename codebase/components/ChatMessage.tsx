@@ -1,7 +1,9 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import {
   Bot,
+  ChevronDown,
   Copy,
   FileText,
   Layers,
@@ -14,17 +16,27 @@ import {
 import AnswerBlocks from "./AnswerBlocks";
 import Tooltip from "./Tooltip";
 import type { Dict } from "@/lib/i18n";
-import type { ChatMsg, ScopeLevel } from "@/lib/types";
+import type { AnswerBlock, ChatMsg, ScopeLevel } from "@/lib/types";
 
 interface Props {
   t: Dict;
   message: ChatMsg;
   text: string;
+  docName: string;
+  dayLabel: string;
   onFeedback: (id: string, value: "up" | "down") => void;
   onCopy: (text: string) => void;
   onRegenerate: (id: string) => void;
   onJumpToPage: (page: number, docId?: string) => void;
   compact?: boolean;
+}
+
+interface CitationSource {
+  key: string;
+  title: string;
+  detail: string;
+  docId?: string;
+  pages: number[];
 }
 
 const SCOPE_ICON: Record<ScopeLevel, typeof FileText> = {
@@ -41,10 +53,47 @@ const SCOPE_TONE: Record<ScopeLevel, string> = {
     "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-200",
 };
 
+function pagesLabel(t: Dict, pages: number[]) {
+  if (pages.length === 1) return t.chat.pageShort(pages[0]);
+  return pages.map((page) => page.toString()).join(", ");
+}
+
+function addSourcePage(
+  groups: Map<string, Omit<CitationSource, "pages"> & { pages: Set<number> }>,
+  source: Omit<CitationSource, "pages">,
+  page: number,
+) {
+  const existing = groups.get(source.key);
+  if (existing) {
+    existing.pages.add(page);
+    return;
+  }
+  groups.set(source.key, { ...source, pages: new Set([page]) });
+}
+
+function collectHitSources(blocks: AnswerBlock[] | undefined) {
+  const hits: Array<{ page: number; docId?: string; source: string; title: string }> = [];
+  blocks?.forEach((block) => {
+    if (block.kind !== "hits") return;
+    block.items.forEach((item) => {
+      if (!item.source) return;
+      hits.push({
+        page: item.page,
+        docId: item.docId,
+        source: item.source,
+        title: item.title,
+      });
+    });
+  });
+  return hits;
+}
+
 export default function ChatMessage({
   t,
   message,
   text,
+  docName,
+  dayLabel,
   onFeedback,
   onCopy,
   onRegenerate,
@@ -52,6 +101,61 @@ export default function ChatMessage({
   compact = false,
 }: Props) {
   const isUser = message.role === "user";
+  const [sourcesOpen, setSourcesOpen] = useState(false);
+
+  const citationPages = useMemo(
+    () => [...new Set(message.citations ?? [])].sort((a, b) => a - b),
+    [message.citations],
+  );
+
+  const citationSources = useMemo<CitationSource[]>(() => {
+    if (citationPages.length === 0) return [];
+
+    const groups = new Map<
+      string,
+      Omit<CitationSource, "pages"> & { pages: Set<number> }
+    >();
+    const hitSources = collectHitSources(message.blocks);
+
+    hitSources.forEach((hit) => {
+      addSourcePage(
+        groups,
+        {
+          key: hit.docId ?? hit.source,
+          title: hit.source,
+          detail: hit.title,
+          docId: hit.docId,
+        },
+        hit.page,
+      );
+    });
+
+    if (groups.size === 0) {
+      const scope = message.scope;
+      const detail = scope
+        ? scope.level === "session"
+          ? `${dayLabel} · ${scope.detail}`
+          : scope.detail
+        : dayLabel;
+
+      citationPages.forEach((page) => {
+        addSourcePage(
+          groups,
+          {
+            key: docName,
+            title: docName,
+            detail,
+          },
+          page,
+        );
+      });
+    }
+
+    return [...groups.values()].map((source) => ({
+      ...source,
+      pages: [...source.pages].sort((a, b) => a - b),
+    }));
+  }, [citationPages, dayLabel, docName, message.blocks, message.scope]);
 
   if (isUser) {
     return (
@@ -73,6 +177,9 @@ export default function ChatMessage({
 
   const scope = message.scope;
   const ScopeIcon = scope ? SCOPE_ICON[scope.level] : FileText;
+  const sourceDocumentsLabel = t.chat.citations === "Sources" ? "Source documents" : "Tài liệu nguồn";
+  const showSourcesLabel = t.chat.citations === "Sources" ? "Show source documents" : "Mở tài liệu nguồn";
+  const hideSourcesLabel = t.chat.citations === "Sources" ? "Hide source documents" : "Ẩn tài liệu nguồn";
 
   return (
     <div className="animate-fade-up flex gap-2.5 px-4">
@@ -81,7 +188,6 @@ export default function ChatMessage({
       </span>
 
       <div className="min-w-0 flex-1">
-        {/* Phạm vi truy xuất đã dùng cho lượt trả lời này */}
         {scope && (
           <div className="mb-1.5 space-y-1">
             <span
@@ -110,24 +216,58 @@ export default function ChatMessage({
           )}
         </div>
 
-        {/* Trích dẫn trang — bấm để nhảy tới slide */}
-        {message.citations && message.citations.length > 0 && !compact && (
-          <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <span className="text-[10.5px] font-semibold text-slate-400 dark:text-slate-500">
-              {t.chat.citations}
-            </span>
-            {message.citations.map((p) => (
+        {citationPages.length > 0 && !compact && (
+          <div className="mt-2 space-y-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-[10.5px] font-semibold text-slate-400 dark:text-slate-500">
+                {t.chat.citations}
+              </span>
               <button
-                key={p}
                 type="button"
-                onClick={() => onJumpToPage(p)}
-                title={t.chat.openPage(p)}
-                className="inline-flex items-center gap-1 rounded-lg border border-brand-100 bg-brand-50/70 px-2 py-1 font-mono text-[10.5px] font-bold text-brand-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-100 dark:border-slate-700 dark:bg-slate-800 dark:text-brand-200"
+                onClick={() => setSourcesOpen((open) => !open)}
+                aria-expanded={sourcesOpen}
+                aria-label={sourcesOpen ? hideSourcesLabel : showSourcesLabel}
+                title={sourcesOpen ? hideSourcesLabel : showSourcesLabel}
+                className="inline-flex items-center gap-1 rounded-lg border border-brand-100 bg-brand-50/70 px-2 py-1 font-mono text-[10.5px] font-bold text-brand-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-100 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-brand-200"
               >
                 <FileText className="h-3 w-3" />
-                {p}
+                {citationPages.length}
+                <ChevronDown
+                  className={`h-3 w-3 transition-transform duration-150 ${sourcesOpen ? "rotate-180" : ""}`}
+                />
               </button>
-            ))}
+            </div>
+
+            {sourcesOpen && (
+              <div className="rounded-xl border border-slate-200 bg-slate-50/80 p-2.5 shadow-sm dark:border-slate-700 dark:bg-slate-900/80">
+                <p className="mb-1.5 text-[10px] font-bold tracking-[0.06em] text-slate-400 uppercase dark:text-slate-500">
+                  {sourceDocumentsLabel}
+                </p>
+                <div className="space-y-1.5">
+                  {citationSources.map((source) => (
+                    <button
+                      key={source.key}
+                      type="button"
+                      onClick={() => onJumpToPage(source.pages[0], source.docId)}
+                      className="group/source flex w-full items-start gap-2 rounded-lg border border-transparent px-2 py-1.5 text-left transition-colors hover:border-brand-200 hover:bg-white focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none dark:hover:border-slate-700 dark:hover:bg-slate-800"
+                    >
+                      <FileText className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600 dark:text-brand-300" />
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-[11.5px] font-semibold text-slate-700 dark:text-slate-100">
+                          {source.title}
+                        </span>
+                        <span className="mt-0.5 block truncate text-[10.5px] text-slate-500 dark:text-slate-400">
+                          {source.detail}
+                        </span>
+                      </span>
+                      <span className="shrink-0 rounded-md bg-brand-50 px-1.5 py-0.5 font-mono text-[10px] font-bold text-brand-700 dark:bg-brand-500/15 dark:text-brand-200">
+                        {pagesLabel(t, source.pages)}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

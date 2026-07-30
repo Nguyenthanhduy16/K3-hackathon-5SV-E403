@@ -26,7 +26,13 @@ export interface CourseDay {
   documents: CourseDoc[];
 }
 
-/** Một nét bút / vệt highlight người dùng đặt lên slide. */
+export interface AnnotationPoint {
+  /** Tọa độ theo % chiều rộng/cao của slide. */
+  x: number;
+  y: number;
+}
+
+/** Một nét bút / vệt highlight người dùng vẽ lên slide. */
 export interface Annotation {
   id: string;
   docId: string;
@@ -35,9 +41,8 @@ export interface Annotation {
   color: string;
   /** 1 | 2 | 3 — độ dày. */
   size: number;
-  /** Toạ độ theo % chiều rộng/cao của slide. */
-  x: number;
-  y: number;
+  /** Các điểm của nét vẽ, dùng tọa độ tương đối để không lệch khi zoom. */
+  points: AnnotationPoint[];
 }
 
 export interface MarkStyle {

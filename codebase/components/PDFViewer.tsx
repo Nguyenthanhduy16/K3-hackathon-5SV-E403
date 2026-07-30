@@ -1,10 +1,10 @@
 "use client";
 
-import type { MouseEvent } from "react";
+import { useState, type PointerEvent } from "react";
 import { VLearnMark } from "./VLearnLogo";
 import { getSlide } from "@/lib/mock-data";
 import type { Dict } from "@/lib/i18n";
-import type { Annotation, CourseDoc, Slide, ToolId } from "@/lib/types";
+import type { Annotation, AnnotationPoint, CourseDoc, MarkStyle, Slide, ToolId } from "@/lib/types";
 
 interface Props {
   t: Dict;
@@ -12,8 +12,14 @@ interface Props {
   page: number;
   zoom: number;
   tool: ToolId;
+  penStyle: MarkStyle;
+  highlightStyle: MarkStyle;
   annotations: Annotation[];
-  onAddAnnotation: (x: number, y: number) => void;
+  onAddAnnotation: (
+    points: AnnotationPoint[],
+    tool: Exclude<ToolId, "read">,
+    style: MarkStyle,
+  ) => void;
   /** Bề ngang tối đa của trang ở mức zoom 100% (px). */
   baseWidth: number;
 }
@@ -288,26 +294,195 @@ function SlideSurface({ slide }: { slide: Slide }) {
 
 /* ------------------------------------------------------------------ */
 
+type DrawingTool = Exclude<ToolId, "read">;
+
+interface DraftStroke extends MarkStyle {
+  pointerId: number;
+  tool: DrawingTool;
+  points: AnnotationPoint[];
+}
+
+const VIEWBOX_WIDTH = 1600;
+const VIEWBOX_HEIGHT = 900;
+const MIN_POINT_DISTANCE_SQUARED = 0.01;
+
+function clampPercent(value: number) {
+  return Math.min(Math.max(value, 0), 100);
+}
+
+function pointFromClient(clientX: number, clientY: number, element: HTMLDivElement) {
+  const rect = element.getBoundingClientRect();
+  return {
+    x: clampPercent(((clientX - rect.left) / rect.width) * 100),
+    y: clampPercent(((clientY - rect.top) / rect.height) * 100),
+  };
+}
+
+function appendDistinctPoints(
+  current: AnnotationPoint[],
+  incoming: AnnotationPoint[],
+) {
+  const next = [...current];
+  for (const point of incoming) {
+    const last = next.at(-1);
+    if (!last) {
+      next.push(point);
+      continue;
+    }
+    const dx = point.x - last.x;
+    const dy = point.y - last.y;
+    if (dx * dx + dy * dy >= MIN_POINT_DISTANCE_SQUARED) next.push(point);
+  }
+  return next;
+}
+
+function toSvgPoint(point: AnnotationPoint) {
+  return {
+    x: (point.x / 100) * VIEWBOX_WIDTH,
+    y: (point.y / 100) * VIEWBOX_HEIGHT,
+  };
+}
+
+function pointsToPath(points: AnnotationPoint[]) {
+  const svgPoints = points.map(toSvgPoint);
+  if (svgPoints.length < 2) return "";
+  if (svgPoints.length === 2) {
+    return `M ${svgPoints[0].x} ${svgPoints[0].y} L ${svgPoints[1].x} ${svgPoints[1].y}`;
+  }
+
+  let path = `M ${svgPoints[0].x} ${svgPoints[0].y}`;
+  for (let index = 1; index < svgPoints.length - 1; index += 1) {
+    const point = svgPoints[index];
+    const following = svgPoints[index + 1];
+    const midpointX = (point.x + following.x) / 2;
+    const midpointY = (point.y + following.y) / 2;
+    path += ` Q ${point.x} ${point.y} ${midpointX} ${midpointY}`;
+  }
+  const last = svgPoints.at(-1)!;
+  return `${path} L ${last.x} ${last.y}`;
+}
+
+function strokeWidth(tool: DrawingTool, size: number) {
+  return tool === "pen" ? 2 + size * 2 : 18 + size * 8;
+}
+
+function AnnotationStroke({ annotation }: { annotation: Annotation }) {
+  const width = strokeWidth(annotation.tool, annotation.size);
+  const opacity = annotation.tool === "highlight" ? 0.42 : 1;
+
+  if (annotation.points.length === 1) {
+    const point = toSvgPoint(annotation.points[0]);
+    return (
+      <circle
+        cx={point.x}
+        cy={point.y}
+        r={width / 2}
+        fill={annotation.color}
+        fillOpacity={opacity}
+      />
+    );
+  }
+
+  return (
+    <path
+      d={pointsToPath(annotation.points)}
+      fill="none"
+      stroke={annotation.color}
+      strokeOpacity={opacity}
+      strokeWidth={width}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  );
+}
+
 export default function PDFViewer({
   t,
   doc,
   page,
   zoom,
   tool,
+  penStyle,
+  highlightStyle,
   annotations,
   onAddAnnotation,
   baseWidth,
 }: Props) {
   const slide = getSlide(page, doc);
   const drawing = tool !== "read";
+  const [draft, setDraft] = useState<DraftStroke | null>(null);
 
-  function handleClick(e: MouseEvent<HTMLDivElement>) {
-    if (!drawing) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    onAddAnnotation(x, y);
+  function startStroke(e: PointerEvent<HTMLDivElement>) {
+    if (!drawing || !e.isPrimary || (e.pointerType === "mouse" && e.button !== 0)) {
+      return;
+    }
+
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const style = tool === "pen" ? penStyle : highlightStyle;
+    setDraft({
+      pointerId: e.pointerId,
+      tool,
+      color: style.color,
+      size: style.size,
+      points: [pointFromClient(e.clientX, e.clientY, e.currentTarget)],
+    });
   }
+
+  function extendStroke(e: PointerEvent<HTMLDivElement>) {
+    if (!draft || draft.pointerId !== e.pointerId) return;
+    e.preventDefault();
+
+    const samples = e.nativeEvent.getCoalescedEvents?.() ?? [e.nativeEvent];
+    const points = samples.map((sample) =>
+      pointFromClient(sample.clientX, sample.clientY, e.currentTarget),
+    );
+    setDraft((current) =>
+      current && current.pointerId === e.pointerId
+        ? { ...current, points: appendDistinctPoints(current.points, points) }
+        : current,
+    );
+  }
+
+  function finishStroke(e: PointerEvent<HTMLDivElement>) {
+    if (!draft || draft.pointerId !== e.pointerId) return;
+    e.preventDefault();
+
+    const points = appendDistinctPoints(draft.points, [
+      pointFromClient(e.clientX, e.clientY, e.currentTarget),
+    ]);
+    onAddAnnotation(points, draft.tool, {
+      color: draft.color,
+      size: draft.size,
+    });
+    setDraft(null);
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+  }
+
+  function cancelStroke(e: PointerEvent<HTMLDivElement>) {
+    if (draft?.pointerId !== e.pointerId) return;
+    setDraft(null);
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+  }
+
+  const visibleAnnotations = draft
+    ? [
+        ...annotations,
+        {
+          id: "draft-stroke",
+          docId: doc.id,
+          page,
+          tool: draft.tool,
+          color: draft.color,
+          size: draft.size,
+          points: draft.points,
+        } satisfies Annotation,
+      ]
+    : annotations;
 
   return (
     <div
@@ -325,50 +500,31 @@ export default function PDFViewer({
         </div>
 
         <div
-          onClick={handleClick}
+          onPointerDown={startStroke}
+          onPointerMove={extendStroke}
+          onPointerUp={finishStroke}
+          onPointerCancel={cancelStroke}
+          onContextMenu={drawing ? (event) => event.preventDefault() : undefined}
           className={[
-            "@container relative aspect-[16/9] w-full overflow-hidden rounded-[14px] shadow-inner",
+            "@container relative aspect-[16/9] w-full overflow-hidden rounded-[14px] shadow-inner select-none",
             drawing ? "cursor-crosshair" : "cursor-default",
           ].join(" ")}
+          style={{ touchAction: drawing ? "none" : "auto" }}
         >
           <SlideSurface slide={slide} />
 
-          {/* lớp ghi chú của người dùng */}
-          <div className="pointer-events-none absolute inset-0">
-            {annotations.map((a) =>
-              a.tool === "pen" ? (
-                <span
-                  key={a.id}
-                  className="animate-pop absolute rounded-full"
-                  style={{
-                    left: `${a.x}%`,
-                    top: `${a.y}%`,
-                    width: `${a.size * 1.1}cqw`,
-                    height: `${a.size * 1.1}cqw`,
-                    backgroundColor: a.color,
-                    transform: "translate(-50%, -50%)",
-                    boxShadow: `0 0 0 0.15cqw ${a.color}55`,
-                  }}
-                />
-              ) : (
-                <span
-                  key={a.id}
-                  className="animate-pop absolute rounded-[0.3cqw]"
-                  style={{
-                    left: `${a.x}%`,
-                    top: `${a.y}%`,
-                    width: "18cqw",
-                    height: `${1.6 + a.size * 0.9}cqw`,
-                    backgroundColor: a.color,
-                    opacity: 0.45,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-              ),
-            )}
-          </div>
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 h-full w-full"
+            viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
+            preserveAspectRatio="none"
+          >
+            {visibleAnnotations.map((annotation) => (
+              <AnnotationStroke key={annotation.id} annotation={annotation} />
+            ))}
+          </svg>
 
-          {drawing && (
+          {drawing && !draft && (
             <span className="animate-fade-up pointer-events-none absolute top-[2cqw] right-[2cqw] rounded-full bg-slate-900/70 px-[1.6cqw] py-[0.7cqw] text-[1.3cqw] font-semibold text-white backdrop-blur-sm">
               {t.viewer.drawHint}
             </span>
