@@ -9,7 +9,8 @@ import PageNavigation from "@/components/PageNavigation";
 import AIChatPanel from "@/components/AIChatPanel";
 import Toasts from "@/components/Toasts";
 import { getDict } from "@/lib/i18n";
-import { buildAnswer, rephrase, replyDelay } from "@/lib/ai-mock";
+import { buildAnswer, rephrase } from "@/lib/ai-mock";
+import { buildScopeContext, parseAiBlocks, type AiTurn } from "@/lib/ai-context";
 import { COURSE_STATS, getSessionPack } from "@/lib/session-data";
 import {
   COURSE_CODE,
@@ -239,13 +240,60 @@ export default function ReaderPage() {
     };
   }
 
-  function ask(question: string) {
+  /** Vài lượt hội thoại gần nhất để model giữ mạch trò chuyện. */
+  function recentHistory(list: ChatMsg[], limit = 6): AiTurn[] {
+    return list.slice(-limit).map((m) => ({
+      role: m.role,
+      text: resolveText(m) || m.content || "",
+    }));
+  }
+
+  /**
+   * Gọi AI thật qua /api/chat. Phạm vi + trích dẫn vẫn do lớp truy xuất
+   * (ai-mock) quyết định; AI chỉ sinh phần câu chữ từ grounding context.
+   * Trả về null khi lỗi — người gọi tự lui về câu trả lời dựng sẵn.
+   */
+  async function fetchAiAnswer(
+    question: string,
+    answer: Answer,
+    history: AiTurn[],
+    doRephrase = false,
+  ): Promise<Answer | null> {
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question,
+          context: buildScopeContext(question, doc, page, answer.scope.level),
+          scopeLabel: answer.scope.label,
+          lang,
+          history,
+          rephrase: doRephrase,
+        }),
+      });
+      if (!res.ok) {
+        const { error } = await res.json().catch(() => ({ error: "network" }));
+        pushToast(error === "missing-key" ? t.toast.aiNoKey : t.toast.aiFallback, "info");
+        return null;
+      }
+      const { text } = (await res.json()) as { text: string };
+      return { ...answer, blocks: parseAiBlocks(text), plain: text };
+    } catch {
+      pushToast(t.toast.aiFallback, "info");
+      return null;
+    }
+  }
+
+  async function ask(question: string) {
     const text = question.trim();
     if (!text || isTyping) return;
 
     // Phạm vi được quyết định TRƯỚC khi trả lời: đây là chỗ xử lý P1 —
     // câu hỏi cấp buổi tự nới ra cả buổi thay vì kẹt ở trang đang mở.
-    const answer = buildAnswer(text, doc, page, lang, scopeChoice);
+    // Câu trả lời mock giữ vai trò khung (scope + trích dẫn) và đường lui.
+    const fallback = buildAnswer(text, doc, page, lang, scopeChoice);
+    const history = recentHistory(messages);
 
     setMessages((prev) => [
       ...prev,
@@ -254,13 +302,12 @@ export default function ReaderPage() {
     setInput("");
     setIsTyping(true);
 
-    schedule(() => {
-      setMessages((prev) => [...prev, messageFromAnswer(answer)]);
-      setIsTyping(false);
-    }, replyDelay(text, answer.scope.level));
+    const answer = (await fetchAiAnswer(text, fallback, history)) ?? fallback;
+    setMessages((prev) => [...prev, messageFromAnswer(answer)]);
+    setIsTyping(false);
   }
 
-  function regenerate(id: string) {
+  async function regenerate(id: string) {
     if (isTyping) return;
     const index = messages.findIndex((m) => m.id === id);
     if (index < 0) return;
@@ -268,30 +315,31 @@ export default function ReaderPage() {
       .reverse()
       .find((m) => m.role === "user");
     const prompt = asked ? resolveText(asked) : t.chat.suggestions[0].text;
-    const answer = rephrase(buildAnswer(prompt, doc, page, lang, scopeChoice), lang);
+    const fallback = buildAnswer(prompt, doc, page, lang, scopeChoice);
+    const history = recentHistory(messages.slice(0, index));
 
     setIsTyping(true);
-    schedule(() => {
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === id
-            ? {
-                ...m,
-                seedKey: undefined,
-                sourcePage: undefined,
-                content: answer.plain,
-                blocks: answer.blocks,
-                scope: answer.scope,
-                citations: answer.citations,
-                intent: answer.intent,
-                feedback: undefined,
-                time: stamp(),
-              }
-            : m,
-        ),
-      );
-      setIsTyping(false);
-    }, 1100);
+    const answer =
+      (await fetchAiAnswer(prompt, fallback, history, true)) ?? rephrase(fallback, lang);
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.id === id
+          ? {
+              ...m,
+              seedKey: undefined,
+              sourcePage: undefined,
+              content: answer.plain,
+              blocks: answer.blocks,
+              scope: answer.scope,
+              citations: answer.citations,
+              intent: answer.intent,
+              feedback: undefined,
+              time: stamp(),
+            }
+          : m,
+      ),
+    );
+    setIsTyping(false);
   }
 
   /**

@@ -1,14 +1,18 @@
-# VLearn Reader — mockup trang đọc học liệu + trợ lý AI
+# VLearn Reader — trang đọc học liệu + trợ lý AI
 
-Prototype giao diện (mức **Mock**) cho trang đọc học liệu PDF của VLearn, kèm panel chatbot
-"VLearn Tutor". Toàn bộ dữ liệu là **giả lập trong frontend** — không có backend, không gọi API.
+Prototype trang đọc học liệu PDF của VLearn, kèm panel chatbot "VLearn Tutor".
+Dữ liệu học liệu là **giả lập trong frontend**, nhưng phần **sinh câu trả lời gọi
+OpenAI thật** qua route `/api/chat` (có đường lui về câu trả lời dựng sẵn khi chưa có key).
 
 ## Chạy
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
+cp .env.example .env.local   # rồi điền OPENAI_API_KEY (lấy tại platform.openai.com/api-keys)
+npm run dev                  # http://localhost:3000
 ```
+
+Chưa điền key vẫn chạy được: chatbot tự lui về câu trả lời dựng sẵn và hiện toast nhắc cấu hình.
 
 `npm run build` để build production, `npx eslint .` để lint, `npx tsc --noEmit` để typecheck.
 
@@ -24,6 +28,7 @@ app/
   layout.tsx           font Inter + JetBrains Mono, khung html/body
   page.tsx             component điều phối: giữ toàn bộ state, ghép các khối lại
   globals.css          theme Tailwind v4 (@theme), biến dark mode, animation, scrollbar
+  api/chat/route.ts    route handler gọi OpenAI — key đọc từ .env.local, không lộ ra client
 components/
   Header.tsx           thanh trên: quay lại · logo · tên file · AI · VI/EN · sáng-tối · tài khoản
   AIAssistantButton.tsx nút "Trợ lý AI" bo tròn, gradient xanh, hover nổi
@@ -42,7 +47,8 @@ lib/
   mock-data.ts         6 Day · 12 tài liệu · bộ slide riêng cho từng buổi
   session-data.ts      dữ liệu CẤP BUỔI: dàn ý, takeaway, thuật ngữ, vận hành lớp, tìm kiếm
   i18n.ts              từ điển VI/EN cho toàn bộ chữ trên giao diện
-  ai-mock.ts           đoán ý định → chọn phạm vi → dựng câu trả lời có cấu trúc
+  ai-mock.ts           đoán ý định → chọn phạm vi → dựng câu trả lời dự phòng có cấu trúc
+  ai-context.ts        gom nội dung phạm vi thành context cho AI + parse text AI thành khối
 ```
 
 ## Trạng thái mặc định
@@ -111,9 +117,11 @@ Khi không tìm thấy, tutor nói rõ đã quét bao nhiêu slide và gợi ý 
 - **Tìm kiếm là thật, trong phạm vi mock.** `searchSession` / `searchCourse` quét thật nội dung
   slide, bỏ dấu tiếng Việt, chấm điểm theo tiêu đề và thân slide — không phải kết quả dựng sẵn.
 - **Dữ liệu vận hành lớp là thật**, lấy từ `README.md` và `04-rubric.md` của repo này.
-- **Không gọi AI thật.** Phần sinh câu chữ trong `lib/ai-mock.ts` là chuỗi dựng sẵn. Đây là chỗ
-  cần thay bằng lời gọi API thật để đạt yêu cầu ≥1 lời gọi AI của đề bài — điểm thay là hàm
-  `buildAnswer()`, đã tách sẵn phần "chọn phạm vi" ra khỏi phần "sinh câu trả lời".
+- **Gọi AI thật (OpenAI).** Mỗi lượt hỏi: `ai-mock.ts` chọn phạm vi + trích dẫn →
+  `ai-context.ts` gom nội dung phạm vi đó thành grounding context → `app/api/chat/route.ts`
+  gọi OpenAI (key server-side trong `.env.local`) → text trả về được `parseAiBlocks()` dựng
+  lại thành khối hiển thị. Khi chưa có `OPENAI_API_KEY` hoặc gọi lỗi, dùng lại câu trả lời
+  dựng sẵn trong `lib/ai-mock.ts` — demo không bao giờ chết vì mạng.
 - Tải xuống, lưu, đính kèm, in: chỉ hiện toast.
 
 ## Responsive
