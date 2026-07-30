@@ -1,0 +1,397 @@
+{
+  "meta": {
+    "name": "VLearn slide summary evaluation set",
+    "version": "1.0",
+    "focus": ["accuracy", "relevance", "completeness", "hallucination_rate"],
+    "notes": "Bộ test này tập trung vào việc tóm tắt và tổng hợp slide, có cả case tích cực lẫn case bẫy để đo hallucination."
+  },
+  "scoring": {
+    "accuracy": {
+      "scale": "0-2",
+      "definition": "Khớp với fact và ý đồ được source hỗ trợ"
+    },
+    "relevance": {
+      "scale": "0-2",
+      "definition": "Bám đúng phạm vi câu hỏi"
+    },
+    "completeness": {
+      "scale": "0-2",
+      "definition": "Bao phủ đầy đủ các ý bắt buộc trong đáp án mẫu"
+    },
+    "hallucination_rate": {
+      "formula": "cases_with_unsupported_claims / total_cases",
+      "definition": "Bất kỳ thông tin nào không được source hỗ trợ đều tính là hallucination"
+    }
+  },
+  "cases": [
+    {
+      "id": "D6-SUM-01",
+      "category": "session_summary",
+      "prompt": "Tóm tắt toàn bộ buổi học Day 6 trong 5-7 ý chính.",
+      "source": "codebase/lib/mock-data.ts :: Day 6 authored deck, slides 1-16",
+      "expected_answer": "Buổi học nói về vì sao quản lý sản phẩm AI khác phần mềm truyền thống, những nguồn bất định của dự án AI, vòng đời sản phẩm AI, cách xử lý scope creep, quality bar, golden set, rủi ro và checklist trước demo.",
+      "must_include": [
+        "quản lý sản phẩm AI khác phần mềm",
+        "3 nguồn bất định",
+        "vòng đời sản phẩm AI",
+        "scope creep",
+        "quality bar",
+        "golden set",
+        "checklist trước demo"
+      ],
+      "must_not_include": [
+        "đây là khóa về blockchain",
+        "không nhắc đến quality bar hay golden set",
+        "thêm fact về speaker name mà source không có"
+      ]
+    },
+    {
+      "id": "D6-P2-01",
+      "category": "slide_summary",
+      "prompt": "Tóm tắt slide mở đầu với câu hỏi về stakeholder đổi requirements.",
+      "source": "codebase/lib/mock-data.ts :: slide 2",
+      "expected_answer": "Slide mở đầu đặt tình huống team đã build 3 tuần nhưng stakeholder muốn đổi requirements, và đây là câu hỏi dẫn nhập về cách xử lý thay đổi mà không phá kế hoạch.",
+      "must_include": [
+        "team đã build 3 tuần",
+        "stakeholder muốn đổi requirements",
+        "câu hỏi cách xử lý"
+      ],
+      "must_not_include": [
+        "slide này nói về AI chatbot tổng quát",
+        "có chi tiết về deadline nộp spec"
+      ]
+    },
+    {
+      "id": "D6-COMP-01",
+      "category": "compare",
+      "prompt": "So sánh phần mềm truyền thống và sản phẩm AI theo slide.",
+      "source": "codebase/lib/mock-data.ts :: slide 5",
+      "expected_answer": "Phần mềm truyền thống có requirement rõ và bug có thể tái hiện; sản phẩm AI cần quality bar, lỗi mang tính xác suất, ước lượng theo số vòng eval, và chốt scope chỉ là chốt phạm vi thử.",
+      "must_include": [
+        "requirement rõ",
+        "bug tái hiện được",
+        "quality bar",
+        "lỗi mang tính xác suất",
+        "ước lượng theo số vòng eval",
+        "chốt scope chỉ là chốt phạm vi thử"
+      ],
+      "must_not_include": [
+        "hai bên giống nhau hoàn toàn",
+        "sản phẩm AI chỉ cần test pass/fail"
+      ]
+    },
+    {
+      "id": "D6-UNC-01",
+      "category": "core_concept",
+      "prompt": "Nhắc lại 3 nguồn bất định làm dự án AI khác đi.",
+      "source": "codebase/lib/mock-data.ts :: slide 4",
+      "expected_answer": "Ba nguồn bất định là: chất lượng đầu ra là phân phối xác suất, chi phí và độ trễ thay đổi theo prompt/model/lượng truy cập, và người dùng đổi kỳ vọng ngay khi gặp bản chạy đầu tiên.",
+      "must_include": [
+        "chất lượng đầu ra là phân phối xác suất",
+        "chi phí và độ trễ thay đổi",
+        "người dùng đổi kỳ vọng sau bản chạy đầu tiên"
+      ],
+      "must_not_include": [
+        "chỉ phụ thuộc vào số commit code",
+        "không có bất định nào"
+      ]
+    },
+    {
+      "id": "D6-LIFE-01",
+      "category": "framework",
+      "prompt": "Nêu 5 giai đoạn trong vòng đời sản phẩm AI là gì?",
+      "source": "codebase/lib/mock-data.ts :: slide 6",
+      "expected_answer": "Năm giai đoạn là: discovery, spec, prototype, eval, validation.",
+      "must_include": [
+        "discovery",
+        "spec",
+        "prototype",
+        "eval",
+        "validation"
+      ],
+      "must_not_include": [
+        "deploy, monitor, archive là 5 giai đoạn chính trong slide này"
+      ]
+    },
+    {
+      "id": "D6-SCOPE-01",
+      "category": "risk",
+      "prompt": "Scope creep thường vào cửa nào theo slide?",
+      "source": "codebase/lib/mock-data.ts :: slide 8",
+      "expected_answer": "Nó thường xuất hiện khi stakeholder mới xuất hiện, khi demo giữa kỳ làm mọi người nghĩ ra tính năng mới, khi tiêu chí thành công chưa được viết ra thành số, hoặc khi một lỗi lẻ bị nâng cấp thành yêu cầu lớn.",
+      "must_include": [
+        "stakeholder mới xuất hiện",
+        "demo giữa kỳ",
+        "tiêu chí thành công chưa được viết ra thành số",
+        "lỗi lẻ bị nâng cấp thành yêu cầu lớn"
+      ],
+      "must_not_include": [
+        "scope creep là một loại mô hình AI",
+        "chỉ xảy ra khi code bị lỗi"
+      ]
+    },
+    {
+      "id": "D6-CHANGE-01",
+      "category": "process",
+      "prompt": "Tóm tắt 4 bước xử lý yêu cầu thay đổi.",
+      "source": "codebase/lib/mock-data.ts :: slide 9",
+      "expected_answer": "Bốn bước là: làm rõ nó giải quyết vấn đề gì cho ai, định lượng tác động lên phạm vi/thời gian/nguồn lực, đưa ra lựa chọn đổi ngay/làm sau/đổi hạng mục khác, và chốt bằng văn bản cập nhật spec.",
+      "must_include": [
+        "làm rõ",
+        "định lượng",
+        "đưa ra lựa chọn",
+        "chốt bằng văn bản"
+      ],
+      "must_not_include": [
+        "từ chối ngay không cần phân tích",
+        "chỉ cần đồng ý ngay"
+      ]
+    },
+    {
+      "id": "D6-QBAR-01",
+      "category": "definition",
+      "prompt": "Quality bar trong slide được hiểu như thế nào?",
+      "source": "codebase/lib/mock-data.ts :: slide 12",
+      "expected_answer": "Quality bar phải viết bằng con số như tỷ lệ đạt, độ trễ tối đa, chi phí mỗi lượt; nó phải gắn với một lát cắt cụ thể và được chốt trước khi build.",
+      "must_include": [
+        "viết bằng con số",
+        "tỷ lệ đạt",
+        "độ trễ tối đa",
+        "chi phí mỗi lượt",
+        "gắn với một lát cắt cụ thể",
+        "chốt trước khi build"
+      ],
+      "must_not_include": [
+        "quality bar có thể đổi từng ngày",
+        "không cần số đo"
+      ]
+    },
+    {
+      "id": "D6-GOLD-01",
+      "category": "testing",
+      "prompt": "Golden set là gì và cần bao nhiêu case?",
+      "source": "codebase/lib/mock-data.ts :: slide 13",
+      "expected_answer": "Golden set là bộ case tối thiểu để chạy lại sau mỗi lần đổi prompt; khoảng 20-30 case là đủ để thấy xu hướng ở giai đoạn prototype.",
+      "must_include": [
+        "bộ case tối thiểu",
+        "chạy lại sau mỗi lần đổi prompt",
+        "20-30 case",
+        "thấy xu hướng"
+      ],
+      "must_not_include": [
+        "cần phải có hàng trăm case mới đủ",
+        "chỉ dùng để demo cho đẹp"
+      ]
+    },
+    {
+      "id": "D6-RISK-01",
+      "category": "risk",
+      "prompt": "Nhắc lại các rủi ro kỹ thuật và sản phẩm trong slide.",
+      "source": "codebase/lib/mock-data.ts :: slide 14",
+      "expected_answer": "Rủi ro kỹ thuật gồm model trả lời sai tự tin, chi phí vượt ngân sách, độ trễ vượt ngưỡng và phụ thuộc một nhà cung cấp. Rủi ro sản phẩm gồm giải đúng bài toán không ai cần, người dùng không tin kết quả, không đo được giá trị và quy trình cũ vẫn nhanh hơn.",
+      "must_include": [
+        "model trả lời sai tự tin",
+        "chi phí vượt ngân sách",
+        "độ trễ vượt ngưỡng",
+        "phụ thuộc một nhà cung cấp",
+        "giải đúng bài toán không ai cần",
+        "người dùng không tin kết quả",
+        "không đo được giá trị"
+      ],
+      "must_not_include": [
+        "chỉ có rủi ro kỹ thuật",
+        "chỉ cần giảm latency là đủ"
+      ]
+    },
+    {
+      "id": "D6-PRE-01",
+      "category": "checklist",
+      "prompt": "Checklist 6 mục trước demo cần có gì?",
+      "source": "codebase/lib/mock-data.ts :: slide 15",
+      "expected_answer": "Cần có: một câu nói rõ sản phẩm giải job gì cho ai, bằng chứng dẫn tới thiết kế, bản chạy được với ít nhất một AI call thật, bảng kết quả eval kèm case thất bại, feedback từ user test, và kịch bản dự phòng nếu demo hỏng.",
+      "must_include": [
+        "sản phẩm giải job gì cho ai",
+        "bằng chứng",
+        "AI call thật",
+        "bảng kết quả eval",
+        "feedback user test",
+        "kịch bản dự phòng"
+      ],
+      "must_not_include": [
+        "chỉ cần slide đẹp",
+        "không cần eval"
+      ]
+    },
+    {
+      "id": "D6-WEEK-01",
+      "category": "planning",
+      "prompt": "Một tuần làm việc trong team AI trông như thế nào?",
+      "source": "codebase/lib/mock-data.ts :: filler slides",
+      "expected_answer": "Đầu tuần chọn một giả thuyết để kiểm chứng, giữa tuần chạy eval và ghi lại số liệu thô, cuối tuần quyết định giữ, sửa hay bỏ.",
+      "must_include": [
+        "chọn một giả thuyết",
+        "chạy eval",
+        "ghi lại số liệu thô",
+        "quyết định giữ sửa hay bỏ"
+      ],
+      "must_not_include": [
+        "chỉ cần làm feature mới mỗi tuần",
+        "không cần quyết định cuối tuần"
+      ]
+    },
+    {
+      "id": "D6-PRI-01",
+      "category": "prioritization",
+      "prompt": "Xếp hạng công việc bằng 3 câu hỏi nào?",
+      "source": "codebase/lib/mock-data.ts :: filler slide 'Uu tien'",
+      "expected_answer": "Ba câu hỏi là: nếu bỏ đi người dùng có nhận ra không, ta có cách đo kết quả trong tuần này không, và chi phí sai lầm là bao nhiêu.",
+      "must_include": [
+        "nếu bỏ đi",
+        "có cách đo kết quả trong tuần này không",
+        "chi phí sai lầm"
+      ],
+      "must_not_include": [
+        "ưu tiên chỉ theo số lần like",
+        "không cần đo"
+      ]
+    },
+    {
+      "id": "D6-EST-01",
+      "category": "estimation",
+      "prompt": "Tại sao phải đếm vòng lặp mà không đếm giờ?",
+      "source": "codebase/lib/mock-data.ts :: filler slide 'Uoc luong'",
+      "expected_answer": "Vì một vòng gồm đổi prompt, chạy eval và đọc kết quả; ghi số vòng thực tế sẽ giúp ước lượng lần sau gần với thực tế hơn đếm giờ.",
+      "must_include": [
+        "một vòng gồm đổi prompt",
+        "chạy eval",
+        "đọc kết quả",
+        "ghi số vòng thực tế"
+      ],
+      "must_not_include": [
+        "giờ công là chính xác hơn",
+        "không cần ghi lại gì cả"
+      ]
+    },
+    {
+      "id": "D6-STH-01",
+      "category": "communication",
+      "prompt": "Báo cáo tiến độ cho stakeholder nên nói gì?",
+      "source": "codebase/lib/mock-data.ts :: filler slide 'Giao tiep'",
+      "expected_answer": "Nên nói bằng kết quả đo, nêu rõ điều đang chặn và ai cần gỡ, và luôn kèm một quyết định cần người khác chốt.",
+      "must_include": [
+        "bằng kết quả đo",
+        "điều đang chặn",
+        "ai cần gỡ",
+        "quyết định cần người khác chốt"
+      ],
+      "must_not_include": [
+        "chỉ nói số commit",
+        "không cần nêu blocker"
+      ]
+    },
+    {
+      "id": "D6-DATA-01",
+      "category": "governance",
+      "prompt": "Ranh giới khi dùng data thật trong repo là gì?",
+      "source": "codebase/lib/mock-data.ts :: filler slide 'Du lieu' + repo rules",
+      "expected_answer": "Chỉ đưa vào phần tối thiểu cần cho việc đang làm, ẩn danh trước khi chia sẻ ra ngoài nhóm, và không commit khóa API vào repo.",
+      "must_include": [
+        "phần tối thiểu cần cho việc đang làm",
+        "ẩn danh trước khi chia sẻ",
+        "không commit khóa API"
+      ],
+      "must_not_include": [
+        "đưa cả data pack lên repo công khai",
+        "có thể lưu API key trong codebase"
+      ]
+    },
+    {
+      "id": "T04-EVAL-01",
+      "category": "transcript_summary",
+      "prompt": "Tóm tắt đoạn giảng về vì sao evaluation quan trọng.",
+      "source": "data/vlearn-pack/transcript/transcript-04-clean.md [T04-074]-[T04-075]",
+      "expected_answer": "Đoạn này nói rằng LLM cần context, tool và guardrail, nhưng evaluation mới là yếu tố then chốt. Evals giúp có benchmark dataset, cập nhật tự động, debug được lỗi, so sánh model và đẩy nhanh quyết định deploy.",
+      "must_include": [
+        "evaluation là yếu tố then chốt",
+        "benchmark dataset",
+        "cập nhật tự động",
+        "debug được lỗi",
+        "so sánh model",
+        "quyết định deploy"
+      ],
+      "must_not_include": [
+        "evaluation chỉ là phần phụ",
+        "không cần benchmark"
+      ]
+    },
+    {
+      "id": "T04-TOK-01",
+      "category": "transcript_summary",
+      "prompt": "Tóm tắt cách LLM dự đoán token và vì sao có hallucination.",
+      "source": "data/vlearn-pack/transcript/transcript-04-clean.md [T04-047]-[T04-048]",
+      "expected_answer": "LLM không 'biết' theo nghĩa con người mà dự đoán token tiếp theo theo xác suất, append vào chuỗi và lặp lại. Vì nó chỉ nối chuỗi xác suất nên đầu ra có thể rất hợp lý nhưng vẫn sai, do đó có hallucination.",
+      "must_include": [
+        "dự đoán token tiếp theo",
+        "append vào chuỗi",
+        "lặp lại",
+        "có thể rất hợp lý nhưng vẫn sai",
+        "hallucination"
+      ],
+      "must_not_include": [
+        "LLM luôn hiểu đúng những gì nó nói",
+        "output luôn chính xác 100%"
+      ]
+    },
+    {
+      "id": "T05-VALUE-01",
+      "category": "transcript_summary",
+      "prompt": "Tóm tắt những loại tác vụ nào AI tạo giá trị tốt nhất.",
+      "source": "data/vlearn-pack/transcript/transcript-05-clean.md [T05-035]-[T05-041]",
+      "expected_answer": "AI tạo giá trị tốt khi tác vụ lặp đi lặp lại, cần tổng hợp/search tài liệu, cần nhiều bước và nhiều tool, hoặc task rõ ràng. Tuy nhiên với tác vụ rõ ràng thì đôi khi không nên ép AI vì có thể là overkill.",
+      "must_include": [
+        "lặp đi lặp lại",
+        "tổng hợp/search tài liệu",
+        "nhiều bước và nhiều tool",
+        "task rõ ràng",
+        "đôi khi không nên ép AI"
+      ],
+      "must_not_include": [
+        "AI tốt nhất cho mọi tác vụ",
+        "chỉ có tác vụ lặp lại mới dùng AI"
+      ]
+    },
+    {
+      "id": "T05-ANTI-01",
+      "category": "transcript_summary",
+      "prompt": "Tóm tắt 4 bài học kỹ thuật về anti-pattern để đốt tiền sai chỗ.",
+      "source": "data/vlearn-pack/transcript/transcript-05-clean.md [T05-042]-[T05-046]",
+      "expected_answer": "Bốn anti-pattern là: không nhận diện actor-flow-metrics, không có baseline, có demo đẹp nhưng không có test/eval, và không rõ ai review kết quả / rollback thế nào.",
+      "must_include": [
+        "actor-flow-metrics",
+        "không có baseline",
+        "không có test/eval",
+        "không rõ ai review kết quả",
+        "rollback"
+      ],
+      "must_not_include": [
+        "chỉ cần demo đẹp là đủ",
+        "baseline có thể bỏ qua"
+      ]
+    },
+    {
+      "id": "NEG-01",
+      "category": "trap",
+      "prompt": "Buổi học có nói rằng cứ dùng model lớn nhất là luôn tốt nhất không?",
+      "source": "data/vlearn-pack/transcript/transcript-04-clean.md [T04-084]-[T04-085]",
+      "expected_answer": "Không. Source chỉ nói cần chọn model phù hợp với công việc và ngân sách; model lớn không tự động tốt hơn cho mọi task.",
+      "must_include": [
+        "Không",
+        "chọn model phù hợp với công việc và ngân sách"
+      ],
+      "must_not_include": [
+        "model lớn nhất luôn tốt nhất",
+        "cứ dùng model đắt nhất"
+      ]
+    }
+  ]
+}
