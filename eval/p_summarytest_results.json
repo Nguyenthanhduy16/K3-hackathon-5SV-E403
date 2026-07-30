@@ -1,0 +1,129 @@
+{
+  "summary": {
+    "total": 17,
+    "passed": 8,
+    "failed": 9,
+    "accuracy": 0.47058823529411764
+  },
+  "results": [
+    {
+      "id": "tc_001",
+      "utterance": "Vui lòng tóm tắt slide 10 về LLM là gì? trong Day 1.",
+      "expected": "page-summary",
+      "predicted": "session-summary",
+      "pass": false
+    },
+    {
+      "id": "tc_002",
+      "utterance": "Bạn hãy tóm tắt slide 17 về Automation vs Augmentation trong DAY 02.",
+      "expected": "page-summary",
+      "predicted": "compare",
+      "pass": false
+    },
+    {
+      "id": "tc_003",
+      "utterance": "Xin tóm tắt toàn bộ Day 1, chủ đề AI & LLM Foundation.",
+      "expected": "session-summary",
+      "predicted": "session-summary",
+      "pass": true
+    },
+    {
+      "id": "tc_004",
+      "utterance": "Hãy tổng hợp toàn bộ bài giảng DAY 02 về Xác định bài toán cho AI.",
+      "expected": "session-summary",
+      "predicted": "session-summary",
+      "pass": true
+    },
+    {
+      "id": "tc_005",
+      "utterance": "Tóm tắt hộ con slide 23 Precision ↔ Recall của DAY 02 với.",
+      "expected": "page-summary",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": false
+    },
+    {
+      "id": "tc_006",
+      "utterance": "Recap lẹ slide 13 Token bên Day 1 nha.",
+      "expected": "page-summary",
+      "predicted": "session-summary",
+      "pass": false
+    },
+    {
+      "id": "tc_007",
+      "utterance": "Tóm lẹ cả bài Day 1 coi, phần AI & LLM Foundation á.",
+      "expected": "session-summary",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": false
+    },
+    {
+      "id": "tc_008",
+      "utterance": "Tóm tắt slide này giúp mình với.",
+      "expected": "page-summary",
+      "predicted": "page-summary",
+      "pass": true
+    },
+    {
+      "id": "tc_009",
+      "utterance": "Tóm tắt phần Double Diamond giúp mình.",
+      "expected": "page-summary",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": false
+    },
+    {
+      "id": "tc_010",
+      "utterance": "Cho mình bản tóm tắt toàn bộ bài giảng.",
+      "expected": "session-summary",
+      "predicted": "session-summary",
+      "pass": true
+    },
+    {
+      "id": "tc_011",
+      "utterance": "tom tat slie 24 ve agent o Day 1 di",
+      "expected": "page-summary",
+      "predicted": "session-summary",
+      "pass": false
+    },
+    {
+      "id": "tc_012",
+      "utterance": "tóm tăt lẹ slde 26: Problem Statement đến Eval Plan, DAY 02",
+      "expected": "page-summary",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": false
+    },
+    {
+      "id": "tc_013",
+      "utterance": "Hôm nay ăn gì?",
+      "expected": "OUT_OF_DOMAIN",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": true
+    },
+    {
+      "id": "tc_014",
+      "utterance": "Mở nhạc giúp mình.",
+      "expected": "OUT_OF_DOMAIN",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": true
+    },
+    {
+      "id": "tc_015",
+      "utterance": "Thời tiết ở Hà Nội thế nào?",
+      "expected": "OUT_OF_DOMAIN",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": true
+    },
+    {
+      "id": "tc_016",
+      "utterance": "Tóm tắt sờ lai này",
+      "expected": "page-summary",
+      "predicted": "OUT_OF_DOMAIN",
+      "pass": false
+    },
+    {
+      "id": "tc_017",
+      "utterance": "Tổng hợp toàn bộ những kiên thức chính trong bài này",
+      "expected": "session-summary",
+      "predicted": "session-summary",
+      "pass": true
+    }
+  ]
+}

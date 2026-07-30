@@ -138,5 +138,19 @@
     "expected_intent": "OUT_OF_DOMAIN",
     "expected_entities": {},
     "test_type": "negative_case"
+  },
+  {
+    "id": "tc_016",
+    "utterance": "Tóm tắt sờ lai này",
+    "expected_intent": "page-summary",
+    "expected_entities": {},
+    "test_type": "typo_noise"
+  },
+  {
+    "id": "tc_017",
+    "utterance": "Tổng hợp toàn bộ những kiên thức chính trong bài này",
+    "expected_intent": "session-summary",
+    "expected_entities": {},
+    "test_type": "typo_noise"
   }
 ]
