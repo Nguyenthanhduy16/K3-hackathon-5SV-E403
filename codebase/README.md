@@ -107,10 +107,11 @@ Khi không tìm thấy, tutor nói rõ đã quét bao nhiêu slide và gợi ý 
 
 ## Phần nào là mock
 
-- **Không đọc PDF thật.** Mỗi trang là một slide dựng bằng CSS từ `lib/mock-data.ts`. Day 6 có
-  bộ 16 slide soạn tay + phần xoay vòng; Day 1–5 mỗi buổi có bộ slide riêng để tìm kiếm ở phạm vi
-  "Cả môn" trả về kết quả thật sự khác nhau. Cỡ chữ dùng đơn vị container query (`cqw`) nên co
-  giãn đúng theo mức zoom.
+- **Không render PDF thật, nhưng nội dung Day 1–2 là thật.** Mỗi trang là một slide dựng bằng
+  CSS từ `lib/mock-data.ts`. Tài liệu chính của **Day 1 và Day 2 có deck soạn đầy đủ 29 trang**,
+  tóm lược theo đúng từng trang PDF thật trong `data/vlearn-pack/slide/`; Day 6 có bộ 16 slide
+  soạn tay + phần xoay vòng; Day 3–5 mỗi buổi có bộ slide riêng để tìm kiếm ở phạm vi "Cả môn"
+  trả về kết quả khác nhau. Cỡ chữ dùng đơn vị container query (`cqw`) nên co giãn theo mức zoom.
 - **Dữ liệu cấp buổi là hardcode** — dàn ý, takeaway và 7 thuật ngữ của Day 6 nằm trong
   `lib/session-data.ts`. Trong bản thật, đây là chỗ cần một job tóm tắt chạy sẵn sau mỗi buổi
   (offline summarisation) rồi lưu cạnh tài liệu, chứ không tóm tắt lại mỗi lần có người hỏi.
