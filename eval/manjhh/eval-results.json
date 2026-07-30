@@ -10,19 +10,19 @@
     {
       "id": "D6-SUM-01",
       "prompt": "Tóm tắt toàn bộ buổi học Day 6 trong 5-7 ý chính.",
-      "response": "Dưới đây là tóm tắt buổi học Day 6:\n\n1. **Khác biệt trong quản lý sản phẩm AI**:\n   - Dự án AI có ba nguồn bất định không có trong phần mềm truyền thống, bao gồm chất lượng đầu ra, chi phí và độ trễ thay đổi, và kỳ vọng người dùng.\n\n2. **Quy trình xử lý thay đổi yêu cầu**:\n   - Bốn bước: làm rõ vấn đề, định lượng ảnh hưởng, đưa ra lựa chọn, và chốt bằng văn bản.\n\n3. **Đo lường chất lượng**:\n   - Thiết lập quality bar rõ ràng và golden set để đánh giá sản phẩm AI.\n\n4. **Rủi ro trong dự án AI**:\n   - Phân biệt giữa rủi ro kỹ thuật (model sai, chi phí vượt ngân sách) và rủi ro sản phẩm (giải quyết vấn đề không cần thiết, người dùng không tin tưởng).\n\n5. **Nhịp làm việc trong nhóm sản phẩm AI**:\n   - Quy trình làm việc hàng tuần bao gồm chọn giả thuyết, chạy eval, và quyết định về sản phẩm.\n\n6. **Ưu tiên và ước lượng**:\n   - Xếp hạng yêu cầu dựa trên tác động đến người dùng và khả năng đo lường kết quả; ước lượng dựa trên số vòng lặp thay vì thời gian.\n\n7. **Giao tiếp và tài liệu**:\n   - Báo cáo tiến độ dựa trên kết quả đo lường và duy trì tài liệu spec sống để ghi lại lịch sử thay đổi.",
+      "response": "Dưới đây là tóm tắt buổi học Day 6:\n\n1. **Khác biệt trong quản lý sản phẩm AI**:\n   - Dự án AI có ba nguồn bất định không có trong phần mềm truyền thống, bao gồm chất lượng đầu ra, chi phí và độ trễ thay đổi, và kỳ vọng người dùng.\n\n2. **Quy trình xử lý thay đổi yêu cầu**:\n   - Bốn bước: làm rõ vấn đề, định lượng ảnh hưởng, đưa ra lựa chọn, và chốt bằng văn bản.\n\n3. **Đo lường chất lượng**:\n   - Thiết lập quality bar rõ ràng và golden set để đánh giá sản phẩm AI.\n\n4. **Rủi ro trong dự án AI**:\n   - Phân biệt giữa rủi ro kỹ thuật (model sai, chi phí vượt ngân sách) và rủi ro sản phẩm (giải bài toán không cần thiết, người dùng không tin tưởng).\n\n5. **Nhịp làm việc trong nhóm sản phẩm AI**:\n   - Quy trình hàng tuần bao gồm chọn giả thuyết, chạy eval, và quyết định về sản phẩm.\n\n6. **Ưu tiên và ước lượng**:\n   - Xếp hạng yêu cầu dựa trên tác động đến người dùng và khả năng đo lường kết quả; ước lượng dựa trên số vòng lặp thay vì thời gian.\n\n7. **Giao tiếp và tài liệu**:\n   - Báo cáo tiến độ dựa trên kết quả đo và duy trì tài liệu spec sống để ghi lại lịch sử thay đổi.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The response accurately summarizes the key points of the lesson, including the differences in managing AI products, the three sources of uncertainty, the AI product lifecycle, scope creep, quality bar, golden set, risks, and the checklist before a demo. All required concepts are included without introducing any unsupported information."
+        "reasoning": "The response accurately summarizes the key points of the lesson, including the differences in managing AI products, the three sources of uncertainty, the product lifecycle, scope creep, quality bar, golden set, risks, and a checklist before the demo. All required concepts are included, and there are no unsupported claims or irrelevant information."
       }
     },
     {
       "id": "D6-P2-01",
       "prompt": "Tóm tắt slide mở đầu với câu hỏi về stakeholder đổi requirements.",
-      "response": "- **Tiêu đề:** AI Product & Project Management\n- **Phụ đề:** AICB-P1 · Ngày 6 · Quản lý sản phẩm AI như thế nào?\n- **Câu hỏi:** Team đã build 3 tuần. Nhưng stakeholder muốn đổi requirements. Làm sao xử lý?\n- **Ghi chú:** Giữ câu hỏi này trong đầu khi học bài hôm nay.\n- **Tên Giảng Viên:** Không tìm thấy.\n- **Chân trang:** VinUniversity · Phase 1 · Tuần 1 · 2026.",
+      "response": "- **Tiêu đề:** AI Product & Project Management\n- **Phụ đề:** AICB-P1 · Ngày 6 · Quản lý sản phẩm AI như thế nào?\n- **Câu hỏi:** Team đã build 3 tuần. Nhưng stakeholder muốn đổi requirements. Làm sao xử lý?\n- **Ghi chú:** Giữ câu hỏi này trong đầu khi học bài hôm nay.\n- **Giảng viên:** Tên Giảng Viên\n- **Chân trang:** VinUniversity · Phase 1 · Tuần 1 · 2026",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
@@ -34,13 +34,13 @@
     {
       "id": "D6-COMP-01",
       "prompt": "So sánh phần mềm truyền thống và sản phẩm AI theo slide.",
-      "response": "| Tiêu chí                | Phần mềm truyền thống                     | Sản phẩm AI                          |\n|------------------------|------------------------------------------|-------------------------------------|\n| Requirement            | Rõ ràng → test pass/fail                 | Mờ → cần quality bar                |\n| Bug                    | Tái hiện được                            | Lỗi mang tính xác suất              |\n| Ước lượng              | Theo số màn hình                         | Theo số vòng eval                   |\n| Chốt scope             | Chốt kết quả                            | Chốt phạm vi thử                    |",
+      "response": "| Tiêu chí                | Phần mềm truyền thống                     | Sản phẩm AI                          |\n|-------------------------|-------------------------------------------|--------------------------------------|\n| Requirement             | Rõ ràng → test pass/fail                  | Mờ → cần quality bar                 |\n| Bug                     | Tái hiện được                             | Lỗi mang tính xác suất               |\n| Ước lượng               | Theo số màn hình                          | Theo số vòng eval                    |\n| Chốt scope              | Chốt kết quả                             | Chốt phạm vi thử                     |",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately captures all required concepts related to traditional software and AI products, including the necessary terms and comparisons. It is directly relevant to the context and includes all must-include points without introducing any unsupported claims."
+        "reasoning": "The model response accurately captures all required concepts and terms from the expected answer, directly addressing the differences between traditional software and AI products. There are no inaccuracies or irrelevant information present, and all must-include points are covered."
       }
     },
     {
@@ -58,25 +58,25 @@
     {
       "id": "D6-LIFE-01",
       "prompt": "Nêu 5 giai đoạn trong vòng đời sản phẩm AI là gì?",
-      "response": "- Khám phá — tìm bằng chứng cho job cần giải.\n- Spec — chốt lát cắt, quality bar và cách đo.\n- Prototype — chạy thật ít nhất một lời gọi AI.\n- Eval — đo trên golden set, ghi nhận trung thực.\n- Validation — đưa cho người dùng thật, sửa theo phản hồi.",
+      "response": "Năm giai đoạn của một sản phẩm AI là:\n\n1. **Khám phá** — tìm bằng chứng cho job cần giải.\n2. **Spec** — chốt lát cắt, quality bar và cách đo.\n3. **Prototype** — chạy thật ít nhất một lời gọi AI.\n4. **Eval** — đo trên golden set, ghi nhận trung thực.\n5. **Validation** — đưa cho người dùng thật, sửa theo phản hồi.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately lists all five stages: discovery, spec, prototype, eval, and validation. It is directly relevant to the question and includes all required points without introducing any unsupported information."
+        "reasoning": "The model response accurately lists the five stages of an AI product as required, using the exact terms 'discovery', 'spec', 'prototype', 'eval', and 'validation'. It does not include any unsupported claims or irrelevant information, and it adheres to the must-include criteria without introducing any must-not-include elements."
       }
     },
     {
       "id": "D6-SCOPE-01",
       "prompt": "Scope creep thường vào cửa nào theo slide?",
-      "response": "Scope creep thường vào cửa nào:\n- Stakeholder mới xuất hiện sau khi team đã bắt đầu build.\n- Demo giữa kỳ khiến người xem nghĩ ra tính năng mới.\n- Tiêu chí thành công chưa bao giờ được viết ra thành số.\n- Một lỗi lẻ được nâng cấp thành yêu cầu lớn.",
+      "response": "- Stakeholder mới xuất hiện sau khi team đã bắt đầu build.\n- Demo giữa kỳ khiến người xem nghĩ ra tính năng mới.\n- Tiêu chí thành công chưa bao giờ được viết ra thành số.\n- Một lỗi lẻ được nâng cấp thành yêu cầu lớn.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately lists the causes of scope creep as specified in the expected answer. It includes all required concepts without introducing any unsupported information, making it fully relevant and complete."
+        "reasoning": "The model response accurately reflects the expected answer, addressing all required points without introducing any unsupported claims or irrelevant information."
       }
     },
     {
@@ -88,19 +88,19 @@
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately outlines the four steps required for handling change requests, using the exact terms from the 'must_include' list. It is directly relevant to the context and includes all necessary points without introducing any unsupported information."
+        "reasoning": "The model response accurately outlines the four steps required for handling change requests, using the exact terms from the 'must_include' list and avoiding any terms from the 'must_not_include' list. It is directly relevant to the context and fully addresses all required points."
       }
     },
     {
       "id": "D6-QBAR-01",
       "prompt": "Quality bar trong slide được hiểu như thế nào?",
-      "response": "Quality bar trong slide được hiểu như sau:\n\n- **Định nghĩa**: Là các tiêu chí chất lượng được xác định trước cho sản phẩm AI.\n- **Yêu cầu**:\n  - Viết bằng con số: tỷ lệ đạt, độ trễ tối đa, chi phí mỗi lượt.\n  - Gắn với một lát cắt cụ thể, không phải toàn bộ sản phẩm.\n  - Phải dễ hiểu, ai cũng có thể đọc được trong 30 giây; nếu không, cần viết lại.\n- **Thay đổi**: Thay đổi quality bar giữa chừng sẽ dẫn đến thay đổi kết quả đo.",
+      "response": "Quality bar trong slide được hiểu như sau:\n\n- **Định nghĩa**: Là tiêu chí chất lượng được xác định trước cho sản phẩm AI.\n- **Yêu cầu**:\n  - Viết bằng con số: tỷ lệ đạt, độ trễ tối đa, chi phí mỗi lượt.\n  - Gắn với một lát cắt cụ thể, không phải toàn bộ sản phẩm.\n  - Dễ hiểu trong 30 giây — nếu không, cần viết lại.\n- **Thay đổi**: Thay đổi quality bar giữa chừng sẽ dẫn đến thay đổi kết quả đo.",
       "grade": {
         "accuracy": 1,
         "relevance": 2,
         "completeness": 1,
         "hallucination": 0,
-        "reasoning": "The response is mostly accurate but misses some specific required phrases such as 'gắn với một lát cắt cụ thể và được chốt trước khi build'. It is relevant and provides a good overview of the quality bar concept, but it lacks completeness in including all must-include points."
+        "reasoning": "The response is mostly accurate but misses some specific phrases from the 'must_include' list, such as 'chốt trước khi build'. It is relevant to the topic and provides a clear definition and requirements for the quality bar, but it does not fully meet the completeness criteria."
       }
     },
     {
@@ -110,15 +110,15 @@
       "grade": {
         "accuracy": 2,
         "relevance": 2,
-        "completeness": 1,
+        "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The response accurately defines the golden set and mentions the appropriate number of cases (20-30) to observe trends in the prototype phase. However, it lacks the specific phrase 'bộ case tối thiểu' and the full context of 'chạy lại sau mỗi lần đổi prompt'. Overall, it is mostly complete but missing some key phrases."
+        "reasoning": "The model response accurately defines 'golden set' and mentions the required number of cases (20-30) to observe trends, aligning perfectly with the expected answer and must-include criteria without introducing any unsupported information."
       }
     },
     {
       "id": "D6-RISK-01",
       "prompt": "Nhắc lại các rủi ro kỹ thuật và sản phẩm trong slide.",
-      "response": "**Rủi ro kỹ thuật:**\n- Model trả lời sai tự tin\n- Chi phí vượt ngân sách\n- Độ trễ vượt ngưỡng chịu đựng\n- Phụ thuộc một nhà cung cấp\n\n**Rủi ro sản phẩm:**\n- Giải đúng bài toán không ai cần\n- Người dùng không tin kết quả\n- Không đo được giá trị mang lại\n- Quy trình cũ vẫn nhanh hơn",
+      "response": "### Rủi ro kỹ thuật\n- Model trả lời sai tự tin\n- Chi phí vượt ngân sách\n- Độ trễ vượt ngưỡng chịu đựng\n- Phụ thuộc một nhà cung cấp\n\n### Rủi ro sản phẩm\n- Giải đúng bài toán không ai cần\n- Người dùng không tin kết quả\n- Không đo được giá trị mang lại\n- Quy trình cũ vẫn nhanh hơn",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
@@ -136,19 +136,19 @@
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately lists all the required points as specified in the expected answer and must include criteria. It is directly relevant to the context and does not contain any unsupported claims or irrelevant information."
+        "reasoning": "The model response accurately lists all required points as specified in the expected answer and must include criteria. It is directly relevant to the context and does not contain any unsupported claims or irrelevant information."
       }
     },
     {
       "id": "D6-WEEK-01",
       "prompt": "Một tuần làm việc trong team AI trông như thế nào?",
-      "response": "- **Đầu tuần**: Chọn một giả thuyết để kiểm chứng.\n- **Giữa tuần**: Chạy eval và ghi lại số liệu thô.\n- **Cuối tuần**: Quyết định giữ, sửa hay bỏ.",
+      "response": "Một tuần làm việc trong team AI trông như sau:\n\n- **Đầu tuần**: Chọn một giả thuyết để kiểm chứng.\n- **Giữa tuần**: Chạy eval và ghi lại số liệu thô.\n- **Cuối tuần**: Quyết định giữ, sửa hay bỏ.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately reflects the expected answer, including all required concepts and phrases without introducing any unsupported information. It directly addresses the task and maintains relevance throughout."
+        "reasoning": "The model response accurately reflects the expected answer by including all required points: choosing a hypothesis, running eval, recording raw data, and deciding whether to keep, modify, or discard. It is directly relevant to the context and does not include any unsupported claims or irrelevant information."
       }
     },
     {
@@ -158,9 +158,9 @@
       "grade": {
         "accuracy": 2,
         "relevance": 2,
-        "completeness": 2,
+        "completeness": 1,
         "hallucination": 0,
-        "reasoning": "The model response accurately reflects the questions posed in the expected answer, directly addressing the three key points without introducing any unsupported information. It includes all required concepts and does not contain any irrelevant content."
+        "reasoning": "The response accurately reflects the questions posed in the expected answer and is relevant to the topic. However, it does not include the exact phrases required in the 'must_include' section, which affects completeness."
       }
     },
     {
@@ -172,7 +172,7 @@
         "relevance": 2,
         "completeness": 1,
         "hallucination": 0,
-        "reasoning": "The response is mostly accurate but misses some specific wording from the 'must_include' list, such as 'một vòng gồm đổi prompt' and 'ghi số vòng thực tế'. It is relevant and on-topic, and there are no hallucinations present."
+        "reasoning": "The response is mostly accurate but lacks the specific phrasing of 'một vòng gồm đổi prompt', 'chạy eval', 'đọc kết quả', and 'ghi số vòng thực tế' as required. It is relevant and does not include any hallucinated information."
       }
     },
     {
@@ -184,7 +184,7 @@
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately reflects the expected answer by including all required concepts and avoiding any prohibited phrases. It directly addresses the points that must be included, making it fully relevant and complete."
+        "reasoning": "The model response accurately reflects the expected answer by stating to speak in terms of measurement results, clarifying what is blocking and who needs to resolve it, and including a decision that requires confirmation from others. It does not include any unsupported claims or irrelevant information."
       }
     },
     {
@@ -196,67 +196,67 @@
         "relevance": 0,
         "completeness": 0,
         "hallucination": 0,
-        "reasoning": "The model response 'Không tìm thấy' does not address the expected answer or any of the must-include points. It is completely off-topic and fails to provide any relevant information regarding the context."
+        "reasoning": "The model response 'Không tìm thấy' does not address the expected answer or any of the must-include points. It is completely irrelevant and lacks any accurate or complete information related to the context."
       }
     },
     {
       "id": "T04-EVAL-01",
       "prompt": "Tóm tắt đoạn giảng về vì sao evaluation quan trọng.",
-      "response": "- **Đánh giá (evaluation) quyết định 80% thành công sản phẩm**: Việc xây dựng hệ thống đánh giá tự động giúp xác định hiệu suất của mô hình.\n- **Cần bộ dataset benchmark**: Để biết hệ thống hoạt động tốt hay không, cần có bộ dữ liệu đánh giá có khả năng tự động cập nhật.\n- **Giúp nhanh chóng sửa lỗi**: Nếu có hệ thống đánh giá tốt, có thể nhanh chóng xác định và sửa lỗi trong sản phẩm.\n- **Tăng tốc độ phát triển**: Đánh giá tốt giúp đưa sản phẩm ra thị trường nhanh hơn và đảm bảo chất lượng.\n- **Cần thiết cho việc ra quyết định**: Giúp xác định liệu mô hình mới có thể được triển khai ngay hay không.",
+      "response": "- **Đánh giá (evaluation) quyết định 80% thành công sản phẩm**: Việc xây dựng hệ thống đánh giá tự động giúp xác định hiệu quả hoạt động của mô hình.\n- **Cần bộ dataset benchmark**: Để biết hệ thống hoạt động tốt hay không, cần có bộ dữ liệu đánh giá có khả năng tự động cập nhật.\n- **Giúp nhanh chóng sửa lỗi**: Khi có hệ thống đánh giá tốt, có thể nhanh chóng xác định và sửa lỗi trong sản phẩm.\n- **Tăng tốc độ phát triển**: Đánh giá tốt giúp đưa sản phẩm ra thị trường nhanh hơn và đáp ứng kịp thời với các thay đổi.\n- **Ngăn ngừa ảo tưởng**: Giúp người phát triển không bị vỡ mộng khi đưa sản phẩm ra đời thật.",
       "grade": {
         "accuracy": 1,
         "relevance": 2,
         "completeness": 1,
         "hallucination": 0,
-        "reasoning": "The response is mostly accurate but lacks some specific phrases from the 'must_include' list, such as 'evaluation là yếu tố then chốt' and 'so sánh model'. It is relevant and addresses the topic well, but it misses some key points for completeness."
+        "reasoning": "The response is mostly accurate but misses some specific required phrases from the 'must_include' list, such as 'evaluation là yếu tố then chốt' and 'so sánh model'. It is relevant to the topic and does not include any unsupported claims."
       }
     },
     {
       "id": "T04-TOK-01",
       "prompt": "Tóm tắt cách LLM dự đoán token và vì sao có hallucination.",
-      "response": "### Cách LLM Dự Đoán Token\n- **Dự đoán từ tiếp theo**: LLM (Large Language Model) dự đoán token (từ hoặc phần của từ) tiếp theo dựa trên xác suất.\n- **Quá trình**:\n  1. **Học từ dữ liệu**: LLM đã học từ hàng triệu câu để hiểu ngữ cảnh.\n  2. **Nhập từ vào**: Khi người dùng nhập một từ, LLM sẽ dự đoán từ tiếp theo dựa trên xác suất đã học.\n  3. **Lặp lại**: Quá trình này lặp lại cho đến khi tạo ra một chuỗi văn bản hoàn chỉnh.\n\n### Nguyên Nhân Gây Ra Hallucination\n- **Dự đoán không chính xác**: LLM chỉ dự đoán từ tiếp theo mà không thực sự \"hiểu\" nội dung, dẫn đến việc có thể tạo ra thông tin sai lệch.\n- **Kết nối từ không chính xác**: Khi LLM cố gắng nối các từ với nhau để tạo thành câu, nó có thể tạo ra các câu có vẻ hợp lý nhưng thực tế lại sai thông tin.\n- **Thiếu ngữ cảnh**: Nếu ngữ cảnh không đủ rõ ràng hoặc quá dài, LLM có thể quên thông tin quan trọng từ đầu câu, dẫn đến kết quả không chính xác.",
+      "response": "### Cách LLM dự đoán token\n- **Dự đoán từ tiếp theo**: LLM (Large Language Model) dự đoán token tiếp theo dựa trên xác suất từ hàng triệu câu đã học.\n- **Quy trình**:\n  1. Nhập một từ hoặc cụm từ vào mô hình.\n  2. Mô hình sử dụng dữ liệu đã học để xác định xác suất của các từ tiếp theo.\n  3. Dựa trên xác suất, mô hình sinh ra từ tiếp theo và tiếp tục quá trình cho đến khi hoàn thành văn bản.\n\n### Nguyên nhân gây ra hallucination\n- **Chỉ dựa vào xác suất**: LLM không \"biết\" thông tin mà chỉ dự đoán từ tiếp theo dựa trên xác suất, dẫn đến khả năng sinh ra thông tin sai lệch.\n- **Kết nối từ không chính xác**: Khi mô hình cố gắng nối các từ với nhau để tạo thành câu, nó có thể tạo ra thông tin không chính xác hoặc không có thật, gọi là hiện tượng hallucination.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The model response accurately describes how LLMs predict the next token based on probabilities, includes the process of appending to the sequence and repeating it, and explains the potential for hallucination. All required concepts are included without introducing unsupported claims."
+        "reasoning": "The model response accurately describes how LLMs predict the next token based on probabilities, includes all required concepts, and does not introduce any unsupported claims or irrelevant information."
       }
     },
     {
       "id": "T05-VALUE-01",
       "prompt": "Tóm tắt những loại tác vụ nào AI tạo giá trị tốt nhất.",
-      "response": "AI tạo giá trị tốt nhất ở những loại tác vụ sau:\n\n1. **Tác vụ lặp đi lặp lại**:\n   - Ví dụ: Đăng ký môn học, các quy trình thường xuyên.\n\n2. **Tác vụ cần tổng hợp và tìm kiếm tài liệu**:\n   - Giúp giảm chi phí truy xuất thông tin.\n\n3. **Tác vụ cần nhiều bước và nhiều công cụ**:\n   - Ví dụ: Lập kế hoạch cho các sự kiện lớn, yêu cầu nhiều quyết định.\n\n4. **Tác vụ có tác dụng rõ ràng**:\n   - Ví dụ: Nhận diện tình trạng thùng rác đầy, cảnh báo cho quản lý. \n\nCác tác vụ này thường có quy trình rõ ràng và có thể được tối ưu hóa bằng AI để nâng cao hiệu quả và giảm thiểu chi phí.",
+      "response": "AI tạo giá trị tốt nhất ở những loại tác vụ sau:\n\n1. **Tác vụ lặp đi lặp lại**:\n   - Ví dụ: Đăng ký môn học, các quy trình thường xuyên.\n\n2. **Tác vụ cần tổng hợp và tìm kiếm tài liệu**:\n   - Giúp giảm chi phí truy xuất thông tin.\n\n3. **Tác vụ cần nhiều bước và nhiều công cụ**:\n   - Ví dụ: Lập kế hoạch cho các sự kiện lớn, yêu cầu nhiều quyết định.\n\n4. **Tác vụ có tác dụng rõ ràng**:\n   - Ví dụ: Nhận diện và cảnh báo khi thùng rác đầy, giúp tối ưu hóa quy trình. \n\nCác tác vụ này thường có tính ổn định và rõ ràng, giúp AI phát huy hiệu quả tối đa.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 1,
         "hallucination": 0,
-        "reasoning": "The response accurately describes the types of tasks where AI adds value, aligning well with the expected answer. It includes relevant examples and concepts but does not explicitly mention the caution against forcing AI on clear tasks, which is a minor omission."
+        "reasoning": "The response accurately describes the types of tasks where AI adds value, aligning well with the expected answer. It includes relevant points about repetitive tasks, document searching, and multi-step processes. However, it does not explicitly mention the caution against using AI for clear tasks, which is a key point in the must-include criteria."
       }
     },
     {
       "id": "T05-ANTI-01",
       "prompt": "Tóm tắt 4 bài học kỹ thuật về anti-pattern để đốt tiền sai chỗ.",
-      "response": "Bốn bài học kỹ thuật về anti-pattern để đốt tiền sai chỗ:\n\n1. **Không có đo lường**:\n   - Không xác định được chỉ số thành công.\n   - Chưa đo thì không nên làm hoặc không nên mở rộng.\n\n2. **Không có baseline**:\n   - Không có điểm chuẩn để so sánh hiệu suất.\n   - Không xác định được khả năng chịu tải của hệ thống.\n\n3. **Thiếu đánh giá (eval)**:\n   - Không có quy trình kiểm tra và đánh giá.\n   - Chỉ dựa vào demo mà không chạy trên môi trường thực tế.\n\n4. **Không rõ trách nhiệm**:\n   - Không xác định ai sẽ chịu trách nhiệm khi có lỗi xảy ra.\n   - Thiếu kế hoạch khắc phục khi gặp sự cố.",
+      "response": "Bốn bài học kỹ thuật về anti-pattern để đốt tiền sai chỗ:\n\n1. **Không có đo lường**:\n   - Không xác định được chỉ số thành công.\n   - Chưa đo thì không nên làm hoặc không nên mở rộng.\n\n2. **Không có baseline**:\n   - Không có điểm chuẩn để so sánh hiệu suất.\n   - Không xác định được khả năng chịu tải của hệ thống.\n\n3. **Thiếu đánh giá (eval)**:\n   - Không có quy trình kiểm tra và đánh giá.\n   - Chỉ dựa vào demo mà không có kết quả thực tế.\n\n4. **Không rõ trách nhiệm**:\n   - Không xác định ai sẽ chịu trách nhiệm khi có lỗi xảy ra.\n   - Thiếu kế hoạch khắc phục khi gặp sự cố.",
       "grade": {
         "accuracy": 1,
         "relevance": 2,
         "completeness": 1,
         "hallucination": 0,
-        "reasoning": "The response is mostly accurate but does not explicitly mention 'actor-flow-metrics' and uses slightly different phrasing for some points. It is relevant and addresses the topic of anti-patterns, but it misses some exact terms from the must-include list."
+        "reasoning": "The response accurately identifies some anti-patterns but does not explicitly mention 'actor-flow-metrics' and 'không rõ ai review kết quả', which are required points. It is relevant to the topic and does not contain hallucinations."
       }
     },
     {
       "id": "NEG-01",
       "prompt": "Buổi học có nói rằng cứ dùng model lớn nhất là luôn tốt nhất không?",
-      "response": "- Không, buổi học nhấn mạnh rằng việc chọn mô hình phù hợp với công việc là quan trọng.\n- Mô hình lớn nhất không phải lúc nào cũng là lựa chọn tốt nhất; cần hiểu điểm mạnh của mô hình và bài toán cụ thể.\n- Việc thử nghiệm và đánh giá mô hình cũng rất cần thiết để xác định hiệu quả.",
+      "response": "- Không, buổi học nhấn mạnh rằng việc chọn mô hình phù hợp với công việc là quan trọng.\n- Mô hình lớn không phải lúc nào cũng tốt nhất; cần hiểu điểm mạnh của mô hình và bài toán cụ thể.\n- Đôi khi, mô hình ít tham số nhưng chuyên biệt có thể làm tốt hơn cho các tác vụ cụ thể.",
       "grade": {
         "accuracy": 2,
         "relevance": 2,
         "completeness": 2,
         "hallucination": 0,
-        "reasoning": "The response accurately addresses the question by stating that choosing the right model for the job and budget is important. It correctly mentions that the largest model is not always the best choice, aligning with the expected answer. All required points are included, and there are no unsupported claims or irrelevant information."
+        "reasoning": "The response accurately addresses the question by stating that choosing the right model for the job and budget is important, aligning with the expected answer. It includes the required phrases and does not introduce any unsupported claims or irrelevant information."
       }
     }
   ]

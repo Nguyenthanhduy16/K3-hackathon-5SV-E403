@@ -83,11 +83,40 @@ const PATTERNS: { intent: Intent; re: RegExp }[] = [
 
 export function classifyIntent(question: string): Intent {
   const q = deaccent(question);
-  for (const { intent, re } of PATTERNS) {
+
+  // 1. Check tutor-probe
+  if (/\b(ban la ai|ban ten|ban lam duoc gi|giup duoc gi|ban co the lam|lam duoc nhung gi|who are you|what can you do|how can you help)\b/.test(q)) {
+    return "tutor-probe";
+  }
+
+  // 2. Check ops
+  if (/\b(deadline|han nop|hen nop|nop bai|nop spec|checkpoint|cp[1-6]|moc|lich|thoi gian bieu|may gio|diem|cham diem|rubric|repo|cau truc thu muc|quy dinh|luat|the le|bao nhieu diem)\b/.test(q)) {
+    return "ops";
+  }
+
+  // 3. Check page-summary (refined pattern to match slide/trang + numbers, phan, and colloquial terms)
+  const isPageSummary = /\b(tom tat|tom luoc|summar|recap|tom le|recap le)\w*\b.{0,30}\b(trang nay|trang hien tai|trang dang doc|slide nay|doan nay|this page|this slide|current page|trang \d+|slide \d+|phan \w+)\b/.test(q);
+  const isExplicitSession = /\b(ca bai|ca buoi|toan bo buoi|toan bo day)\b/.test(q);
+
+  if (isPageSummary && !isExplicitSession) {
+    return "page-summary";
+  }
+
+  // 4. Check session-summary (refined to include "tom le" and deaccented keywords)
+  if (/\b(tom tat|tom luoc|tong hop|tong ket|recap|summar|overview|tom le)\w*\b.{0,40}\b(buoi|hom nay|bai hoc|bai giang|ca bai|toan bo|session|lecture|day ?[1-6])\b|^\s*(tom tat buoi|tom tat bai|hom nay hoc gi|buoi nay hoc gi|buoi hom nay hoc gi)/.test(q)) {
+    return "session-summary";
+  }
+
+  // 5. Check remaining patterns
+  // Index 4 onwards covers session-outline, compare, quiz, example, definition, page-explain, mechanism
+  for (let i = 4; i < PATTERNS.length; i++) {
+    const { intent, re } = PATTERNS[i];
     if (re.test(q)) return intent;
   }
+
   return "keyword";
 }
+
 
 /* ------------------------------------------------------------------ */
 /* 2. Nới phạm vi                                                      */

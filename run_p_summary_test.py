@@ -83,13 +83,36 @@ PATTERNS = [
 
 def classify_intent(question):
     q = deaccent(question)
-    for p in PATTERNS:
+
+    # 1. Check tutor-probe
+    if re.search(r"\b(ban la ai|ban ten|ban lam duoc gi|giup duoc gi|ban co the lam|lam duoc nhung gi|who are you|what can you do|how can you help)\b", q):
+        return "tutor-probe"
+
+    # 2. Check ops
+    if re.search(r"\b(deadline|han nop|hen nop|nop bai|nop spec|checkpoint|cp[1-6]|moc|lich|thoi gian bieu|may gio|diem|cham diem|rubric|repo|cau truc thu muc|quy dinh|luat|the le|bao nhieu diem)\b", q):
+        return "ops"
+
+    # 3. Check page-summary (refined pattern to match slide/trang + numbers, phan, and colloquial terms)
+    is_page_summary = bool(re.search(r"\b(tom tat|tom luoc|summar|recap|tom le|recap le)\w*\b.{0,30}\b(trang nay|trang hien tai|trang dang doc|slide nay|doan nay|this page|this slide|current page|trang \d+|slide \d+|phan \w+)\b", q))
+    is_explicit_session = bool(re.search(r"\b(ca bai|ca buoi|toan bo buoi|toan bo day)\b", q))
+
+    if is_page_summary and not is_explicit_session:
+        return "page-summary"
+
+    # 4. Check session-summary (refined to include "tom le" and deaccented keywords)
+    if re.search(r"\b(tom tat|tom luoc|tong hop|tong ket|recap|summar|overview|tom le)\w*\b.{0,40}\b(buoi|hom nay|bai hoc|bai giang|ca bai|toan bo|session|lecture|day ?[1-6])\b|^\s*(tom tat buoi|tom tat bai|hom nay hoc gi|buoi nay hoc gi|buoi hom nay hoc gi)", q):
+        return "session-summary"
+
+    # 5. Check remaining patterns
+    for p in PATTERNS[4:]:
         if p["re"].search(q):
             return p["intent"]
+
     return "keyword"
 
+
 def run_tests():
-    with open('eval/p_summarytest.json', 'r', encoding='utf-8') as f:
+    with open('eval/phuc/p_summarytest.json', 'r', encoding='utf-8') as f:
         test_cases = json.load(f)
 
     passed = 0
@@ -126,8 +149,8 @@ def run_tests():
     print(f"Result: {passed}/{len(test_cases)} passed")
     print("========================================")
 
-    # Save to eval/p_summarytest_results.json
-    output_path = 'eval/p_summarytest_results.json'
+    # Save to eval/phuc/p_summarytest_results.json
+    output_path = 'eval/phuc/p_summarytest_results.json'
     output_data = {
         "summary": {
             "total": len(test_cases),
