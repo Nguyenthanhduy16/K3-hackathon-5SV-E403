@@ -11,15 +11,15 @@ export const COURSE_DAYS: CourseDay[] = [
   {
     id: "day-1",
     label: "Day 1",
-    topic: "Tư duy sản phẩm AI · khai mạc",
-    topicEn: "AI product mindset · kickoff",
+    topic: "Nền tảng AI & LLM",
+    topicEn: "AI & LLM foundation",
     status: "ACTIVE",
     documents: [
       {
         id: "d1-main",
-        name: "day01-ai-product-mindset.pdf",
+        name: "day01-ai-llm-foundation.pdf",
         meta: "Lecture_material_kq81ba4_zn02vc",
-        pages: 28,
+        pages: 29,
       },
       {
         id: "d1-worksheet",
@@ -32,15 +32,15 @@ export const COURSE_DAYS: CourseDay[] = [
   {
     id: "day-2",
     label: "Day 2",
-    topic: "JTBD & bằng chứng người dùng",
-    topicEn: "JTBD & user evidence",
+    topic: "Xác định bài toán cho AI",
+    topicEn: "Framing the problem for AI",
     status: "ACTIVE",
     documents: [
       {
         id: "d2-main",
-        name: "day02-jtbd-and-user-evidence.pdf",
+        name: "day02-ai-problem-framing.pdf",
         meta: "Lecture_material_h3m9xt2_bw41qs",
-        pages: 31,
+        pages: 29,
       },
     ],
   },
@@ -451,83 +451,796 @@ const FILLER: { eyebrow: string; title: string; bullets: string[] }[] = [
 ];
 
 /**
+ * Deck soạn ĐẦY ĐỦ theo từng trang, tóm lược từ PDF thật trong
+ * `data/vlearn-pack/slide/` (d1/d2-slide-hackathon.pdf, mỗi file 29 trang).
+ * Tên giảng viên giữ nguyên dạng ẩn danh theo quy định bảo mật data pack.
+ */
+const DOC_DECKS: Record<string, Omit<Slide, "page">[]> = {
+  "d1-main": [
+    {
+      kind: "cover",
+      title: "AI & LLM Foundation",
+      subtitle: "Bạn đang dùng AI mỗi ngày — nhưng thực sự bên trong nó đang làm gì?",
+      body: "Tên Giảng Viên",
+      footnote: "AI IN ACTION · Hackathon · Day 1",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "AGENDA",
+      title: "Từ “nghe AI” đến “gọi AI” trong một ngày",
+      bullets: [
+        "Bức tranh AI: các tầng AI · ML · Deep Learning · GenAI · LLM.",
+        "Lịch sử AI 70 năm — hai mùa đông và những bước ngoặt.",
+        "Bên trong LLM: token, context, attention, cách model được luyện.",
+        "Từ LLM đến AI Agent — bốn mức độ năng lực.",
+        "Landscape hôm nay: chọn model theo tầng và chi phí token.",
+        "Gọi API lần đầu · tổng kết những ý mang về.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CÁC TẦNG AI",
+      title: "AI, ML, Deep Learning, GenAI, LLM — từ rộng đến hẹp",
+      bullets: [
+        "AI — chiếc ô lớn nhất: mọi hệ thống có yếu tố “thông minh”, kể cả hệ luật tay.",
+        "Machine learning — học từ dữ liệu thay vì viết luật tay: lọc spam, gợi ý phim.",
+        "Deep learning — mạng nơ-ron nhiều tầng tự học đặc trưng: nhận diện ảnh, giọng nói.",
+        "Generative AI — sinh nội dung mới: văn bản, ảnh, code.",
+        "LLM — model nền chuyên ngôn ngữ (GPT, Claude, Kimi) — tim của làn sóng hiện nay.",
+      ],
+      footnote: "LLM không phải toàn bộ AI — nhưng là tầng nền của gần hết trải nghiệm AI bạn dùng hôm nay.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "BA NHÓM AI",
+      title: "Phân loại · sinh nội dung · hành động",
+      bullets: [
+        "Discriminative AI — phân loại, dự đoán: lọc spam, phát hiện gian lận. Input → một nhãn.",
+        "Generative AI — sinh ra thứ mới: ChatGPT, Claude, Midjourney. Prompt → nội dung mới.",
+        "Agentic AI — nhận mục tiêu rồi tự làm nhiều bước: Goal → Plan → Action.",
+        "LLM là engine chung của cả Generative lẫn Agentic AI.",
+      ],
+      footnote: "Hành trình khoá học: LLM Foundation → Agent → Multi-Agent → Deploy → Evaluate.",
+    },
+    {
+      kind: "section",
+      eyebrow: "LỊCH SỬ",
+      title: "Lịch sử AI 70 năm",
+      subtitle: "Khai sinh · hai mùa đông · từ model đơn lẻ sang hệ thống biết hành động như agent",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "1980",
+      title: "Hệ chuyên gia — AI đổi chiến lược",
+      bullets: [
+        "Thôi theo đuổi trí tuệ tổng quát, tập trung giải thật tốt một miền hẹp.",
+        "Mã hoá tri thức chuyên gia thành luật.",
+        "Đặt lại vấn đề: “nếu AI chỉ giải thật tốt một loại bài toán chuyên môn hẹp thì sao?”",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "2009",
+      title: "Fei-Fei Li và ImageNet — cuộc cách mạng của dữ liệu",
+      bullets: [
+        "Cả ngành chạy theo thuật toán khôn hơn; ImageNet chọn xây bộ dữ liệu lớn hơn.",
+        "14 triệu ảnh gán nhãn tay, hơn 20.000 loại vật.",
+        "Ba năm sau, chính bộ dữ liệu đó là sân khấu cho cú nổ AlexNet 2012.",
+      ],
+      footnote: "Bài học định hình kỷ nguyên: đôi khi dữ liệu tốt hơn đánh bại thuật toán khôn hơn.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "2017",
+      title: "Transformer — bước ngoặt của hiểu ngôn ngữ",
+      bullets: [
+        "Mỗi từ có thể “nhìn sang” những từ quan trọng khác trong cả câu.",
+        "Thay lối đọc tuần tự từng bước của các thế hệ trước.",
+        "Trở thành nền móng kỹ thuật cho GPT, BERT và toàn bộ làn sóng LLM sau đó.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "2022",
+      title: "ChatGPT — AI thành trải nghiệm đại chúng",
+      bullets: [
+        "Lần đầu người dùng phổ thông chạm trực tiếp vào một mô hình ngôn ngữ mạnh.",
+        "Giao diện đơn giản đến mức ai cũng hiểu cách dùng.",
+        "Mở màn làn sóng sản phẩm LLM đại chúng hiện nay.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "LLM LÀ GÌ",
+      title: "Một bộ não nền, không phải một chatbot",
+      bullets: [
+        "Mô hình ngôn ngữ rất lớn trên kiến trúc Transformer, luyện trên hàng nghìn tỷ mảnh chữ.",
+        "Học một việc duy nhất: đoán mảnh chữ tiếp theo trong ngữ cảnh.",
+        "Luyện đủ rộng thì thành nền chung: cùng một model làm chatbot, tóm tắt, viết code, dịch.",
+        "Chatbot chỉ là một dạng sản phẩm đóng gói quanh bộ não đó — lớp áo bên ngoài.",
+      ],
+      footnote: "Model hiện nay chủ yếu decoder-only, nhiều model dùng MoE; sau pre-training còn SFT, RLHF/DPO và luyện suy luận.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CƠ CHẾ",
+      title: "Đầu ra của Transformer luôn là một phân bố xác suất",
+      bullets: [
+        "Với mọi ngữ cảnh, model chấm điểm MỌI từ trong từ vựng.",
+        "“land” 22%, “forest” 9%… — rồi chọn theo xác suất đó.",
+        "Bên trong model không có khái niệm “đáp án duy nhất”.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CƠ CHẾ",
+      title: "Sinh văn bản = đoán → nối vào câu → đoán tiếp",
+      bullets: [
+        "Mỗi token mới được nối vào ngữ cảnh.",
+        "Model chạy lại từ đầu với ngữ cảnh mới — vòng lặp predict → append → rerun.",
+        "Câu dài được sinh từng mảnh một, không có dàn ý tổng viết sẵn.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "TOKEN",
+      title: "Model không đọc “từ”, model đọc mảnh chữ",
+      bullets: [
+        "Văn bản bị cắt thành token: có từ một mảnh, có từ vỡ ba bốn mảnh, dấu câu cũng là mảnh.",
+        "“Hello world” ≈ 2 token, nhưng “Xin chào” có thể tới 3–4 token.",
+        "Tiếng Việt, code, JSON tốn token hơn tiếng Anh thường — vì dấu thanh và ký tự đặc biệt.",
+      ],
+      footnote: "Mọi thứ model làm đều quy ra token — và mỗi token đều có giá.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CONTEXT",
+      title: "Bàn làm việc có hạn của model",
+      bullets: [
+        "Mỗi lần trả lời, model chỉ nhìn được một lượng chữ có hạn — gọi là context.",
+        "128K token ≈ một cuốn sách 300 trang; 1M token ≈ 45 cuốn trên bàn cùng lúc.",
+        "Bàn đầy quá thì đồ ở giữa dễ bị bỏ sót — hiện tượng “lost in the middle”.",
+      ],
+      footnote: "Context càng dài càng tốn tiền và càng chậm — bàn rộng không có nghĩa là dùng tốt.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "ATTENTION",
+      title: "Mỗi từ được “nhìn sang” những từ quan trọng khác",
+      bullets: [
+        "Mỗi token chủ động “quay đầu” nhìn lại các token trước đó trong câu.",
+        "Chấm điểm mức độ liên quan của từng token với nghĩa của mình.",
+        "Khoá nghĩa theo ngữ cảnh — “nó” là quyển sách hay cái túi, tuỳ nó chú ý vào từ nào.",
+      ],
+      footnote: "Đây chính là chữ T trong GPT — lý do model hiểu ngữ cảnh tốt hơn hẳn thế hệ trước.",
+    },
+    {
+      kind: "checklist",
+      eyebrow: "DÙNG CHO ĐÚNG",
+      title: "Quản context = quản sự chú ý",
+      bullets: [
+        "Đặt điều quan trọng ở đầu hoặc cuối prompt — yêu cầu quan trọng đừng chôn giữa.",
+        "Giữ bàn làm việc sạch: chat dài thì tóm tắt lại; vibe code thì đưa đúng file, đừng dán cả repo.",
+        "Cho tra sổ thay vì bắt nhớ: lấy đoạn liên quan nhét vào context (RAG) thay vì nhét cả cuốn.",
+      ],
+      footnote: "Agent mạnh không phải vì context khổng lồ — mà vì có tools lấy đúng thứ lên bàn đúng lúc.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "THAM SỐ",
+      title: "Tham số: những “khớp nối” model học được",
+      bullets: [
+        "Những gì model “biết” nằm trong các con số cố định — file weights.",
+        "Không chỉnh được tham số khi dùng — chỉ chỉnh context và núm vặn lúc gọi.",
+        "GPT-3 (2020): 175 tỷ tham số dense — mọi token đi qua toàn bộ khớp nối.",
+        "Kimi K3 (2026): 2.800 tỷ tham số MoE — mỗi token chỉ gọi vài chuyên gia.",
+      ],
+      footnote: "Nhờ MoE, “bệnh viện” lớn gấp 16 lần mà chi phí mỗi ca khám gần như không đổi.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "HUẤN LUYỆN",
+      title: "LLM được tạo ra như thế nào — bốn bước",
+      bullets: [
+        "① Pre-training — “đọc cả thư viện”: học tiếng nói và kiến thức từ hàng nghìn tỷ token.",
+        "② SFT — “được chỉ cách trả lời”: học theo ví dụ mẫu để ra dáng trợ lý.",
+        "③ RLHF/DPO — “được uốn nắn”: học theo phản hồi con người, an toàn và dễ chịu hơn.",
+        "④ Luyện suy luận (từ 2025): giải đề tự chấm — model biết làm nháp trước khi trả lời.",
+      ],
+      footnote: "Đọc vạn cuốn sách chưa chắc biết trả lời phỏng vấn — đó là lý do cần bước ②③④.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "RLHF",
+      title: "Ba bước uốn cỗ máy đoán token thành trợ lý",
+      bullets: [
+        "① Model viết nhiều câu trả lời cho cùng một câu hỏi.",
+        "② Người chấm xếp hạng → luyện reward model chấm điểm thay người.",
+        "③ Huấn luyện theo điểm: tăng xác suất câu ghi điểm cao — lặp hàng nghìn lần.",
+      ],
+      footnote: "Cỗ máy đoán token + điểm xếp hạng của con người → trợ lý helpful · harmless · honest.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "GIỚI HẠN",
+      title: "Giới hạn bẩm sinh: học giả trong bong bóng",
+      bullets: [
+        "Bong bóng thời gian — model “đóng băng” tại ngày ngừng đọc (knowledge cutoff).",
+        "Nói chắc như đúng rồi — tối ưu cho câu nghe hợp lý, không phải tra sự thật (hallucination).",
+        "Bàn làm việc có hạn — context có trần; quá dài vừa tốn vừa dễ sót thông tin ở giữa.",
+      ],
+      footnote: "Đây là bản chất, không phải lỗi tạm thời — nên cần prompt tốt, context sạch, RAG, tools và luôn kiểm chứng.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "ĐƯỜNG TẮT",
+      title: "Vì sao model vẫn sai: rất giỏi học vẹt đường tắt",
+      bullets: [
+        "Phân loại spam: model thực chất học “đếm số hyperlink trong email”.",
+        "Chủ quan vs khách quan: học “câu có trích từ film review không”.",
+        "Suy luận MNLI: học “câu có động từ phủ định” — đổi dữ liệu test là điểm tụt ngay.",
+      ],
+      footnote: "Benchmark cao ≠ model hiểu đúng thứ bạn tưởng — luôn test trên dữ liệu của chính mình.",
+    },
+    {
+      kind: "compare",
+      eyebrow: "CHAIN-OF-THOUGHT",
+      title: "Chỉ thêm “giấy nháp”, từ sai thành đúng",
+      columns: [
+        {
+          heading: "Không nháp — trả lời ngay",
+          items: [
+            "Đọc câu hỏi → bật ra đáp án",
+            "“Đáp án là 27 quả” — SAI",
+            "Suy luận bị nén vào một bước đoán",
+          ],
+        },
+        {
+          heading: "Có nháp — nghĩ từng bước",
+          items: [
+            "Bắt đầu có 5 quả",
+            "2 hộp × 3 quả = 6 quả",
+            "5 + 6 = 11 — ĐÚNG",
+          ],
+        },
+      ],
+      footnote: "Cùng model, cùng câu hỏi — đây là mầm của các reasoning model và test-time compute.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "AGENT",
+      title: "Từ LLM đến agent: bốn mức độ",
+      bullets: [
+        "Level 0 — bộ não suy luận: LLM trần, không công cụ, không dữ liệu mới.",
+        "Level 1 — có kết nối: + tools (search web, database, API) — vượt bong bóng thời gian.",
+        "Level 2 — biết lập kế hoạch: tự chia mục tiêu thành bước, tự kiểm tra từng bước.",
+        "Level 3 — đội agent phối hợp: nhiều agent chuyên biệt chia việc (multi-agent).",
+      ],
+      footnote: "Agent không phải “một loại model khác” — là LLM đặt vào vòng làm việc có mục tiêu và hành động.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "GIẢI PHẪU",
+      title: "Một agent = 5 bộ phận chạy thành vòng lặp",
+      bullets: [
+        "Goal — mục tiêu cần đạt.",
+        "Reasoning — bộ não LLM chia bước.",
+        "Tools — search · API · database · code.",
+        "Action — hành động ra đời thật; quan sát kết quả rồi lặp lại.",
+        "Memory — sổ tay ghi nhớ các bước đã làm.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CHI PHÍ",
+      title: "Cùng mức năng lực, giá rơi khoảng 10 lần mỗi năm",
+      bullets: [
+        "Việc năm ngoái phải dùng model đắt nhất — năm nay model rẻ đã làm được.",
+        "Đừng khoá kiến trúc vào một model: giá và năng lực đổi liên tục.",
+        "Tổng hợp từ bảng giá các nhà cung cấp 2023–2026.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CHỌN MODEL",
+      title: "Chọn model theo TẦNG, không chọn theo tên",
+      bullets: [
+        "Tầng 1 — frontier đóng: đắt nhất, chỉ trả cho việc thật sự khó (suy luận nhiều bước, độ tin cậy cao).",
+        "Tầng 2 — rẻ mà mạnh: giải đa số việc hằng ngày — MẶC ĐỊNH thử tầng này trước.",
+        "Tầng 3 — self-host / siêu rẻ: khi cần kiểm soát dữ liệu hoặc chi phí ở quy mô lớn.",
+        "Hai lỗi đối xứng: việc đơn giản gọi frontier → phí tiền; việc khó cố dùng rẻ → kết quả tệ.",
+      ],
+      footnote: "Bắt đầu từ model đủ tốt và đủ rẻ — chỉ nâng tầng khi kết quả thực sự chặn use case.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "TOKEN CÓ GIÁ",
+      title: "Vé vào rẻ, vé ra đắt gấp 3–5 lần",
+      bullets: [
+        "Input — chữ BẠN gửi đi (prompt, system, context, lịch sử): rẻ, model chỉ cần đọc.",
+        "Output — chữ MODEL viết ra từng mảnh một: đắt, vừa chậm vừa tốn.",
+        "Hoá đơn ví dụ: input 1.150 tok × $3/1M + output 200 tok × $15/1M ≈ $0.0065 mỗi lần gọi.",
+        "Đọc mục usage trong mỗi response — đó là hoá đơn chi tiết của bạn.",
+      ],
+      footnote: "Input + Output = chi phí mỗi lần gọi — kiểm soát output là núm vặn lớn nhất.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "PROMPT",
+      title: "Giải phẫu một prompt: bốn lớp xếp chồng",
+      bullets: [
+        "Lớp 1 — System instruction: “lời dặn đầu ca” — model là ai, cư xử thế nào, không được làm gì.",
+        "Lớp 2 — User input: câu hỏi / yêu cầu của người dùng trong lượt này.",
+        "Lớp 3 — Context bổ sung: tài liệu, lịch sử chat, dữ liệu tra sổ — phần bày lên “bàn làm việc”.",
+        "Lớp 4 — Output mong muốn: gạch đầu dòng? bảng? JSON? dài bao nhiêu?",
+      ],
+      footnote: "Viết rõ cả 4 lớp = đã làm tốt một nửa “prompt engineering” — phần còn lại là các ngày sau.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "NÚM VẶN",
+      title: "Hai núm vặn chọn từ: temperature & top_p",
+      bullets: [
+        "Temperature 0 — luôn chọn từ chắc nhất: ổn định, lặp lại được, hợp code & phân tích.",
+        "Temperature cao — phân bố phẳng ra: đa dạng, “phiêu”, dễ lạc đề.",
+        "top_p — chỉ chọn trong nhóm cộng dồn ≥ p; đuôi xác suất thấp bị loại.",
+        "Hai núm này không làm model thông minh hơn — chỉ đổi cách chọn từ, không thêm tri thức.",
+      ],
+      footnote: "Mặc định an toàn: temperature = 0 cho việc cần ổn định — thường chỉ vặn một trong hai núm.",
+    },
+  ],
+  "d2-main": [
+    {
+      kind: "cover",
+      title: "Xác định bài toán cho AI",
+      subtitle: "Từ yêu cầu mơ hồ đến Problem Statement rõ ràng",
+      body: "Tên Giảng Viên",
+      footnote: "AI IN ACTION · Hackathon · Day 2",
+    },
+    {
+      kind: "compare",
+      eyebrow: "AGENDA",
+      title: "Sáng lý thuyết · chiều thực hành",
+      columns: [
+        {
+          heading: "Sáng — khung lý thuyết (4h)",
+          items: [
+            "Problem Discovery: Double Diamond, HCD",
+            "Problem Statement & định lượng hoá",
+            "PAIR ①②③: giá trị AI · Automate/Augment · reward function",
+            "Khi AI sai & UX/HITL → Go / Not Yet / No-Go",
+          ],
+        },
+        {
+          heading: "Chiều — thực hành lab (4h)",
+          items: [
+            "Cá nhân: tìm 5 bài toán, điền 3 Problem Card",
+            "Nhóm: phản biện chéo, chốt 1 bài toán",
+            "Nhóm: xác thực dữ liệu, vẽ quy trình, chọn giải pháp",
+            "Cá nhân: viết nhật ký phản tư (Reflection Log)",
+          ],
+        },
+      ],
+      footnote: "Bài nộp cuối buổi: nhật ký tìm bài toán · Problem Statement nhóm · nhật ký phản tư.",
+    },
+    {
+      kind: "compare",
+      eyebrow: "DOUBLE DIAMOND",
+      title: "Tìm đúng vấn đề trước khi tìm giải pháp",
+      columns: [
+        {
+          heading: "Diamond 1 — tìm đúng vấn đề",
+          items: [
+            "Discover: mở rộng — khảo sát vấn đề căn bản",
+            "Define: thu hẹp — xác định đúng bài toán gốc",
+          ],
+        },
+        {
+          heading: "Diamond 2 — tìm đúng giải pháp",
+          items: [
+            "Develop: mở rộng — nhiều giải pháp tiềm năng",
+            "Deliver: thu hẹp — chọn và triển khai",
+          ],
+        },
+      ],
+      footnote: "Giải pháp xuất sắc cho sai vấn đề có thể còn tệ hơn không có giải pháp — Don Norman / British Design Council.",
+    },
+    {
+      kind: "compare",
+      eyebrow: "DIAMOND 1",
+      title: "Phân kỳ để thấu hiểu, hội tụ để lựa chọn",
+      columns: [
+        {
+          heading: "Discover · phân kỳ",
+          items: [
+            "Quan sát thực tế · phỏng vấn người dùng",
+            "Khảo sát · nhật ký hành vi",
+            "Phân tích dữ liệu / log hệ thống",
+            "Bản đồ các bên liên quan",
+          ],
+        },
+        {
+          heading: "Define · hội tụ",
+          items: [
+            "Affinity mapping · 5 Whys",
+            "Ma trận Tác động – Nỗ lực",
+            "Dot voting · How Might We",
+            "Phát biểu bài toán (Problem Statement)",
+          ],
+        },
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "CASE STUDY",
+      title: "Khởi nguồn từ bài toán, không bắt đầu từ AI",
+      bullets: [
+        "Cursor — “lệch năng lực cốt lõi”: bỏ AI cho CAD, dồn vào AI code editor nơi đội ngũ am hiểu sâu.",
+        "Artifact — “sản phẩm tốt ≠ thị trường lớn”: app đọc tin AI xuất sắc nhưng thị trường quá hẹp (đóng cửa 1/2024).",
+        "NotebookLM — “định vị đúng điểm đau”: hỏi đáp, tóm tắt trên tài liệu cá nhân, đối chiếu bằng trích dẫn.",
+      ],
+      footnote: "Lộ trình: Bài toán → Quy trình vận hành → Chỉ số đo lường → Giải pháp AI.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "4 LĂNG KÍNH",
+      title: "Tìm bài toán AI ở đâu?",
+      bullets: [
+        "Repetitive — việc lặp lại thường xuyên: công đoạn nào cần chuẩn hoá để tự động hoá?",
+        "Time-consuming — hao phí ở bước nào: tìm kiếm, đọc hiểu, chờ đợi, định dạng?",
+        "AI advantage — tác vụ cần phân tích ngữ cảnh, ngôn ngữ tự nhiên, tổng hợp đa nguồn.",
+        "User pain points — ai đang gặp khó, phàn nàn hoặc bị tắc nghẽn liên tục?",
+      ],
+      footnote: "Tập trung nhận diện vấn đề, chưa vội đề xuất giải pháp — sàng lọc để dành buổi chiều.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "ANTI-PATTERNS",
+      title: "Bốn sai lầm thường gặp",
+      bullets: [
+        "Solution-first — xây chatbot/agent trước khi làm rõ quy trình và điểm nghẽn thực tế.",
+        "No baseline — không lượng hoá tổn thất hiện tại, mất căn cứ đánh giá cải tiến.",
+        "No evaluation — không có kịch bản kiểm thử, chỉ số đo lường hay phương án đối chứng.",
+        "No boundary — không rõ phạm vi tự chủ của AI và thời điểm cần con người phê duyệt (HITL).",
+      ],
+      footnote: "Mắc phải sai lầm trên? Quay lại làm rõ Problem Statement trước khi chọn công nghệ.",
+    },
+    {
+      kind: "quote",
+      eyebrow: "PAIR · REFRAME",
+      title: "Đừng hỏi “Can we use AI to…?” — hãy hỏi “How might we solve…?”, rồi mới hỏi “AI có giải được theo cách độc đáo không?”",
+      footnote: "Hỏi về bài toán trước, về AI sau — câu hỏi đúng quyết định bài toán bạn giải và giải pháp bạn chọn. (Google PAIR · Ch.1)",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "PROBLEM CARD",
+      title: "Quick Problem Card — 6 trường định hình bài toán",
+      bullets: [
+        "Problem — vấn đề cụ thể cần giải quyết, không bao gồm giải pháp.",
+        "Actor — cá nhân hoặc bộ phận chịu tác động trực tiếp.",
+        "Workflow — quy trình hiện tại, gồm 3–7 bước.",
+        "Bottleneck + Impact — khâu chậm trễ/sai sót/lặp lại và tổn thất cụ thể.",
+        "Success metric — chỉ số định lượng chứng minh hiệu quả cải tiến.",
+        "Direction — No AI / Rule / Workflow / Agent / chưa xác định.",
+      ],
+    },
+    {
+      kind: "checklist",
+      eyebrow: "KHAI THÁC",
+      title: "Sáu câu hỏi khai thác bài toán",
+      bullets: [
+        "Quy trình hiện tại như thế nào — công cụ, các bước, cơ chế bàn giao thông tin?",
+        "Nút thắt nằm ở đâu — bước nào chậm, dễ sai sót, lặp lại?",
+        "Hao phí hiện tại là bao nhiêu — thời gian, chi phí nhân sự, SLA, cơ hội bỏ lỡ?",
+        "Tiêu chí thành công đo bằng gì — hiệu quả cải tiến định lượng cụ thể?",
+        "Hậu quả khi sai sót — AI tự quyết tới đâu, điểm nào cần con người phê duyệt?",
+        "Có giải pháp phi AI đơn giản hơn — quy tắc, checklist, quy trình, tài liệu hướng dẫn?",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "ĐỊNH LƯỢNG",
+      title: "Baseline → Target → Measurement",
+      bullets: [
+        "Baseline — hiện trạng: mức hao phí hiện tại là bao nhiêu, bằng con số cụ thể.",
+        "Target — mục tiêu: kỳ vọng cải thiện ở mức độ nào, ngưỡng cụ thể là gì.",
+        "Measurement — chỉ số nào chứng minh hiệu quả, thu thập bằng cách nào.",
+        "Ví dụ: thời gian hoàn thành 90 → dưới 30 phút · lỗi phân loại 20% → dưới 5% · giảm 40% câu hỏi trùng lặp TA phải xử lý.",
+      ],
+      footnote: "Điểm đau chưa được định lượng thì không thể xác định giá trị thực tế của AI.",
+    },
+    {
+      kind: "compare",
+      eyebrow: "METRICS",
+      title: "Output metric & Input metrics",
+      columns: [
+        {
+          heading: "Output — kết quả tối ưu",
+          items: [
+            "Thời lượng hoàn tất quy trình giảm bao nhiêu?",
+            "Tỷ lệ sai sót / chất lượng đầu ra thay đổi thế nào?",
+            "Giá trị thực tế người dùng nhận được rõ nét hơn?",
+          ],
+        },
+        {
+          heading: "Input — đòn bẩy tác động",
+          items: [
+            "Tỷ lệ câu hỏi được phân loại chính xác",
+            "Tỷ lệ yêu cầu được chuyển tiếp kịp thời",
+            "Thời gian TA hiệu chỉnh bản nháp phản hồi",
+          ],
+        },
+      ],
+      footnote: "“Nâng cao hiệu suất” không phải chỉ số — cần gắn với hiện trạng, mục tiêu và phương pháp đo.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "PAIR 3 BƯỚC",
+      title: "Ba bước quyết định AI theo PAIR",
+      bullets: [
+        "① Giao điểm nhu cầu × thế mạnh AI — có thực sự cần AI?",
+        "② Automate hay Augment — giải pháp ở cấp độ nào?",
+        "③ Reward function & tiêu chí thành công — Problem Statement đã đủ rõ để đo?",
+        "Tổng hợp ①②③ → ④ Go / Not Yet / No-Go.",
+      ],
+      footnote: "Google People + AI Guidebook · Ch.1 User Needs + Defining Success.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "AI CÓ LỢI THẾ",
+      title: "Tám trường hợp “AI probably better” (PAIR)",
+      bullets: [
+        "Gợi ý theo từng người · dự đoán tương lai · cá nhân hoá trải nghiệm.",
+        "Hiểu ngôn ngữ tự nhiên — câu hỏi viết tự do bằng lời nói hằng ngày.",
+        "Nhận diện cả một lớp thực thể · phát hiện cái hiếm và biến đổi theo thời gian.",
+        "Agent/bot cho một lĩnh vực chuyên biệt · nội dung động thay giao diện tĩnh.",
+      ],
+      footnote: "AI chỉ đáng làm khi bài toán nằm trong nhóm này.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "KHI NÀO KHÔNG",
+      title: "Sáu trường hợp “AI probably NOT better” (PAIR)",
+      bullets: [
+        "Cần duy trì tính dự đoán được — nút Home/Cancel phải luôn ở chỗ quen thuộc.",
+        "Thông tin tĩnh ít thay đổi · yêu cầu minh bạch tuyệt đối, truy vết từng bước.",
+        "Lỗi quá tốn kém — chi phí một lần sai lớn hơn lợi ích nhiều lần đúng.",
+        "Tối ưu tốc độ & chi phí thấp — AI chỉ thêm độ trễ và chi phí.",
+        "Việc giá trị cao mà người dùng muốn tự làm.",
+      ],
+      footnote: "Rule/heuristic dễ build, dễ giải thích, dễ bảo trì — nếu giải quyết được, đó là lựa chọn tối ưu.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "HỆ THỐNG AI",
+      title: "Hệ thống AI = Model + Context + Planning + Tools",
+      bullets: [
+        "Model — tư duy & sáng tạo: đọc hiểu, soạn thảo, tổng hợp, phân loại, gợi ý.",
+        "Context — tri thức chuyên biệt: database, tài liệu nghiệp vụ, hồ sơ lịch sử.",
+        "Planning — điều phối quy trình: tự phân rã tác vụ phức tạp, linh hoạt điều chỉnh.",
+        "Tools — liên kết hệ thống: CRM, database, lịch làm việc, API bên thứ ba.",
+      ],
+      footnote: "Giải pháp AI là một HỆ THỐNG — model chỉ là một thành phần. (Anthropic · Chip Huyen)",
+    },
+    {
+      kind: "compare",
+      eyebrow: "PAIR BƯỚC ②",
+      title: "Automate vs Augment — AI làm thay hay hỗ trợ?",
+      columns: [
+        {
+          heading: "Automate — AI làm thay",
+          items: [
+            "Việc khó, nhàm chán, nguy hiểm hoặc cần scale",
+            "Người dùng thiếu kiến thức / khả năng tự làm",
+            "Có “đáp án đúng” mà mọi người đồng thuận",
+            "Đo bằng: hiệu quả tăng · an toàn hơn · giảm việc tẻ nhạt",
+          ],
+        },
+        {
+          heading: "Augment — AI hỗ trợ con người",
+          items: [
+            "Người dùng thích tự làm việc đó",
+            "Stakes cao: tiền bạc, pháp lý, sức khoẻ",
+            "Kết quả cần trách nhiệm cá nhân / social capital",
+            "Đo bằng: thích thú · cảm giác kiểm soát · sáng tạo tăng",
+          ],
+        },
+      ],
+      footnote: "Quyết định theo từng tác vụ. Việc đã automate vẫn gần như luôn cần human oversight — preview, edit, undo.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "BA CẤP GIẢI PHÁP",
+      title: "Rule / Workflow / Agent — cấp độ kỹ thuật",
+      bullets: [
+        "Cấp 1 · Rule/Script — đầu vào ổn định, logic if/else, cần đúng 100%: tính thuế, auto-reply template.",
+        "Cấp 2 · LLM Workflow — đầu vào đa dạng, đầu ra linh hoạt, có cách đo: tóm tắt email, chatbot FAQ.",
+        "Cấp 3 · Agent — nhiều bước, nhiều công cụ, tình huống đổi liên tục: agent nghiên cứu, coding agent.",
+        "Rule/Workflow/Agent là cấp KỸ THUẬT — Automate/Augment là cấp VAI TRÒ của con người.",
+      ],
+      footnote: "Thứ tự thực dụng: bắt đầu từ bên trái, chỉ sang phải khi giá trị tăng hơn độ phức tạp.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "MỘT CASE BA CẤP",
+      title: "Cùng một tình huống lớp học, ba cấp giải pháp",
+      bullets: [
+        "Rule — trả lời tự động FAQ, gửi link thời khoá biểu, nhắc checklist nộp bài.",
+        "Workflow — AI kiểm tra độ đầy đủ của Problem Card, yêu cầu bổ sung, chuyển Trợ giảng.",
+        "Agent — theo dõi tiến độ nộp bài, phát hiện nhóm bị kẹt lâu, soạn sẵn câu trả lời chờ TA duyệt.",
+      ],
+      footnote: "Không bắt buộc nâng cấp tuần tự — dừng ở cấp tối giản nhất nếu đã đáp ứng mục tiêu.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "WORKFLOW PATTERNS",
+      title: "Ba pattern đủ cho hầu hết bài toán (Anthropic)",
+      bullets: [
+        "Prompt chaining — chuỗi bước tuần tự có gate kiểm tra giữa chừng: đổi độ trễ lấy độ chính xác.",
+        "Routing — phân loại input vào nhánh chuyên biệt: câu dễ đi model rẻ, câu khó đi model mạnh.",
+        "Parallelization — chạy song song rồi tổng hợp hoặc vote: giảm rủi ro một đầu ra sai.",
+      ],
+      footnote: "Nguyên tắc Anthropic: luôn ưu tiên giải pháp đơn giản nhất — chỉ tăng độ phức tạp khi thực sự cần.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "DECISION TREE",
+      title: "Cây quyết định: chọn cấp độ giải pháp",
+      bullets: [
+        "Đi từ bài toán cốt lõi xuống: Rule → Workflow → Agent.",
+        "Mỗi nhánh “KHÔNG” là một lần tránh được độ phức tạp không cần thiết.",
+        "Nguồn: Anthropic — Building effective agents · Google — Rules of ML.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "REWARD FUNCTION",
+      title: "Hệ thống hiểu “đúng / sai” thế nào — bốn kết quả",
+      bullets: [
+        "TP — câu hỏi nghẽn thật, AI gợi ý đúng: học viên được giải toả, TA đỡ tải.",
+        "TN — câu đã có tài liệu sẵn, AI không can thiệp: đúng, không cần gợi ý thêm.",
+        "FP — AI gợi ý SAI (hallucination) và gửi thẳng: học viên đi sai hướng thực hành.",
+        "FN — học viên kẹt thật nhưng AI bỏ sót: vẫn chờ lâu như cũ.",
+      ],
+      footnote: "Chi phí FP và FN KHÔNG đối xứng — báo cháy giả ≠ bỏ sót đám cháy. Thiết kế liên chức năng: UX × Product × Engineering.",
+    },
+    {
+      kind: "compare",
+      eyebrow: "ĐÁNH ĐỔI",
+      title: "Precision ↔ Recall: đánh đổi không tránh khỏi",
+      columns: [
+        {
+          heading: "Precision cao — TP/(TP+FP)",
+          items: [
+            "Ít gợi ý, nhưng gợi ý nào cũng chắc đúng",
+            "Người dùng tin vào từng gợi ý nhận được",
+            "Hệ quả: nhiều FN — bỏ sót người thực sự cần giúp",
+          ],
+        },
+        {
+          heading: "Recall cao — TP/(TP+FN)",
+          items: [
+            "Bao trọn mọi trường hợp cần giúp",
+            "Không học viên nào bị bỏ lại phía sau",
+            "Hệ quả: nhiều FP — TA phải lọc lại thủ công",
+          ],
+        },
+      ],
+      footnote: "Không có cấu hình đúng tuyệt đối — phải test điểm cân bằng với chính người dùng.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "SUCCESS CRITERIA",
+      title: "Viết tiêu chí thành công mà hành động được",
+      bullets: [
+        "Template PAIR: If {chỉ số} for {tính năng AI} {drops below / goes above} {ngưỡng}, we will {hành động}.",
+        "Ví dụ: nếu >30% câu AI gợi ý bị TA sửa trong 2 tuần → hạ mức tự động về pha 1 (chỉ gợi ý).",
+        "Checklist: metric có ý nghĩa với MỌI người dùng? nhóm nào bị ảnh hưởng tiêu cực? ngày 1000 thì sao?",
+      ],
+      footnote: "Lên lịch review metric định kỳ — tiêu chí thành công cũng cần được bảo trì theo thời gian.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "DEMO → PRODUCTION",
+      title: "Khoảng cách giữa demo và production",
+      bullets: [
+        "Baseline — đối chiếu hiệu quả với quy tắc tĩnh, nhân sự hay quy trình hiện tại.",
+        "Evaluation — bộ dữ liệu kiểm thử, kịch bản biên (edge cases), tiêu chí nghiệm thu.",
+        "Controls — logging, fallback, rollback và nhân sự chịu trách nhiệm.",
+        "Operations — ai giám sát lỗi, cập nhật tri thức nền, tối ưu hệ thống liên tục.",
+      ],
+      footnote: "Mục tiêu Day 02 là xác định tính khả thi — chưa phải quyết định triển khai ngay.",
+    },
+    {
+      kind: "bullets",
+      eyebrow: "EVAL PLAN",
+      title: "Từ Problem Statement đến Eval Plan",
+      bullets: [
+        "Input — Problem Statement 9 trường đã hoàn chỉnh.",
+        "Test cases — dữ liệu thực tế và các trường hợp biên.",
+        "Success — đạt (pass) / không đạt (fail) / chuyển kiểm duyệt thủ công (HITL).",
+        "Đo ba tầng: tác vụ đơn lẻ · hiệu năng quy trình · rủi ro & sai số.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "9 TRƯỜNG",
+      title: "Problem Statement cho hệ thống AI",
+      bullets: [
+        "6 yếu tố bài toán: Actor · Workflow · Bottleneck · Impact · Success metric · Boundary.",
+        "3 yếu tố quyết định AI: điểm can thiệp · mức Rule/Workflow/Agent · rủi ro & HITL.",
+        "Boundary: AI không được làm gì; khâu nào bắt buộc có con người.",
+      ],
+    },
+    {
+      kind: "bullets",
+      eyebrow: "RA QUYẾT ĐỊNH",
+      title: "Khung Go / Not Yet / No-Go",
+      bullets: [
+        "Go — bài toán rõ, chỉ số khả thi, điểm can thiệp AI phù hợp, kiểm soát được rủi ro.",
+        "Not Yet — có triển vọng: cần bổ sung dữ liệu, chuẩn hoá quy trình, thiết lập chỉ số, xác định ranh giới.",
+        "No-Go — AI không mang giá trị vượt trội, rủi ro quá cao, giải pháp không dùng AI tối ưu hơn.",
+      ],
+      footnote: "“Not Yet” thể hiện sự chín chắn trong tư duy sản phẩm, không phải thất bại.",
+    },
+    {
+      kind: "checklist",
+      eyebrow: "RECAP",
+      title: "Sáu nguyên tắc cốt lõi sau Day 02",
+      bullets: [
+        "Brief mơ hồ không thay thế Problem Statement.",
+        "Mô hình hoá workflow trước khi tích hợp AI.",
+        "Pain point phải được lượng hoá bằng baseline và chỉ số cụ thể.",
+        "Phức tạp không đồng nghĩa hiệu quả — Rule/Workflow/Agent là ba cấp độ khác nhau.",
+        "Quyết định Go / Not Yet / No-Go dựa trên lập luận thực tế và số liệu kiểm thử.",
+        "Đo reward function bằng trải nghiệm người dùng, không chỉ accuracy.",
+      ],
+      footnote: "Kim chỉ nam để thẩm định mọi đề xuất ứng dụng AI. (PAIR · Ch.1)",
+    },
+  ],
+};
+
+/**
  * Nội dung riêng cho từng buổi khác, để tìm kiếm ở phạm vi "Cả môn" trả về
  * kết quả thật sự khác nhau giữa các tài liệu thay vì lặp lại một bộ slide.
  */
 const DAY_DECKS: Record<string, { eyebrow: string; title: string; bullets: string[] }[]> = {
+  // Worksheet khởi động của Day 1 — bám chủ đề AI & LLM Foundation.
   "day-1": [
     {
       eyebrow: "KHỞI ĐỘNG",
-      title: "Sản phẩm AI khác phần mềm ở chỗ nào",
+      title: "Bạn đã “gặp” LLM ở đâu trong 24 giờ qua?",
       bullets: [
-        "Đầu ra không cố định — cùng đầu vào có thể ra hai kết quả.",
-        "Giá trị nằm ở tỷ lệ đúng, không nằm ở việc chạy không lỗi.",
-        "Người dùng đánh giá bằng cảm nhận trước khi đánh giá bằng số.",
+        "Liệt kê ba lần bạn dùng AI hôm qua — cái nào là LLM, cái nào chỉ là ML?",
+        "Việc nào trong số đó một hệ luật tay cũng làm được?",
+        "Chọn một việc bạn nghĩ AI làm tệ — vì bong bóng thời gian, hallucination hay context?",
       ],
     },
     {
-      eyebrow: "TƯ DUY",
-      title: "Bắt đầu từ job, không bắt đầu từ model",
+      eyebrow: "TOKEN",
+      title: "Đếm token thử trước khi tính tiền",
       bullets: [
-        "Hỏi người dùng đang cố hoàn thành việc gì.",
-        "Tìm cách họ đang xoay xở khi chưa có sản phẩm của bạn.",
-        "Chỉ chọn AI khi cách cũ thật sự chậm hoặc tốn.",
+        "Dán một đoạn tiếng Việt và bản dịch tiếng Anh vào tokenizer — bên nào tốn token hơn?",
+        "Ước lượng chi phí nếu gửi đoạn đó 1.000 lần/ngày.",
+        "Ghi lại: yếu tố nào làm tiếng Việt bị cắt nhỏ hơn?",
       ],
     },
     {
-      eyebrow: "CẠM BẪY",
-      title: "Ba cái bẫy của nhóm mới làm AI",
+      eyebrow: "PROMPT",
+      title: "Tách một prompt thành bốn lớp",
       bullets: [
-        "Chạy theo tính năng nghe hay thay vì việc người dùng cần.",
-        "Demo bằng ca đẹp nhất rồi tưởng sản phẩm đã xong.",
-        "Không ai trong nhóm chịu trách nhiệm về chất lượng đầu ra.",
+        "Lấy prompt gần nhất bạn đã dùng, tách thành: system · user input · context · output mong muốn.",
+        "Lớp nào đang thiếu? Thêm vào và so sánh câu trả lời.",
+        "Thử hạ temperature về 0 — kết quả ổn định hơn hay nhàm hơn?",
       ],
     },
     {
-      eyebrow: "BÀI TẬP",
-      title: "Viết một câu mô tả sản phẩm",
+      eyebrow: "CHỌN MODEL",
+      title: "Chọn tầng model cho ba việc của chính bạn",
       bullets: [
-        "Ai · đang gặp vấn đề gì · sản phẩm giúp họ làm được gì.",
-        "Không dùng từ chuyên môn nào trong câu đó.",
-        "Đọc cho một người ngoài nhóm nghe — họ hiểu là đạt.",
-      ],
-    },
-  ],
-  "day-2": [
-    {
-      eyebrow: "JTBD",
-      title: "Jobs To Be Done — người dùng thuê sản phẩm làm gì",
-      bullets: [
-        "Job là kết quả người dùng muốn đạt, không phải tính năng.",
-        "Mỗi job có hoàn cảnh kích hoạt và tiêu chí thành công riêng.",
-        "Đối thủ thật sự của bạn có thể là một tờ giấy nháp.",
-      ],
-    },
-    {
-      eyebrow: "PHỎNG VẤN",
-      title: "Hỏi về quá khứ, đừng hỏi về tương lai",
-      bullets: [
-        "“Lần gần nhất bạn làm việc đó là khi nào?” hơn “bạn có muốn...”.",
-        "Đi theo dòng thời gian: trước, trong, sau khi gặp vấn đề.",
-        "Ghi nguyên văn — đừng diễn giải trong lúc phỏng vấn.",
-      ],
-    },
-    {
-      eyebrow: "BẰNG CHỨNG",
-      title: "Phân biệt bằng chứng với ý kiến",
-      bullets: [
-        "Bằng chứng: có thời điểm, có số, có người cụ thể.",
-        "Ý kiến: “chắc là”, “em nghĩ”, “mọi người đều”.",
-        "Một trích dẫn nguyên văn đáng giá hơn mười dòng tóm tắt.",
-      ],
-    },
-    {
-      eyebrow: "KHAI THÁC DỮ LIỆU",
-      title: "Đào bằng chứng từ chatlog có sẵn",
-      bullets: [
-        "Phân loại câu hỏi trước, đếm sau.",
-        "Tìm nhóm câu bị trả lời tệ nhất — đó là điểm đau.",
-        "Ghi mã đoạn hội thoại để người khác kiểm chứng lại được.",
+        "Kể ba việc bạn định nhờ AI trong hackathon này.",
+        "Xếp mỗi việc vào tầng: frontier · rẻ-mà-mạnh · self-host.",
+        "Việc nào bắt đầu bằng tầng rẻ được? Ghi lý do.",
       ],
     },
   ],
@@ -650,6 +1363,14 @@ const DAY_DECKS: Record<string, { eyebrow: string; title: string; bullets: strin
 export function getSlide(page: number, doc: CourseDoc): Slide {
   const total = doc.pages;
   const isMain = doc.id === DEFAULT_DOC_ID;
+
+  // Tài liệu có deck soạn đầy đủ theo PDF thật: trả thẳng slide của trang đó,
+  // kể cả trang cuối (trang cuối của deck thật là recap, không phải trang chào).
+  const full = DOC_DECKS[doc.id];
+  if (full) {
+    const authored = full[Math.min(Math.max(page, 1), full.length) - 1];
+    return { page, ...authored };
+  }
 
   if (page === total) {
     return {
