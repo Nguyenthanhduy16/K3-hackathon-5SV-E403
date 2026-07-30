@@ -147,6 +147,8 @@ const vi = {
     feedbackDown: "Đã ghi nhận — mình sẽ trả lời lại tốt hơn",
     jumped: (page: number) => `Đã mở trang ${page}`,
     scopeChanged: (scope: string) => `Phạm vi tìm: ${scope}`,
+    aiNoKey: "Chưa cấu hình OPENAI_API_KEY — đang dùng câu trả lời dựng sẵn",
+    aiFallback: "Không gọi được AI — đang dùng câu trả lời dựng sẵn",
   },
 };
 
@@ -297,6 +299,8 @@ const en: typeof vi = {
     feedbackDown: "Noted — I'll try a better answer next time",
     jumped: (page: number) => `Opened page ${page}`,
     scopeChanged: (scope: string) => `Search scope: ${scope}`,
+    aiNoKey: "OPENAI_API_KEY not set — falling back to canned answers",
+    aiFallback: "AI call failed — falling back to canned answers",
   },
 };
 
