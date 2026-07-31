@@ -11,7 +11,12 @@ import AIChatPanel from "@/components/AIChatPanel";
 import Toasts from "@/components/Toasts";
 import { getDict } from "@/lib/i18n";
 import { buildAnswer, rephrase } from "@/lib/ai-mock";
-import { buildScopeContext, parseAiBlocks, type AiTurn } from "@/lib/ai-context";
+import {
+  buildScopeContext,
+  extractPageCitations,
+  parseAiBlocks,
+  type AiTurn,
+} from "@/lib/ai-context";
 import { COURSE_STATS, getSessionPack } from "@/lib/session-data";
 import {
   COURSE_CODE,
@@ -23,7 +28,7 @@ import {
   ZOOM_STEPS,
   findDayOfDoc,
   findDoc,
-} from "@/lib/mock-data";
+} from "@/lib/course-data";
 import type {
   Annotation,
   AnnotationPoint,
@@ -45,7 +50,7 @@ export default function ReaderPage() {
   const t = getDict(lang);
 
   /* ---------------- học liệu ---------------- */
-  const [expandedDays, setExpandedDays] = useState<string[]>(["day-6"]);
+  const [expandedDays, setExpandedDays] = useState<string[]>(["day-1"]);
   const [activeDocId, setActiveDocId] = useState(DEFAULT_DOC_ID);
   const [userCollapsedSidebar, setUserCollapsedSidebar] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -241,6 +246,7 @@ export default function ReaderPage() {
       blocks: answer.blocks,
       scope: answer.intent === "tutor-probe" ? undefined : answer.scope,
       citations: answer.citations,
+      sources: answer.sources,
       intent: answer.intent,
       time: stamp(),
     };
@@ -286,7 +292,19 @@ export default function ReaderPage() {
         return null;
       }
       const { text } = (await res.json()) as { text: string };
-      return { ...answer, blocks: parseAiBlocks(text), plain: text };
+      const inlinePages = extractPageCitations(text, doc.pages);
+      const citations = [...new Set([...answer.citations, ...inlinePages])].sort(
+        (a, b) => a - b,
+      );
+      const sources = answer.sources.map((source) =>
+        source.docId === doc.id
+          ? {
+              ...source,
+              pages: [...new Set([...source.pages, ...inlinePages])].sort((a, b) => a - b),
+            }
+          : source,
+      );
+      return { ...answer, blocks: parseAiBlocks(text), plain: text, citations, sources };
     } catch {
       pushToast(t.toast.aiFallback, "info");
       return null;
@@ -350,6 +368,7 @@ export default function ReaderPage() {
               blocks: answer.blocks,
               scope: answer.intent === "tutor-probe" ? undefined : answer.scope,
               citations: answer.citations,
+              sources: answer.sources,
               intent: answer.intent,
               feedback: undefined,
               time: stamp(),

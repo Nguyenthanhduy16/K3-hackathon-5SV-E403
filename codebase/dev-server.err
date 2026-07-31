@@ -1,0 +1,2157 @@
+⚠ Port 3000 is in use by process 10356, using available port 3001 instead.
+⚠ Attempted to load @next/swc-win32-x64-msvc, but an error occurred: \\?\C:\Onedrive\Lab\K3-hackathon-5SV-E403\codebase\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 application.
+\\?\C:\Onedrive\Lab\K3-hackathon-5SV-E403\codebase\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="vi" className="__variable...">
+                          <body
+                            className="h-full overflow-hidden bg-canvas text-slate-800 antialiased dark:bg-slate-950 d..."
+-                           __processed_6ad5146d-2069-432f-a3f5-7e13a9eaff85__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <ClientPageRoot Component={function ReaderPage} serverProvidedParams={{...}}>
+                                  <ReaderPage params={Promise} searchParams={Promise}>
+                                    <div
+                                      className="flex h-full flex-col bg-canvas dark:bg-slate-950"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Header t={{header:{...}, ...}} docName="day06-ai-p..." docMeta="COMP2010 ·..." ...>
+                                        <header className="z-50 flex ...">
+                                          <Tooltip>
+                                          <div
+                                            className="hidden shrink-0 sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <span>
+                                          <Tooltip>
+                                          <div
+                                            className="flex min-w-0 items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <span>
+                                            <div
+                                              className="min-w-0"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <div
+                                        className="relative flex min-h-0 flex-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CourseSidebar t={{header:{...}, ...}} days={[...]} expandedDays={[...]} ...>
+                                          <div
+                                            onClick={function onCloseMobile}
+                                            aria-hidden="true"
+                                            className="fixed inset-x-0 top-[84px] bottom-0 z-30 bg-slate-900/40 backdr..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <aside id="course-mat..." aria-label="Học liệu m..." aria-hidden={false} ...>
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[390px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="mx-3 flex shrink-0 items-center gap-3 border-b border-slate..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto px-3 py-5"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                          ...
+                                        <main className="flex min-w...">
+                                          <DocumentToolbar t={{header:{...}, ...}} tool="read" ...>
+                                            <div
+                                              className="relative z-30 mx-auto w-full max-w-[1240px] px-3 pt-4 sm:px-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="scroll-slim flex items-center gap-1.5 overflow-x-auto round..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex shrink-0 items-center gap-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <span>
+                                                <div
+                                                  className="flex shrink-0 items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex items-center gap-0.5 rounded-full bg-slate-50 px-1..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="ml-auto flex shrink-0 items-center gap-0.5 pl-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="scroll-slim min-h-0 flex-1 overflow-auto px-3 py-5 sm:px-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <PDFViewer t={{header:{...}, ...}} doc={{id:"d6-main", ...}} page={2} ...>
+                                              <div
+                                                className="mx-auto transition-[width] duration-200 ease-out"
+                                                style={{width:"calc(min(1..."}}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="rounded-[20px] border border-brand-100 bg-paper p-3 shado..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="mb-2.5 flex items-center justify-between gap-3 px-1"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    onPointerDown={function startStroke}
+                                                    onPointerMove={function extendStroke}
+                                                    onPointerUp={function finishStroke}
+                                                    onPointerCancel={function cancelStroke}
+                                                    onContextMenu={undefined}
+                                                    className="@container relative aspect-[16/9] w-full overflow-hidde..."
+                                                    style={{touchAction:"auto"}}
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <SlideSurface slide={{page:2,kind:"t...", ...}}>
+                                                      <ThinkSlide slide={{page:2,kind:"t...", ...}}>
+                                                        <div
+                                                          className="relative h-full w-full overflow-hidden bg-[linear..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <span>
+                                                          <div
+                                                            className="relative flex h-full flex-col px-[7cqw] py-[6cq..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Eyebrow>
+                                                            <div
+                                                              className="flex flex-1 items-center"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                          ...
+                                                    ...
+                                          <PageNavigation t={{header:{...}, ...}} page={2} total={37} ...>
+                                            <nav aria-label="Trang" className="flex shrin...">
+                                              <Tooltip>
+                                              <div
+                                                className="flex items-center gap-2 rounded-full border border-slate-20..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                        <AIChatPanel t={{header:{...}, ...}} state="closed" page={2} dayLabel="Day 6" ...>
+                                          <aside aria-label="VLearn Tutor" inert={true} className="fixed top-...">
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[440px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-br..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0 flex-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              <div
+                                                className="shrink-0 space-y-2 border-b border-slate-100 bg-slate-50/80..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex flex-1 items-center gap-0.5 rounded-full bg-white ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="flex items-center gap-2 px-0.5"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                ref={{current:null}}
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto py-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="px-4"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="rounded-2xl border border-brand-100 bg-gradient-to-br f..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <SuggestedQuestions label="Câu hỏi gợi ý" questions={[...]} ...>
+                                                  <div
+                                                    className="px-4 pb-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <p>
+                                                    <div
+                                                      className="flex flex-wrap gap-1.5"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                ...
+                                              <div
+                                                className="shrink-0 border-t border-slate-100 bg-white px-3 py-3 dark:..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-end gap-1.5 rounded-2xl border border-slate-20..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                      <Toasts items={[...]}>
+                                        <div
+                                          aria-live="polite"
+                                          className="pointer-events-none fixed top-[96px] left-1/2 z-[70] flex w-[min(..."
+-                                         bis_skin_checked="1"
+                                        >
+                  ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="vi" className="__variable...">
+                          <body
+                            className="h-full overflow-hidden bg-canvas text-slate-800 antialiased dark:bg-slate-950 d..."
+-                           __processed_e8ed325f-4e78-465a-a2e2-7e837cd634ab__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <ClientPageRoot Component={function ReaderPage} serverProvidedParams={{...}}>
+                                  <ReaderPage params={Promise} searchParams={Promise}>
+                                    <div
+                                      className="flex h-full flex-col bg-canvas dark:bg-slate-950"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Header t={{header:{...}, ...}} docName="day06-ai-p..." docMeta="COMP2010 ·..." ...>
+                                        <header className="z-50 flex ...">
+                                          <Tooltip>
+                                          <div
+                                            className="hidden shrink-0 sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <span>
+                                          <Tooltip>
+                                          <div
+                                            className="flex min-w-0 items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <span>
+                                            <div
+                                              className="min-w-0"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <div
+                                        className="relative flex min-h-0 flex-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CourseSidebar t={{header:{...}, ...}} days={[...]} expandedDays={[...]} ...>
+                                          <div
+                                            onClick={function onCloseMobile}
+                                            aria-hidden="true"
+                                            className="fixed inset-x-0 top-[84px] bottom-0 z-30 bg-slate-900/40 backdr..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <aside id="course-mat..." aria-label="Học liệu m..." aria-hidden={false} ...>
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[390px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="mx-3 flex shrink-0 items-center gap-3 border-b border-slate..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto px-3 py-5"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                          ...
+                                        <main className="flex min-w...">
+                                          <DocumentToolbar t={{header:{...}, ...}} tool="read" ...>
+                                            <div
+                                              className="relative z-30 mx-auto w-full max-w-[1240px] px-3 pt-4 sm:px-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="scroll-slim flex items-center gap-1.5 overflow-x-auto round..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex shrink-0 items-center gap-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <span>
+                                                <div
+                                                  className="flex shrink-0 items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex items-center gap-0.5 rounded-full bg-slate-50 px-1..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="ml-auto flex shrink-0 items-center gap-0.5 pl-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="scroll-slim min-h-0 flex-1 overflow-auto px-3 py-5 sm:px-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <PDFViewer t={{header:{...}, ...}} doc={{id:"d6-main", ...}} page={2} ...>
+                                              <div
+                                                className="mx-auto transition-[width] duration-200 ease-out"
+                                                style={{width:"calc(min(1..."}}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="rounded-[20px] border border-brand-100 bg-paper p-3 shado..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="mb-2.5 flex items-center justify-between gap-3 px-1"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    onPointerDown={function startStroke}
+                                                    onPointerMove={function extendStroke}
+                                                    onPointerUp={function finishStroke}
+                                                    onPointerCancel={function cancelStroke}
+                                                    onContextMenu={undefined}
+                                                    className="@container relative aspect-[16/9] w-full overflow-hidde..."
+                                                    style={{touchAction:"auto"}}
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <SlideSurface slide={{page:2,kind:"t...", ...}}>
+                                                      <ThinkSlide slide={{page:2,kind:"t...", ...}}>
+                                                        <div
+                                                          className="relative h-full w-full overflow-hidden bg-[linear..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <span>
+                                                          <div
+                                                            className="relative flex h-full flex-col px-[7cqw] py-[6cq..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Eyebrow>
+                                                            <div
+                                                              className="flex flex-1 items-center"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                          ...
+                                                    ...
+                                          <PageNavigation t={{header:{...}, ...}} page={2} total={37} ...>
+                                            <nav aria-label="Trang" className="flex shrin...">
+                                              <Tooltip>
+                                              <div
+                                                className="flex items-center gap-2 rounded-full border border-slate-20..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                        <AIChatPanel t={{header:{...}, ...}} state="closed" page={2} dayLabel="Day 6" ...>
+                                          <aside aria-label="VLearn Tutor" inert={true} className="fixed top-...">
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[440px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-br..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0 flex-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              <div
+                                                className="shrink-0 space-y-2 border-b border-slate-100 bg-slate-50/80..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex flex-1 items-center gap-0.5 rounded-full bg-white ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="flex items-center gap-2 px-0.5"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                ref={{current:null}}
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto py-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="px-4"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="rounded-2xl border border-brand-100 bg-gradient-to-br f..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <SuggestedQuestions label="Câu hỏi gợi ý" questions={[...]} ...>
+                                                  <div
+                                                    className="px-4 pb-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <p>
+                                                    <div
+                                                      className="flex flex-wrap gap-1.5"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                ...
+                                              <div
+                                                className="shrink-0 border-t border-slate-100 bg-white px-3 py-3 dark:..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-end gap-1.5 rounded-2xl border border-slate-20..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                      <Toasts items={[...]}>
+                                        <div
+                                          aria-live="polite"
+                                          className="pointer-events-none fixed top-[96px] left-1/2 z-[70] flex w-[min(..."
+-                                         bis_skin_checked="1"
+                                        >
+                  ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="vi" className="__variable...">
+                          <body
+                            className="h-full overflow-hidden bg-canvas text-slate-800 antialiased dark:bg-slate-950 d..."
+-                           __processed_5be420d5-b6af-42d6-9611-97918bf19717__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <ClientPageRoot Component={function ReaderPage} serverProvidedParams={{...}}>
+                                  <ReaderPage params={Promise} searchParams={Promise}>
+                                    <div
+                                      className="flex h-full flex-col bg-canvas dark:bg-slate-950"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Header t={{header:{...}, ...}} docName="day06-ai-p..." docMeta="COMP2010 ·..." ...>
+                                        <header className="z-50 flex ...">
+                                          <Tooltip>
+                                          <div
+                                            className="hidden shrink-0 sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <span>
+                                          <Tooltip>
+                                          <div
+                                            className="flex min-w-0 items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <span>
+                                            <div
+                                              className="min-w-0"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <div
+                                        className="relative flex min-h-0 flex-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CourseSidebar t={{header:{...}, ...}} days={[...]} expandedDays={[...]} ...>
+                                          <div
+                                            onClick={function onCloseMobile}
+                                            aria-hidden="true"
+                                            className="fixed inset-x-0 top-[84px] bottom-0 z-30 bg-slate-900/40 backdr..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <aside id="course-mat..." aria-label="Học liệu m..." aria-hidden={false} ...>
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[390px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="mx-3 flex shrink-0 items-center gap-3 border-b border-slate..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto px-3 py-5"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                          ...
+                                        <main className="flex min-w...">
+                                          <DocumentToolbar t={{header:{...}, ...}} tool="read" ...>
+                                            <div
+                                              className="relative z-30 mx-auto w-full max-w-[1240px] px-3 pt-4 sm:px-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="scroll-slim flex items-center gap-1.5 overflow-x-auto round..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex shrink-0 items-center gap-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <span>
+                                                <div
+                                                  className="flex shrink-0 items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex items-center gap-0.5 rounded-full bg-slate-50 px-1..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="ml-auto flex shrink-0 items-center gap-0.5 pl-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="scroll-slim min-h-0 flex-1 overflow-auto px-3 py-5 sm:px-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <PDFViewer t={{header:{...}, ...}} doc={{id:"d6-main", ...}} page={2} ...>
+                                              <div
+                                                className="mx-auto transition-[width] duration-200 ease-out"
+                                                style={{width:"calc(min(1..."}}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="rounded-[20px] border border-brand-100 bg-paper p-3 shado..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="mb-2.5 flex items-center justify-between gap-3 px-1"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    onPointerDown={function startStroke}
+                                                    onPointerMove={function extendStroke}
+                                                    onPointerUp={function finishStroke}
+                                                    onPointerCancel={function cancelStroke}
+                                                    onContextMenu={undefined}
+                                                    className="@container relative aspect-[16/9] w-full overflow-hidde..."
+                                                    style={{touchAction:"auto"}}
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <SlideSurface slide={{page:2,kind:"t...", ...}}>
+                                                      <ThinkSlide slide={{page:2,kind:"t...", ...}}>
+                                                        <div
+                                                          className="relative h-full w-full overflow-hidden bg-[linear..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <span>
+                                                          <div
+                                                            className="relative flex h-full flex-col px-[7cqw] py-[6cq..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Eyebrow>
+                                                            <div
+                                                              className="flex flex-1 items-center"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                          ...
+                                                    ...
+                                          <PageNavigation t={{header:{...}, ...}} page={2} total={37} ...>
+                                            <nav aria-label="Trang" className="flex shrin...">
+                                              <Tooltip>
+                                              <div
+                                                className="flex items-center gap-2 rounded-full border border-slate-20..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                        <AIChatPanel t={{header:{...}, ...}} state="closed" page={2} dayLabel="Day 6" ...>
+                                          <aside aria-label="VLearn Tutor" inert={true} className="fixed top-...">
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[440px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-br..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0 flex-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              <div
+                                                className="shrink-0 space-y-2 border-b border-slate-100 bg-slate-50/80..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex flex-1 items-center gap-0.5 rounded-full bg-white ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="flex items-center gap-2 px-0.5"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                ref={{current:null}}
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto py-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="px-4"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="rounded-2xl border border-brand-100 bg-gradient-to-br f..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <SuggestedQuestions label="Câu hỏi gợi ý" questions={[...]} ...>
+                                                  <div
+                                                    className="px-4 pb-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <p>
+                                                    <div
+                                                      className="flex flex-wrap gap-1.5"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                ...
+                                              <div
+                                                className="shrink-0 border-t border-slate-100 bg-white px-3 py-3 dark:..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-end gap-1.5 rounded-2xl border border-slate-20..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                      <Toasts items={[...]}>
+                                        <div
+                                          aria-live="polite"
+                                          className="pointer-events-none fixed top-[96px] left-1/2 z-[70] flex w-[min(..."
+-                                         bis_skin_checked="1"
+                                        >
+                  ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="vi" className="__variable...">
+                          <body
+                            className="h-full overflow-hidden bg-canvas text-slate-800 antialiased dark:bg-slate-950 d..."
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+-                           __processed_e412b79a-24a3-4298-a561-b495391d2c13__="true"
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <ClientPageRoot Component={function ReaderPage} serverProvidedParams={{...}}>
+                                  <ReaderPage params={Promise} searchParams={Promise}>
+                                    <div
+                                      className="flex h-full flex-col bg-canvas dark:bg-slate-950"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Header t={{header:{...}, ...}} docName="day06-ai-p..." docMeta="COMP2010 ·..." ...>
+                                        <header className="z-50 flex ...">
+                                          <Tooltip>
+                                          <div
+                                            className="hidden shrink-0 sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <span>
+                                          <Tooltip>
+                                          <div
+                                            className="flex min-w-0 items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <span>
+                                            <div
+                                              className="min-w-0"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <div
+                                        className="relative flex min-h-0 flex-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CourseSidebar t={{header:{...}, ...}} days={[...]} expandedDays={[...]} ...>
+                                          <div
+                                            onClick={function onCloseMobile}
+                                            aria-hidden="true"
+                                            className="fixed inset-x-0 top-[84px] bottom-0 z-30 bg-slate-900/40 backdr..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <aside id="course-mat..." aria-label="Học liệu m..." aria-hidden={false} ...>
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[390px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="mx-3 flex shrink-0 items-center gap-3 border-b border-slate..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto px-3 py-5"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                          ...
+                                        <main className="flex min-w...">
+                                          <DocumentToolbar t={{header:{...}, ...}} tool="read" ...>
+                                            <div
+                                              className="relative z-30 mx-auto w-full max-w-[1240px] px-3 pt-4 sm:px-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="scroll-slim flex items-center gap-1.5 overflow-x-auto round..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex shrink-0 items-center gap-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <span>
+                                                <div
+                                                  className="flex shrink-0 items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex items-center gap-0.5 rounded-full bg-slate-50 px-1..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="ml-auto flex shrink-0 items-center gap-0.5 pl-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="scroll-slim min-h-0 flex-1 overflow-auto px-3 py-5 sm:px-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <PDFViewer t={{header:{...}, ...}} doc={{id:"d6-main", ...}} page={2} ...>
+                                              <div
+                                                className="mx-auto transition-[width] duration-200 ease-out"
+                                                style={{width:"calc(min(1..."}}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="rounded-[20px] border border-brand-100 bg-paper p-3 shado..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="mb-2.5 flex items-center justify-between gap-3 px-1"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    onPointerDown={function startStroke}
+                                                    onPointerMove={function extendStroke}
+                                                    onPointerUp={function finishStroke}
+                                                    onPointerCancel={function cancelStroke}
+                                                    onContextMenu={undefined}
+                                                    className="@container relative aspect-[16/9] w-full overflow-hidde..."
+                                                    style={{touchAction:"auto"}}
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <SlideSurface slide={{page:2,kind:"t...", ...}}>
+                                                      <ThinkSlide slide={{page:2,kind:"t...", ...}}>
+                                                        <div
+                                                          className="relative h-full w-full overflow-hidden bg-[linear..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <span>
+                                                          <div
+                                                            className="relative flex h-full flex-col px-[7cqw] py-[6cq..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Eyebrow>
+                                                            <div
+                                                              className="flex flex-1 items-center"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                          ...
+                                                    ...
+                                          <PageNavigation t={{header:{...}, ...}} page={2} total={37} ...>
+                                            <nav aria-label="Trang" className="flex shrin...">
+                                              <Tooltip>
+                                              <div
+                                                className="flex items-center gap-2 rounded-full border border-slate-20..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                        <AIChatPanel t={{header:{...}, ...}} state="closed" page={2} dayLabel="Day 6" ...>
+                                          <aside aria-label="VLearn Tutor" inert={true} className="fixed top-...">
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[440px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-br..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0 flex-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              <div
+                                                className="shrink-0 space-y-2 border-b border-slate-100 bg-slate-50/80..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex flex-1 items-center gap-0.5 rounded-full bg-white ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="flex items-center gap-2 px-0.5"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                ref={{current:null}}
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto py-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="px-4"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="rounded-2xl border border-brand-100 bg-gradient-to-br f..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <SuggestedQuestions label="Câu hỏi gợi ý" questions={[...]} ...>
+                                                  <div
+                                                    className="px-4 pb-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <p>
+                                                    <div
+                                                      className="flex flex-wrap gap-1.5"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                ...
+                                              <div
+                                                className="shrink-0 border-t border-slate-100 bg-white px-3 py-3 dark:..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-end gap-1.5 rounded-2xl border border-slate-20..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                      <Toasts items={[...]}>
+                                        <div
+                                          aria-live="polite"
+                                          className="pointer-events-none fixed top-[96px] left-1/2 z-[70] flex w-[min(..."
+-                                         bis_skin_checked="1"
+                                        >
+                  ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="vi" className="__variable...">
+                          <body
+                            className="h-full overflow-hidden bg-canvas text-slate-800 antialiased dark:bg-slate-950 d..."
+-                           __processed_6629533f-582e-4860-97ce-3febc7b61bc4__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <ClientPageRoot Component={function ReaderPage} serverProvidedParams={{...}}>
+                                  <ReaderPage params={Promise} searchParams={Promise}>
+                                    <div
+                                      className="flex h-full flex-col bg-canvas dark:bg-slate-950"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Header t={{header:{...}, ...}} docName="day06-ai-p..." docMeta="COMP2010 ·..." ...>
+                                        <header className="z-50 flex ...">
+                                          <Tooltip>
+                                          <div
+                                            className="hidden shrink-0 sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <span>
+                                          <Tooltip>
+                                          <div
+                                            className="flex min-w-0 items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <span>
+                                            <div
+                                              className="min-w-0"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <div
+                                        className="relative flex min-h-0 flex-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CourseSidebar t={{header:{...}, ...}} days={[...]} expandedDays={[...]} ...>
+                                          <div
+                                            onClick={function onCloseMobile}
+                                            aria-hidden="true"
+                                            className="fixed inset-x-0 top-[84px] bottom-0 z-30 bg-slate-900/40 backdr..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <aside id="course-mat..." aria-label="Học liệu m..." aria-hidden={false} ...>
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[390px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="mx-3 flex shrink-0 items-center gap-3 border-b border-slate..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto px-3 py-5"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                          ...
+                                        <main className="flex min-w...">
+                                          <DocumentToolbar t={{header:{...}, ...}} tool="read" ...>
+                                            <div
+                                              className="relative z-30 mx-auto w-full max-w-[1240px] px-3 pt-4 sm:px-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="scroll-slim flex items-center gap-1.5 overflow-x-auto round..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex shrink-0 items-center gap-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <span>
+                                                <div
+                                                  className="flex shrink-0 items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex items-center gap-0.5 rounded-full bg-slate-50 px-1..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="ml-auto flex shrink-0 items-center gap-0.5 pl-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="scroll-slim min-h-0 flex-1 overflow-auto px-3 py-5 sm:px-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <PDFViewer t={{header:{...}, ...}} doc={{id:"d6-main", ...}} page={2} ...>
+                                              <div
+                                                className="mx-auto transition-[width] duration-200 ease-out"
+                                                style={{width:"calc(min(1..."}}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="rounded-[20px] border border-brand-100 bg-paper p-3 shado..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="mb-2.5 flex items-center justify-between gap-3 px-1"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    onPointerDown={function startStroke}
+                                                    onPointerMove={function extendStroke}
+                                                    onPointerUp={function finishStroke}
+                                                    onPointerCancel={function cancelStroke}
+                                                    onContextMenu={undefined}
+                                                    className="@container relative aspect-[16/9] w-full overflow-hidde..."
+                                                    style={{touchAction:"auto"}}
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <SlideSurface slide={{page:2,kind:"t...", ...}}>
+                                                      <ThinkSlide slide={{page:2,kind:"t...", ...}}>
+                                                        <div
+                                                          className="relative h-full w-full overflow-hidden bg-[linear..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <span>
+                                                          <div
+                                                            className="relative flex h-full flex-col px-[7cqw] py-[6cq..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Eyebrow>
+                                                            <div
+                                                              className="flex flex-1 items-center"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                          ...
+                                                    ...
+                                          <PageNavigation t={{header:{...}, ...}} page={2} total={37} ...>
+                                            <nav aria-label="Trang" className="flex shrin...">
+                                              <Tooltip>
+                                              <div
+                                                className="flex items-center gap-2 rounded-full border border-slate-20..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                        <AIChatPanel t={{header:{...}, ...}} state="closed" page={2} dayLabel="Day 6" ...>
+                                          <aside aria-label="VLearn Tutor" inert={true} className="fixed top-...">
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[440px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-br..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0 flex-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              <div
+                                                className="shrink-0 space-y-2 border-b border-slate-100 bg-slate-50/80..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex flex-1 items-center gap-0.5 rounded-full bg-white ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="flex items-center gap-2 px-0.5"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                ref={{current:null}}
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto py-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="px-4"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="rounded-2xl border border-brand-100 bg-gradient-to-br f..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <SuggestedQuestions label="Câu hỏi gợi ý" questions={[...]} ...>
+                                                  <div
+                                                    className="px-4 pb-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <p>
+                                                    <div
+                                                      className="flex flex-wrap gap-1.5"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                ...
+                                              <div
+                                                className="shrink-0 border-t border-slate-100 bg-white px-3 py-3 dark:..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-end gap-1.5 rounded-2xl border border-slate-20..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                      <Toasts items={[...]}>
+                                        <div
+                                          aria-live="polite"
+                                          className="pointer-events-none fixed top-[96px] left-1/2 z-[70] flex w-[min(..."
+-                                         bis_skin_checked="1"
+                                        >
+                  ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <RootLayout>
+                        <html lang="vi" className="__variable...">
+                          <body
+                            className="h-full overflow-hidden bg-canvas text-slate-800 antialiased dark:bg-slate-950 d..."
+-                           __processed_eddaab3e-1590-4453-bb01-a1ee4755cc3f__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            ...
+                              <SegmentViewNode type="page" pagePath="page.tsx">
+                                <SegmentTrieNode>
+                                <ClientPageRoot Component={function ReaderPage} serverProvidedParams={{...}}>
+                                  <ReaderPage params={Promise} searchParams={Promise}>
+                                    <div
+                                      className="flex h-full flex-col bg-canvas dark:bg-slate-950"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Header t={{header:{...}, ...}} docName="day06-ai-p..." docMeta="COMP2010 ·..." ...>
+                                        <header className="z-50 flex ...">
+                                          <Tooltip>
+                                          <div
+                                            className="hidden shrink-0 sm:block"
+-                                           bis_skin_checked="1"
+                                          >
+                                          <span>
+                                          <Tooltip>
+                                          <div
+                                            className="flex min-w-0 items-center gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <span>
+                                            <div
+                                              className="min-w-0"
+-                                             bis_skin_checked="1"
+                                            >
+                                          <div
+                                            className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2"
+-                                           bis_skin_checked="1"
+                                          >
+                                      <div
+                                        className="relative flex min-h-0 flex-1"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CourseSidebar t={{header:{...}, ...}} days={[...]} expandedDays={[...]} ...>
+                                          <div
+                                            onClick={function onCloseMobile}
+                                            aria-hidden="true"
+                                            className="fixed inset-x-0 top-[84px] bottom-0 z-30 bg-slate-900/40 backdr..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <aside id="course-mat..." aria-label="Học liệu m..." aria-hidden={false} ...>
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[390px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="mx-3 flex shrink-0 items-center gap-3 border-b border-slate..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto px-3 py-5"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                <div
+                                                  className="overflow-hidden rounded-2xl border transition-all duratio..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <button>
+                                                  <div
+                                                    className="grid transition-[grid-template-rows] duration-300 ease-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="overflow-hidden"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <div
+                                                        className="space-y-1.5 px-2.5 pb-2.5"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                          ...
+                                        <main className="flex min-w...">
+                                          <DocumentToolbar t={{header:{...}, ...}} tool="read" ...>
+                                            <div
+                                              className="relative z-30 mx-auto w-full max-w-[1240px] px-3 pt-4 sm:px-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="scroll-slim flex items-center gap-1.5 overflow-x-auto round..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex shrink-0 items-center gap-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <span>
+                                                <div
+                                                  className="flex shrink-0 items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex items-center gap-0.5 rounded-full bg-slate-50 px-1..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="ml-auto flex shrink-0 items-center gap-0.5 pl-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="scroll-slim min-h-0 flex-1 overflow-auto px-3 py-5 sm:px-6"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <PDFViewer t={{header:{...}, ...}} doc={{id:"d6-main", ...}} page={2} ...>
+                                              <div
+                                                className="mx-auto transition-[width] duration-200 ease-out"
+                                                style={{width:"calc(min(1..."}}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="rounded-[20px] border border-brand-100 bg-paper p-3 shado..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="mb-2.5 flex items-center justify-between gap-3 px-1"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <div
+                                                    onPointerDown={function startStroke}
+                                                    onPointerMove={function extendStroke}
+                                                    onPointerUp={function finishStroke}
+                                                    onPointerCancel={function cancelStroke}
+                                                    onContextMenu={undefined}
+                                                    className="@container relative aspect-[16/9] w-full overflow-hidde..."
+                                                    style={{touchAction:"auto"}}
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <SlideSurface slide={{page:2,kind:"t...", ...}}>
+                                                      <ThinkSlide slide={{page:2,kind:"t...", ...}}>
+                                                        <div
+                                                          className="relative h-full w-full overflow-hidden bg-[linear..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <span>
+                                                          <div
+                                                            className="relative flex h-full flex-col px-[7cqw] py-[6cq..."
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <Eyebrow>
+                                                            <div
+                                                              className="flex flex-1 items-center"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                          ...
+                                                    ...
+                                          <PageNavigation t={{header:{...}, ...}} page={2} total={37} ...>
+                                            <nav aria-label="Trang" className="flex shrin...">
+                                              <Tooltip>
+                                              <div
+                                                className="flex items-center gap-2 rounded-full border border-slate-20..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                        <AIChatPanel t={{header:{...}, ...}} state="closed" page={2} dayLabel="Day 6" ...>
+                                          <aside aria-label="VLearn Tutor" inert={true} className="fixed top-...">
+                                            <div
+                                              className="flex h-full w-full flex-col lg:w-[440px]"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="flex shrink-0 items-center gap-2.5 bg-gradient-to-r from-br..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <span>
+                                                <div
+                                                  className="min-w-0 flex-1"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              <div
+                                                className="shrink-0 space-y-2 border-b border-slate-100 bg-slate-50/80..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-2"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <span>
+                                                  <div
+                                                    className="flex flex-1 items-center gap-0.5 rounded-full bg-white ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <div
+                                                  className="flex items-center gap-2 px-0.5"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                ref={{current:null}}
+                                                className="scroll-slim flex-1 space-y-4 overflow-y-auto py-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="px-4"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="rounded-2xl border border-brand-100 bg-gradient-to-br f..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                <SuggestedQuestions label="Câu hỏi gợi ý" questions={[...]} ...>
+                                                  <div
+                                                    className="px-4 pb-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <p>
+                                                    <div
+                                                      className="flex flex-wrap gap-1.5"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                ...
+                                              <div
+                                                className="shrink-0 border-t border-slate-100 bg-white px-3 py-3 dark:..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-end gap-1.5 rounded-2xl border border-slate-20..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                      <Toasts items={[...]}>
+                                        <div
+                                          aria-live="polite"
+                                          className="pointer-events-none fixed top-[96px] left-1/2 z-[70] flex w-[min(..."
+-                                         bis_skin_checked="1"
+                                        >
+                  ...
+ 

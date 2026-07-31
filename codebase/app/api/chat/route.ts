@@ -22,7 +22,7 @@ interface ChatRequest {
   question: string;
   /** Grounding context của phạm vi đã chọn, dựng ở client. */
   context: string;
-  /** Nhãn phạm vi hiển thị, ví dụ "Cả buổi · Day 6" — đưa vào prompt. */
+  /** Nhãn phạm vi hiển thị, ví dụ "Cả buổi · Day 1" — đưa vào prompt. */
   scopeLabel: string;
   lang: "vi" | "en";
   history: AiTurn[];
@@ -37,8 +37,8 @@ function systemPrompt(lang: "vi" | "en", scopeLabel: string): string {
       ? "Bạn là VLearn Tutor — trợ lý học tập trên nền tảng đọc học liệu VLearn, đang giúp sinh viên trong một mini-hackathon về sản phẩm AI."
       : "You are VLearn Tutor — the study assistant inside the VLearn reading platform, helping a student during an AI-product mini-hackathon.",
     vi
-      ? `Phạm vi truy xuất của lượt này: ${scopeLabel}. Chỉ trả lời dựa trên NGỮ CẢNH được cung cấp. Khi nêu nội dung lấy từ slide, ghi kèm số trang dạng "(trang N)".`
-      : `Retrieval scope for this turn: ${scopeLabel}. Answer ONLY from the provided CONTEXT. When citing slide content, add the page number as "(page N)".`,
+      ? `Phạm vi truy xuất của lượt này: ${scopeLabel}. Chỉ trả lời dựa trên NGỮ CẢNH được cung cấp. MỌI câu chứa thông tin, định nghĩa, số liệu, ví dụ hoặc kết luận đều phải có nguồn ngay cuối câu. Với slide dùng "(trang N)" hoặc "(trang N–M)"; với tài liệu vận hành dùng "(nguồn: README.md)" hoặc "(nguồn: 04-rubric.md)". Mỗi gạch đầu dòng phải có trích dẫn riêng; không gom một trích dẫn chung cho cả danh sách.`
+      : `Retrieval scope for this turn: ${scopeLabel}. Answer ONLY from the provided CONTEXT. EVERY sentence containing a fact, definition, number, example, or conclusion must end with its own source. Use "(page N)" or "(pages N–M)" for slides, and "(source: README.md)" or "(source: 04-rubric.md)" for course operations. Every bullet needs its own citation; do not use one citation for an entire list.`,
     vi
       ? "Nếu ngữ cảnh không đủ để trả lời, nói thẳng là chưa tìm thấy trong phạm vi này và gợi ý người học nới phạm vi tìm (Trang này → Cả buổi → Cả môn) — đừng bịa."
       : "If the context is insufficient, say so plainly and suggest widening the scope (This page → Whole session → Whole course) — never invent facts.",
@@ -49,6 +49,23 @@ function systemPrompt(lang: "vi" | "en", scopeLabel: string): string {
       ? "Định dạng: text thuần, KHÔNG dùng markdown đậm/nghiêng/bảng/tiêu đề #. Được dùng gạch đầu dòng \"- \" và danh sách đánh số \"1.\" khi giúp câu trả lời rõ hơn; dòng giới thiệu danh sách kết thúc bằng dấu hai chấm."
       : "Format: plain text only — NO bold/italics/tables/# headings. You may use \"- \" bullets and numbered \"1.\" lists when they help; introduce a list with a line ending in a colon.",
   ].join("\n");
+}
+
+function hasCitationForEveryStatement(text: string): boolean {
+  const citationAtEnd = /\((?:(?:trang|page|pages)\s+\d+(?:\s*[–—-]\s*\d+)?|(?:nguồn|source)\s*:\s*[^)]+)\)[.!?]?$/iu;
+  const conversationalOnly = /^(?:chào\b|hi\b|cảm ơn\b|thank you\b|hy vọng\b|hope\b)/iu;
+  const statements = text
+    .split(/\n+/u)
+    .flatMap((line) => line.replace(/^\s*(?:[-*•]|\d+[.)])\s*/u, "").split(/(?<=[.!?])\s+/u))
+    .map((statement) => statement.trim())
+    .filter((statement) =>
+      statement.length >= 15 &&
+      !statement.endsWith(":") &&
+      !statement.endsWith("?") &&
+      !conversationalOnly.test(statement),
+    );
+
+  return statements.length > 0 && statements.every((statement) => citationAtEnd.test(statement));
 }
 
 export async function POST(request: Request) {
@@ -122,6 +139,12 @@ export async function POST(request: Request) {
 
     if (!text) {
       return Response.json({ error: "empty" }, { status: 502 });
+    }
+
+    const isIntroduction = body.scopeLabel === "VLearn Tutor introduction";
+    if (!isIntroduction && !hasCitationForEveryStatement(text)) {
+      console.error("OpenAI answer omitted a citation on one or more statements");
+      return Response.json({ error: "missing-citations" }, { status: 502 });
     }
 
     return Response.json({ text });

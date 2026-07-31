@@ -13,11 +13,15 @@ export interface CourseDoc {
   /** Mã tài liệu hiển thị dưới tên file trên header. */
   meta: string;
   pages: number;
+  /** Thư mục public chứa ảnh từng trang được sinh trực tiếp từ PDF nguồn. */
+  assetBase: string;
+  /** Đường dẫn PDF gốc trong repo để truy vết nguồn. */
+  sourcePath: string;
 }
 
 export interface CourseDay {
   id: string;
-  /** Nhãn "Day 1" … "Day 6". */
+  /** Nhãn buổi học, ví dụ "Day 1". */
   label: string;
   topic: string;
   topicEn: string;
@@ -61,9 +65,9 @@ export type ScopeLevel = "page" | "session" | "course";
 
 export interface RetrievalScope {
   level: ScopeLevel;
-  /** Nhãn ngắn: "Cả buổi · Day 6". */
+  /** Nhãn ngắn: "Cả buổi · Day 1". */
   label: string;
-  /** Dòng phụ: "37 slide · 6 mục". */
+  /** Dòng phụ: "23 slide · 3 mục". */
   detail: string;
   /** Có giá trị khi hệ thống tự nới phạm vi từ trang đang đọc. */
   expandedFromPage?: number;
@@ -118,6 +122,16 @@ export type AnswerBlock =
   | { kind: "hits"; title?: string; items: HitItem[] }
   | { kind: "callout"; tone: "info" | "warn"; text: string };
 
+/** Nguồn kiểm chứng đi kèm câu trả lời, có thể là slide hoặc tài liệu vận hành. */
+export interface AnswerSource {
+  key: string;
+  title: string;
+  detail: string;
+  docId?: string;
+  /** Rỗng với nguồn không có số trang, ví dụ README hoặc rubric. */
+  pages: number[];
+}
+
 export interface Answer {
   intent: Intent;
   scope: RetrievalScope;
@@ -126,6 +140,8 @@ export interface Answer {
   plain: string;
   /** Các trang được trích dẫn — bấm được để nhảy tới. */
   citations: number[];
+  /** Danh sách nguồn luôn được giữ lại kể cả khi AI sinh lại phần câu chữ. */
+  sources: AnswerSource[];
 }
 
 /**
@@ -144,6 +160,7 @@ export interface ChatMsg {
   blocks?: AnswerBlock[];
   scope?: RetrievalScope;
   citations?: number[];
+  sources?: AnswerSource[];
   intent?: Intent;
 }
 

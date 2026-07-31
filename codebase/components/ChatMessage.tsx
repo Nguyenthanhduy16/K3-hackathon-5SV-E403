@@ -101,7 +101,7 @@ export default function ChatMessage({
   compact = false,
 }: Props) {
   const isUser = message.role === "user";
-  const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [sourcesOpen, setSourcesOpen] = useState(true);
 
   const citationPages = useMemo(
     () => [...new Set(message.citations ?? [])].sort((a, b) => a - b),
@@ -109,6 +109,7 @@ export default function ChatMessage({
   );
 
   const citationSources = useMemo<CitationSource[]>(() => {
+    if (message.sources?.length) return message.sources;
     if (citationPages.length === 0) return [];
 
     const groups = new Map<
@@ -155,7 +156,7 @@ export default function ChatMessage({
       ...source,
       pages: [...source.pages].sort((a, b) => a - b),
     }));
-  }, [citationPages, dayLabel, docName, message.blocks, message.scope]);
+  }, [citationPages, dayLabel, docName, message.blocks, message.scope, message.sources]);
 
   if (isUser) {
     return (
@@ -177,9 +178,9 @@ export default function ChatMessage({
 
   const scope = message.scope;
   const ScopeIcon = scope ? SCOPE_ICON[scope.level] : FileText;
-  const sourceDocumentsLabel = t.chat.citations === "Sources" ? "Source documents" : "Tài liệu nguồn";
-  const showSourcesLabel = t.chat.citations === "Sources" ? "Show source documents" : "Mở tài liệu nguồn";
-  const hideSourcesLabel = t.chat.citations === "Sources" ? "Hide source documents" : "Ẩn tài liệu nguồn";
+  const sourceDocumentsLabel = t.chat.sourceDocuments;
+  const showSourcesLabel = t.chat.showSources;
+  const hideSourcesLabel = t.chat.hideSources;
 
   return (
     <div className="animate-fade-up flex gap-2.5 px-4">
@@ -216,7 +217,7 @@ export default function ChatMessage({
           )}
         </div>
 
-        {citationPages.length > 0 && !compact && (
+        {citationSources.length > 0 && !compact && (
           <div className="mt-2 space-y-1.5">
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[10.5px] font-semibold text-slate-400 dark:text-slate-500">
@@ -231,7 +232,7 @@ export default function ChatMessage({
                 className="inline-flex items-center gap-1 rounded-lg border border-brand-100 bg-brand-50/70 px-2 py-1 font-mono text-[10.5px] font-bold text-brand-800 transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-300 hover:bg-brand-100 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-brand-200"
               >
                 <FileText className="h-3 w-3" />
-                {citationPages.length}
+                {citationSources.length}
                 <ChevronDown
                   className={`h-3 w-3 transition-transform duration-150 ${sourcesOpen ? "rotate-180" : ""}`}
                 />
@@ -248,8 +249,11 @@ export default function ChatMessage({
                     <button
                       key={source.key}
                       type="button"
-                      onClick={() => onJumpToPage(source.pages[0], source.docId)}
-                      className="group/source flex w-full items-start gap-2 rounded-lg border border-transparent px-2 py-1.5 text-left transition-colors hover:border-brand-200 hover:bg-white focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none dark:hover:border-slate-700 dark:hover:bg-slate-800"
+                      disabled={source.pages.length === 0}
+                      onClick={() => {
+                        if (source.pages.length > 0) onJumpToPage(source.pages[0], source.docId);
+                      }}
+                      className="group/source flex w-full items-start gap-2 rounded-lg border border-transparent px-2 py-1.5 text-left transition-colors enabled:hover:border-brand-200 enabled:hover:bg-white focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:outline-none disabled:cursor-default dark:enabled:hover:border-slate-700 dark:enabled:hover:bg-slate-800"
                     >
                       <FileText className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600 dark:text-brand-300" />
                       <span className="min-w-0 flex-1">
@@ -260,9 +264,11 @@ export default function ChatMessage({
                           {source.detail}
                         </span>
                       </span>
-                      <span className="shrink-0 rounded-md bg-brand-50 px-1.5 py-0.5 font-mono text-[10px] font-bold text-brand-700 dark:bg-brand-500/15 dark:text-brand-200">
-                        {pagesLabel(t, source.pages)}
-                      </span>
+                      {source.pages.length > 0 && (
+                        <span className="shrink-0 rounded-md bg-brand-50 px-1.5 py-0.5 font-mono text-[10px] font-bold text-brand-700 dark:bg-brand-500/15 dark:text-brand-200">
+                          {pagesLabel(t, source.pages)}
+                        </span>
+                      )}
                     </button>
                   ))}
                 </div>

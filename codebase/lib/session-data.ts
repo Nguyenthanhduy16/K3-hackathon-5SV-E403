@@ -1,4 +1,4 @@
-import { ALL_DOCS, COURSE_DAYS, findDayOfDoc, getSlide } from "./mock-data";
+import { ALL_DOCS, COURSE_DAYS, findDayOfDoc, getSlide } from "./course-data";
 import type { CourseDoc } from "./types";
 
 /**

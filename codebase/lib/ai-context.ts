@@ -1,4 +1,4 @@
-import { getSlide } from "./mock-data";
+import { getSlide } from "./course-data";
 import {
   COURSE_OPS,
   COURSE_STATS,
@@ -87,6 +87,7 @@ export function buildScopeContext(
   // level === "course"
   const ops = COURSE_OPS;
   parts.push(
+    `Nguồn dữ liệu vận hành: README.md (lịch, checkpoint, quy định nộp) và 04-rubric.md (cơ cấu điểm, tiêu chí đánh giá).`,
     `Môn ${ops.code} — ${ops.name}. Hình thức: ${ops.format}. Quy mô: ${COURSE_STATS.days} buổi, ${COURSE_STATS.docs} tài liệu, ${COURSE_STATS.pages} slide.`,
     `Các mốc checkpoint:\n${ops.checkpoints
       .map((c) => `- ${c.id} — ${c.what} (Khoá 3: ${c.k3} · Khoá 4: ${c.k4})`)
@@ -116,6 +117,25 @@ export function buildScopeContext(
 export interface AiTurn {
   role: "user" | "assistant";
   text: string;
+}
+
+/** Lấy mọi số trang AI đã ghi dạng “(trang 4)” hoặc “(pages 4–6)”. */
+export function extractPageCitations(raw: string, maxPage?: number): number[] {
+  const pages = new Set<number>();
+  const pattern = /\b(?:trang|page|pages)\s+(\d+)(?:\s*[–—-]\s*(\d+))?/giu;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(raw)) !== null) {
+    const from = Number.parseInt(match[1], 10);
+    const to = match[2] ? Number.parseInt(match[2], 10) : from;
+    const start = Math.min(from, to);
+    const end = Math.max(from, to);
+    for (let page = start; page <= end; page += 1) {
+      if (page > 0 && (maxPage === undefined || page <= maxPage)) pages.add(page);
+    }
+  }
+
+  return [...pages].sort((a, b) => a - b);
 }
 
 /* ------------------------------------------------------------------ */

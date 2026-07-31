@@ -1,0 +1,147 @@
+{
+  "source": "data/vlearn-pack/slide/day01-slide-blue-v0.pdf",
+  "sourceSha256": "e9ef3715eab4b6a7936423aa5d0f65854ea2c2e373c1ad53d4c634ca4dcf9042",
+  "pageCount": 23,
+  "width": 1920,
+  "height": 1080,
+  "pages": [
+    {
+      "page": 1,
+      "image": "page-01.webp",
+      "title": "AI IN ACTION - Day 1",
+      "text": "AI IN ACTION - Day 1\nAI & LLM Foundation\nInstructor: Mai Anh Nguyen (Blue)"
+    },
+    {
+      "page": 2,
+      "image": "page-02.webp",
+      "title": "Instructor",
+      "text": "Instructor\nMai Anh Nguyen (Blue)\nGeneralist Product Builder\n2026 FPT Long Châu (PM · Healthcare Product)\n2025 Thongtincuuho.org (Co-founder)\n2025 FPT Software AI Center (PM · AI Agent)\n2021 - 2025 Xantus (PM · On-chain Analytics, AI Agent)\n2016 - 2021 DYNO, Kalapa (PM · OCR, eKYC, Credit Scoring)\nLinkedin | Facebook"
+    },
+    {
+      "page": 3,
+      "image": "page-03.webp",
+      "title": "LËch sí AI",
+      "text": "LËch sí AI"
+    },
+    {
+      "page": 4,
+      "image": "page-04.webp",
+      "title": "LËch sí AI 70 nm",
+      "text": "LËch sí AI 70 nm\nKhai sinh, lÝi héa §u tiên\n2 l§n mùa ông, cách ti¿p c\nTë model ¡n l» sang system có kh£\nnng hành Ùng nh° agent"
+    },
+    {
+      "page": 5,
+      "image": "page-05.webp",
+      "title": "1956: Dartmouth Workshop",
+      "text": "1956: Dartmouth Workshop\n\"Artificial Intelligence\" ra Ýi vÛi ý t°ßng: n¿u trí thông minh có thÃ\n°ãc mô t£ ç rõ, thì máy móc cing có thÃ mô phÏng l¡i nó."
+    },
+    {
+      "page": 6,
+      "image": "page-06.webp",
+      "title": "1969: Perceptrons",
+      "text": "1969: Perceptrons\nCác h°Ûng i l§n l°ãt ch¡m tr§n:\nH°Ûng symbolic (d¡y máy b±ng lu"
+    },
+    {
+      "page": 7,
+      "image": "page-07.webp",
+      "title": "Mùa ông AI l§n 1: 1974-1980",
+      "text": "Mùa ông AI l§n 1: 1974-1980\nMùa ông AI l§n 1: Suy lu"
+    },
+    {
+      "page": 8,
+      "image": "page-08.webp",
+      "title": "1980: HÇ chuyên gia (expert system)",
+      "text": "1980: HÇ chuyên gia (expert system)\n·t l¡i v¥n Á: ˝N¿u AI chÉ gi£i th"
+    },
+    {
+      "page": 9,
+      "image": "page-09.webp",
+      "title": "Mùa ông AI l§n 2",
+      "text": "Mùa ông AI l§n 2\nExpert systems tëng t¡o ra giá trË th"
+    },
+    {
+      "page": 10,
+      "image": "page-10.webp",
+      "title": "Sñ ra Ýi cça Deep Learning",
+      "text": "Sñ ra Ýi cça Deep Learning\nSau mùa ông l§n hai, câu hÏi cça c£ ngành Õi h³n:\n˝N¿u không thÃ vi¿t h¿t tri théc cça th¿ giÛi vào máy,\nthì có thÃ Ã máy tñ hÍc nó të dï liÇu không?˛"
+    },
+    {
+      "page": 11,
+      "image": "page-11.webp",
+      "title": "Sñ ra Ýi cça Deep Learning",
+      "text": "Sñ ra Ýi cça Deep Learning"
+    },
+    {
+      "page": 12,
+      "image": "page-12.webp",
+      "title": "2012: AlexNet",
+      "text": "2012: AlexNet\nImageNet\nAlexNet chi¿n th¯ng ß ImageNet Large Scale Visual Recognition Challenge\nImageNet cho mô hình n mÙt l°ãng dï liÇu ch°a tëng có ß thÝi iÃm ó.\nKi¿n trúc sâu cho phép hÍc d§n të c¡nh, hình, bÙ ph"
+    },
+    {
+      "page": 13,
+      "image": "page-13.webp",
+      "title": "2016: AlphaGo",
+      "text": "2016: AlphaGo\nAlphaGo và n°Ûc i sÑ 37\nBan §u nó hÍc të kho£ng 150.000 ván cÝ cça chuyên gia con ng°Ýi Ã có trñc giác khßi §u\n™ T¡o ra nhiÁu b£n sao cça AlphaGo và Ã chúng tñ ch¡i vÛi chính mình hàng triÇu l§n\n™ HÇ thÑng không chÉ hÍc të nhïng gì con ng°Ýi ã bi¿t, mà còn tñ mß rÙng không gian\nchi¿n l°ãc b±ng cách khám phá nhïng n°Ûc i ch°a tëng °ãc thí tr°Ûc ó."
+    },
+    {
+      "page": 14,
+      "image": "page-14.webp",
+      "title": "2017: Transformer",
+      "text": "2017: Transformer\nTransformer là b°Ûc ngo·t vì nó cho mô hình hiÃu ngôn ngï theo cách\nlinh ho¡t h¡n: m×i të có thÃ nhìn sang nhïng të quan trÍng khác trong\nc£ câu, thay vì chÉ i tu§n tñ tëng b°Ûc ™ trß thành nÁn móng kù thu"
+    },
+    {
+      "page": 15,
+      "image": "page-15.webp",
+      "title": "2022: ChatGPT",
+      "text": "2022: ChatGPT\nChatGPT xu¥t hiÇn nh° mÙt tr£i nghiÇm ¡i chúng\nL§n §u tiên r¥t ông ng°Ýi dùng phÕ thông có thÃ trñc ti¿p\nch¡m vào mÙt mô hình ngôn ngï m¡nh, thông qua mÙt giao\ndiÇn ¡n gi£n ¿n méc ai cing hiÃu cách dùng"
+    },
+    {
+      "page": 16,
+      "image": "page-16.webp",
+      "title": "Tr°Ûc khi ChatGPT bùng nÕ, nghiên céu mô hình ngôn",
+      "text": "Tr°Ûc khi ChatGPT bùng nÕ, nghiên céu mô hình ngôn\nngï phân thành r¥t nhiÁu nhánh\nChatGPT xu¥t hiÇn, chéng minh hiÇu qu£\n™ trÍng tâm cça toàn ngành b¯t §u dÓn vÁ\ncùng mÙt tråc"
+    },
+    {
+      "page": 17,
+      "image": "page-17.webp",
+      "title": "Transformers, the tech behind LLMs - 3Blue1Brown",
+      "text": "Transformers, the tech behind LLMs - 3Blue1Brown"
+    },
+    {
+      "page": 18,
+      "image": "page-18.webp",
+      "title": "Transformers, the tech behind LLMs - 3Blue1Brown",
+      "text": "Transformers, the tech behind LLMs - 3Blue1Brown"
+    },
+    {
+      "page": 19,
+      "image": "page-19.webp",
+      "title": "Attention in transformers, step-by-step - 3Blue1Brown",
+      "text": "Attention in transformers, step-by-step - 3Blue1Brown"
+    },
+    {
+      "page": 20,
+      "image": "page-20.webp",
+      "title": "Trang 20",
+      "text": ""
+    },
+    {
+      "page": 21,
+      "image": "page-21.webp",
+      "title": "Trang 21",
+      "text": ""
+    },
+    {
+      "page": 22,
+      "image": "page-22.webp",
+      "title": "Trang 22",
+      "text": ""
+    },
+    {
+      "page": 23,
+      "image": "page-23.webp",
+      "title": "Trang 23",
+      "text": ""
+    }
+  ]
+}

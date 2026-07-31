@@ -1,4 +1,4 @@
-import { getSlide } from "./mock-data";
+import { getSlide } from "./course-data";
 import {
   COURSE_OPS,
   COURSE_STATS,
@@ -12,6 +12,7 @@ import {
 import type {
   Answer,
   AnswerBlock,
+  AnswerSource,
   CourseDoc,
   Intent,
   Lang,
@@ -19,6 +20,99 @@ import type {
   ScopeChoice,
   ScopeLevel,
 } from "./types";
+
+function buildAnswerSources(
+  intent: Intent,
+  level: ScopeLevel,
+  doc: CourseDoc,
+  page: number,
+  lang: Lang,
+  blocks: AnswerBlock[],
+  citations: number[],
+): AnswerSource[] {
+  const vi = lang === "vi";
+
+  if (intent === "tutor-probe") {
+    return [{
+      key: "vlearn-tutor-system",
+      title: "VLearn Tutor",
+      detail: vi ? "Mô tả chức năng của trợ lý học tập" : "Study assistant capability description",
+      pages: [],
+    }];
+  }
+
+  if (intent === "ops") {
+    return [
+      {
+        key: "README.md",
+        title: "README.md",
+        detail: vi ? "Lịch, checkpoint và quy định nộp bài" : "Schedule, checkpoints and submission rules",
+        pages: [],
+      },
+      {
+        key: "04-rubric.md",
+        title: "04-rubric.md",
+        detail: vi ? "Cơ cấu điểm và tiêu chí đánh giá" : "Scoring structure and evaluation criteria",
+        pages: [],
+      },
+    ];
+  }
+
+  const courseGroups = new Map<string, AnswerSource>();
+  blocks.forEach((block) => {
+    if (block.kind !== "hits") return;
+    block.items.forEach((item) => {
+      if (!item.source) return;
+      const key = item.docId ?? item.source;
+      const existing = courseGroups.get(key);
+      if (existing) {
+        existing.pages.push(item.page);
+      } else {
+        courseGroups.set(key, {
+          key,
+          title: item.source,
+          detail: item.title,
+          docId: item.docId,
+          pages: [item.page],
+        });
+      }
+    });
+  });
+  if (courseGroups.size > 0) {
+    return [...courseGroups.values()].map((source) => ({
+      ...source,
+      pages: [...new Set(source.pages)].sort((a, b) => a - b),
+    }));
+  }
+
+  const pack = getSessionPack(doc);
+  const pages = citations.length > 0
+    ? citations
+    : level === "page"
+      ? [page]
+      : level === "session"
+        ? pack.sections.map((section) => section.from)
+        : [];
+
+  if (level === "course" && pages.length === 0) {
+    return [{
+      key: "course-library",
+      title: vi ? `Học liệu môn ${COURSE_OPS.code}` : `${COURSE_OPS.code} course library`,
+      detail: vi
+        ? `${COURSE_STATS.docs} tài liệu · ${COURSE_STATS.pages} slide`
+        : `${COURSE_STATS.docs} files · ${COURSE_STATS.pages} slides`,
+      pages: [],
+    }];
+  }
+
+  return [{
+    key: doc.id,
+    title: doc.name,
+    detail: `${pack.dayLabel} · ${pack.title}`,
+    docId: doc.id,
+    pages: [...new Set(pages)].sort((a, b) => a - b),
+  }];
+}
 
 /**
  * Bộ trả lời giả lập — không gọi API.
@@ -717,12 +811,19 @@ export function buildAnswer(
     }
   }
 
+  const sources = buildAnswerSources(intent, level, doc, page, lang, blocks, citations);
+  const citedPages = [
+    ...citations,
+    ...sources.flatMap((source) => source.pages),
+  ];
+
   return {
     intent,
     scope: buildScope(level, doc, page, lang, autoExpanded),
     blocks,
     plain: plainOf(blocks),
-    citations: [...new Set(citations)].sort((a, b) => a - b),
+    citations: [...new Set(citedPages)].sort((a, b) => a - b),
+    sources,
   };
 }
 

@@ -24,7 +24,7 @@ interface Props {
   t: Dict;
   state: ChatState;
   page: number;
-  /** Nhãn buổi đang mở, ví dụ "Day 6". */
+  /** Nhãn buổi đang mở, ví dụ "Day 1". */
   dayLabel: string;
   docName: string;
   sessionPages: number;

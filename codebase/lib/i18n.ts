@@ -91,9 +91,9 @@ const vi = {
       { text: "Tóm tắt buổi học hôm nay", tag: "buổi" },
       { text: "Buổi này gồm những phần nào?", tag: "buổi" },
       { text: "Tóm tắt trang này", tag: "trang" },
-      { text: "Scope creep là gì?", tag: "thuật ngữ" },
-      { text: "Deadline nộp spec là khi nào?", tag: "lớp học" },
-      { text: "So sánh phần mềm truyền thống và sản phẩm AI", tag: "so sánh" },
+      { text: "Dartmouth Workshop là gì?", tag: "thuật ngữ" },
+      { text: "Transformer ra đời năm nào?", tag: "bài học" },
+      { text: "So sánh expert system và deep learning", tag: "so sánh" },
       { text: "Giải thích nội dung dễ hiểu hơn", tag: "trang" },
       { text: "Tạo 3 câu hỏi ôn tập", tag: "trang" },
     ],
@@ -117,6 +117,9 @@ const vi = {
     expandedNote: (from: number, to: string) =>
       `Câu hỏi ở cấp buổi học — đã tự nới phạm vi từ trang ${from} ra ${to}`,
     citations: "Trích dẫn",
+    sourceDocuments: "Tài liệu nguồn",
+    showSources: "Mở danh sách nguồn",
+    hideSources: "Ẩn danh sách nguồn",
     openPage: (page: number) => `Mở trang ${page}`,
     pageShort: (page: number) => `Trang ${page}`,
     pageRange: (from: number, to: number) =>
@@ -133,10 +136,9 @@ const vi = {
     regenerate: "Tạo lại câu trả lời",
     typing: "VLearn Tutor đang soạn câu trả lời",
     empty: "Chưa có tin nhắn nào. Chọn một câu hỏi gợi ý để bắt đầu.",
-    sampleQuestion:
-      "Stakeholder muốn thay đổi yêu cầu sau 3 tuần thì nên xử lý thế nào?",
+    sampleQuestion: "Transformer đánh dấu bước chuyển gì trong lịch sử AI?",
     sampleAnswer:
-      "Nhóm không nên từ chối ngay hoặc thay đổi ngay lập tức. Trước tiên cần làm rõ lý do thay đổi, đánh giá mức độ ảnh hưởng đến phạm vi, thời gian và nguồn lực. Sau đó, team trao đổi với stakeholder để thống nhất ưu tiên và cập nhật lại kế hoạch.",
+      "Transformer là kiến trúc nền tảng đứng sau các mô hình ngôn ngữ lớn và được giới thiệu trong mạch lịch sử AI của bài học.",
     unreadBadge: "tin nhắn mới",
   },
   toast: {
@@ -257,9 +259,9 @@ const en: typeof vi = {
       { text: "Summarise today's session", tag: "session" },
       { text: "What sections does this session have?", tag: "session" },
       { text: "Summarise this page", tag: "page" },
-      { text: "What is scope creep?", tag: "term" },
-      { text: "When is the spec deadline?", tag: "class" },
-      { text: "Compare traditional software and AI products", tag: "compare" },
+      { text: "What was the Dartmouth Workshop?", tag: "term" },
+      { text: "When was the Transformer introduced?", tag: "lesson" },
+      { text: "Compare expert systems and deep learning", tag: "compare" },
       { text: "Explain it more simply", tag: "page" },
       { text: "Write 3 revision questions", tag: "page" },
     ],
@@ -283,6 +285,9 @@ const en: typeof vi = {
     expandedNote: (from: number, to: string) =>
       `Session-level question — scope widened from page ${from} to ${to}`,
     citations: "Sources",
+    sourceDocuments: "Source documents",
+    showSources: "Show sources",
+    hideSources: "Hide sources",
     openPage: (page: number) => `Open page ${page}`,
     pageShort: (page: number) => `Page ${page}`,
     pageRange: (from: number, to: number) =>
@@ -299,10 +304,9 @@ const en: typeof vi = {
     regenerate: "Regenerate answer",
     typing: "VLearn Tutor is writing",
     empty: "No messages yet. Pick a suggested question to start.",
-    sampleQuestion:
-      "A stakeholder wants to change the requirements after 3 weeks — how should we handle it?",
+    sampleQuestion: "What shift did the Transformer mark in AI history?",
     sampleAnswer:
-      "Don't refuse outright, and don't accept on the spot either. First clarify why the change is needed, then quantify its impact on scope, timeline and resources. Bring that to the stakeholder, agree on priorities together, and update the plan in writing.",
+      "The lesson presents the Transformer as the architecture behind large language models within the broader history of AI.",
     unreadBadge: "new messages",
   },
   toast: {

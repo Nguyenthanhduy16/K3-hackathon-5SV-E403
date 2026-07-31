@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import IconButton from "./IconButton";
 import Tooltip from "./Tooltip";
-import { HIGHLIGHT_COLORS, PEN_COLORS } from "@/lib/mock-data";
+import { HIGHLIGHT_COLORS, PEN_COLORS } from "@/lib/course-data";
 import type { Dict } from "@/lib/i18n";
 import type { MarkStyle, ToolId } from "@/lib/types";
 

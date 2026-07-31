@@ -32,9 +32,9 @@ app/
 components/
   Header.tsx           thanh trên: quay lại · logo · tên file · AI · VI/EN · sáng-tối · tài khoản
   AIAssistantButton.tsx nút "Trợ lý AI" bo tròn, gradient xanh, hover nổi
-  CourseSidebar.tsx    danh sách Day 1–6, đóng/mở từng ngày, chọn tài liệu, thu gọn panel
+  CourseSidebar.tsx    danh sách deck thật trong repo, chọn tài liệu, thu gọn panel
   DocumentToolbar.tsx  Đọc/Bút/Highlight · menu ba chấm · badge trang·note · zoom · hành động
-  PDFViewer.tsx        khung giấy + slide dựng bằng CSS + lớp ghi chú của người dùng
+  PDFViewer.tsx        ảnh trang sinh từ PDF thật + lớp ghi chú của người dùng
   PageNavigation.tsx   chuyển trang trước/sau, nhập số trang để nhảy
   LessonCompletion.tsx CTA hoàn thành bài học, kích hoạt tóm tắt cuối buổi
   AIChatPanel.tsx      panel chat: header, thanh phạm vi, luồng tin nhắn, ô nhập
@@ -45,17 +45,20 @@ components/
   Tooltip.tsx, IconButton.tsx  thành phần dùng chung
 lib/
   types.ts             kiểu dữ liệu dùng chung
-  mock-data.ts         6 Day · 12 tài liệu · bộ slide riêng cho từng buổi
+  course-data.ts       catalog deck thật + ánh xạ trang tới asset WebP
   session-data.ts      dữ liệu CẤP BUỔI: dàn ý, takeaway, thuật ngữ, vận hành lớp, tìm kiếm
   i18n.ts              từ điển VI/EN cho toàn bộ chữ trên giao diện
   ai-mock.ts           đoán ý định → chọn phạm vi → dựng câu trả lời dự phòng có cấu trúc
   ai-context.ts        gom nội dung phạm vi thành context cho AI + parse text AI thành khối
 ```
 
+`public/slides/day01-slide-blue-v0/` chứa 23 ảnh WebP và `manifest.json`, được sinh trực tiếp từ
+`data/vlearn-pack/slide/day01-slide-blue-v0.pdf` trên nhánh `main`.
+
 ## Trạng thái mặc định
 
-Day 6 đang mở · tài liệu `day06-ai-product-project-management.pdf` (37 trang) · đang xem
-**trang 2** · zoom 111% · trang 2 có sẵn 1 ghi chú · chatbot **đóng** · phạm vi tìm **Tự động**.
+Day 1 đang mở · tài liệu thật `day01-slide-blue-v0.pdf` (23 trang) · đang xem
+**trang 1** · zoom 100% · không chèn ghi chú giả · chatbot **đóng** · phạm vi tìm **Tự động**.
 
 Đường demo ngắn nhất cho P1: mở Trợ lý AI → bấm chip **"Tóm tắt buổi học hôm nay"** → xem dòng
 nới phạm vi và dàn ý 6 mục → bấm một khoảng trang để nhảy tới slide đó.
@@ -72,12 +75,17 @@ drawer, mở bằng nút trong header.
 bật, bấm vào slide để đặt ghi chú. Zoom ±: 50→200%. Phóng to = ẩn sidebar và nới rộng khung đọc.
 Tải xuống / Lưu / Undo / Xoá ghi chú đều đổi trạng thái thật và bắn toast. Menu ba chấm có 4 mục.
 
-**Trang** — nút trước/sau, hoặc gõ số trang rồi Enter (1–37). Mỗi trang render một slide khác nhau.
+**Trang** — nút trước/sau, hoặc gõ số trang rồi Enter (1–23). Mỗi trang hiển thị đúng một trang của PDF nguồn.
 
 **Chatbot** — 8 câu hỏi gợi ý (mỗi chip ghi rõ cấp trang / buổi / môn) · gõ và nhấn Enter để gửi
 (Shift+Enter xuống dòng) · hiện animation đang nhập rồi trả lời sau 0,9–1,9 giây · thích /
 không thích / sao chép / tạo lại · thu nhỏ thành cửa sổ góc dưới phải · xoá cuộc trò chuyện.
 Lịch sử chat lưu trong state, mất khi reload.
+
+**Citation bắt buộc** — mỗi câu thông tin do AI sinh phải kèm `(trang N)` hoặc `(nguồn: tên-tài-liệu)`.
+Server loại câu trả lời nếu có bất kỳ mệnh đề thông tin nào thiếu citation và dùng phương án dự phòng có nguồn.
+Danh sách tài liệu nguồn luôn mở dưới câu trả lời; nguồn slide bấm được để quay lại đúng trang, còn nguồn vận hành
+hiển thị rõ `README.md` hoặc `04-rubric.md`.
 
 **Hoàn thành bài học** — nút ở cuối trình đọc đánh dấu riêng từng tài liệu đã học xong, tự mở VLearn Tutor,
 chuyển phạm vi sang **Cả buổi** và gửi yêu cầu tóm tắt toàn bộ bài học. Nút khoá sau lần bấm đầu để tránh
@@ -95,15 +103,15 @@ Mockup xử lý bằng **thang phạm vi truy xuất** đặt ngay dưới heade
 |---|---|---|
 | Tự động *(mặc định)* | tự đoán theo câu hỏi | — |
 | Trang này | slide đang mở | giải thích đoạn đang đọc, ôn tập, ví dụ |
-| Cả buổi | toàn bộ 37 slide của Day 6 | tóm tắt buổi, dàn ý, thuật ngữ, so sánh, từ khoá |
-| Cả môn | 12 tài liệu + dữ liệu vận hành lớp | lịch, checkpoint, cách nộp, cách chấm, thăm dò tutor |
+| Cả buổi | toàn bộ 23 slide của Day 1 | tóm tắt buổi, dàn ý, thuật ngữ, so sánh, từ khoá |
+| Cả môn | deck PDF thật hiện có + dữ liệu vận hành lớp | lịch, checkpoint, cách nộp, cách chấm, thăm dò tutor |
 
 Mỗi lượt hỏi đi qua hai bước trong `lib/ai-mock.ts`: đoán ý định (12 nhóm, phủ đủ 8 loại trong
 bảng khảo sát) → chọn phạm vi. Khi hệ thống tự nới phạm vi, câu trả lời hiện dòng
-*"Câu hỏi ở cấp buổi học — đã tự nới phạm vi từ trang 2 ra Cả buổi · Day 6"*, để người dùng thấy
+*"Câu hỏi ở cấp buổi học — đã tự nới phạm vi từ trang hiện tại ra Cả buổi · Day 1"*, để người dùng thấy
 được vì sao lần này trả lời được.
 
-Câu trả lời cấp buổi **không phải văn xuôi** mà là khối có cấu trúc: dàn ý 6 mục kèm khoảng trang
+Câu trả lời cấp buổi **không phải văn xuôi** mà là khối có cấu trúc: dàn ý kèm khoảng trang
 bấm được (bấm là nhảy tới đúng slide), ba takeaway, danh sách thuật ngữ, và trích dẫn trang ở cuối.
 Phạm vi "Cả môn" trả kết quả kèm nhãn buổi + tên file, bấm vào là đổi luôn tài liệu đang đọc.
 
@@ -112,15 +120,13 @@ Khi không tìm thấy, tutor nói rõ đã quét bao nhiêu slide và gợi ý 
 
 ## Phần nào là mock
 
-- **Không đọc PDF thật.** Mỗi trang là một slide dựng bằng CSS từ `lib/mock-data.ts`. Day 6 có
-  bộ 16 slide soạn tay + phần xoay vòng; Day 1–5 mỗi buổi có bộ slide riêng để tìm kiếm ở phạm vi
-  "Cả môn" trả về kết quả thật sự khác nhau. Cỡ chữ dùng đơn vị container query (`cqw`) nên co
-  giãn đúng theo mức zoom.
-- **Dữ liệu cấp buổi là hardcode** — dàn ý, takeaway và 7 thuật ngữ của Day 6 nằm trong
-  `lib/session-data.ts`. Trong bản thật, đây là chỗ cần một job tóm tắt chạy sẵn sau mỗi buổi
-  (offline summarisation) rồi lưu cạnh tài liệu, chứ không tóm tắt lại mỗi lần có người hỏi.
-- **Tìm kiếm là thật, trong phạm vi mock.** `searchSession` / `searchCourse` quét thật nội dung
-  slide, bỏ dấu tiếng Việt, chấm điểm theo tiêu đề và thân slide — không phải kết quả dựng sẵn.
+- **Slide hiển thị là thật.** 23 ảnh trang được render ở đúng độ phân giải 1920×1080 từ file PDF
+  `data/vlearn-pack/slide/day01-slide-blue-v0.pdf`; `manifest.json` lưu SHA-256 của file nguồn để kiểm tra.
+  `PDFViewer.tsx` chỉ hiển thị ảnh trang và lớp annotation, không còn dựng nội dung slide bằng CSS.
+- **Catalog không tạo tài liệu giả.** Sidebar chỉ hiện deck đang thực sự có trong repo. Khi bổ sung PDF mới,
+  cần sinh bộ page asset + manifest tương ứng rồi thêm một entry vào `COURSE_DAYS`.
+- **Tìm kiếm dùng text trích từ PDF thật.** `searchSession` / `searchCourse` quét nội dung trong manifest,
+  bỏ dấu tiếng Việt và chấm điểm theo tiêu đề/thân slide.
 - **Dữ liệu vận hành lớp là thật**, lấy từ `README.md` và `04-rubric.md` của repo này.
 - **Gọi AI thật (OpenAI).** Mỗi lượt hỏi: `ai-mock.ts` chọn phạm vi + trích dẫn →
   `ai-context.ts` gom nội dung phạm vi đó thành grounding context → `app/api/chat/route.ts`
