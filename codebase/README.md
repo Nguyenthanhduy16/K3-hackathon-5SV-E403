@@ -36,6 +36,7 @@ components/
   DocumentToolbar.tsx  Đọc/Bút/Highlight · menu ba chấm · badge trang·note · zoom · hành động
   PDFViewer.tsx        khung giấy + slide dựng bằng CSS + lớp ghi chú của người dùng
   PageNavigation.tsx   chuyển trang trước/sau, nhập số trang để nhảy
+  LessonCompletion.tsx CTA hoàn thành bài học, kích hoạt tóm tắt cuối buổi
   AIChatPanel.tsx      panel chat: header, thanh phạm vi, luồng tin nhắn, ô nhập
   ChatMessage.tsx      bong bóng tin nhắn + chip phạm vi + trích dẫn trang bấm được
   AnswerBlocks.tsx     render câu trả lời có cấu trúc: dàn ý, bảng, thuật ngữ, kết quả tìm
@@ -77,6 +78,10 @@ Tải xuống / Lưu / Undo / Xoá ghi chú đều đổi trạng thái thật v
 (Shift+Enter xuống dòng) · hiện animation đang nhập rồi trả lời sau 0,9–1,9 giây · thích /
 không thích / sao chép / tạo lại · thu nhỏ thành cửa sổ góc dưới phải · xoá cuộc trò chuyện.
 Lịch sử chat lưu trong state, mất khi reload.
+
+**Hoàn thành bài học** — nút ở cuối trình đọc đánh dấu riêng từng tài liệu đã học xong, tự mở VLearn Tutor,
+chuyển phạm vi sang **Cả buổi** và gửi yêu cầu tóm tắt toàn bộ bài học. Nút khoá sau lần bấm đầu để tránh
+tạo bản tóm tắt trùng lặp; khi chưa có API key vẫn dùng bản tóm tắt dự phòng có cấu trúc và trích dẫn trang.
 
 ## Xử lý P1 — retrieval neo theo trang, học viên hỏi theo buổi
 

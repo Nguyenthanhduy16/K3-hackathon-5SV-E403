@@ -6,6 +6,7 @@ import CourseSidebar from "@/components/CourseSidebar";
 import DocumentToolbar from "@/components/DocumentToolbar";
 import PDFViewer from "@/components/PDFViewer";
 import PageNavigation from "@/components/PageNavigation";
+import LessonCompletion from "@/components/LessonCompletion";
 import AIChatPanel from "@/components/AIChatPanel";
 import Toasts from "@/components/Toasts";
 import { getDict } from "@/lib/i18n";
@@ -69,6 +70,7 @@ export default function ReaderPage() {
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [completedDocIds, setCompletedDocIds] = useState<string[]>([]);
 
   /* ---------------- thông báo ---------------- */
   const [toasts, setToasts] = useState<Toast[]>([]);
@@ -291,14 +293,14 @@ export default function ReaderPage() {
     }
   }
 
-  async function ask(question: string) {
+  async function ask(question: string, forcedScope?: ScopeChoice) {
     const text = question.trim();
     if (!text || isTyping) return;
 
     // Phạm vi được quyết định TRƯỚC khi trả lời: đây là chỗ xử lý P1 —
     // câu hỏi cấp buổi tự nới ra cả buổi thay vì kẹt ở trang đang mở.
     // Câu trả lời mock giữ vai trò khung (scope + trích dẫn) và đường lui.
-    const fallback = buildAnswer(text, doc, page, lang, scopeChoice);
+    const fallback = buildAnswer(text, doc, page, lang, forcedScope ?? scopeChoice);
     const history = recentHistory(messages);
 
     setMessages((prev) => [
@@ -311,6 +313,16 @@ export default function ReaderPage() {
     const answer = (await fetchAiAnswer(text, fallback, history)) ?? fallback;
     setMessages((prev) => [...prev, messageFromAnswer(answer)]);
     setIsTyping(false);
+  }
+
+  function completeLesson() {
+    if (isTyping || completedDocIds.includes(doc.id)) return;
+
+    setCompletedDocIds((prev) => [...prev, doc.id]);
+    setScopeChoice("session");
+    setChatState("open");
+    pushToast(t.toast.lessonCompleted, "success");
+    void ask(t.lesson.summaryPrompt, "session");
   }
 
   async function regenerate(id: string) {
@@ -487,6 +499,13 @@ export default function ReaderPage() {
               baseWidth={focusMode ? 1180 : 900}
             />
           </div>
+
+          <LessonCompletion
+            t={t}
+            completed={completedDocIds.includes(doc.id)}
+            isSummarizing={isTyping}
+            onComplete={completeLesson}
+          />
 
           <PageNavigation t={t} page={page} total={doc.pages} onChange={changePage} />
         </main>

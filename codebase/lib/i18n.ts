@@ -65,6 +65,19 @@ const vi = {
     of: (total: number) => `/ ${total}`,
     jump: "Nhập số trang rồi nhấn Enter",
   },
+  lesson: {
+    readyTitle: "Bạn đã học xong bài này?",
+    readyDescription:
+      "Đánh dấu hoàn thành để VLearn Tutor tự động tóm tắt toàn bộ nội dung bài học.",
+    completeButton: "Hoàn thành bài học",
+    summarizingButton: "Đang tóm tắt...",
+    completedTitle: "Đã hoàn thành bài học",
+    completedDescription:
+      "VLearn Tutor đã tự động tạo bản tóm tắt cuối buổi trong khung trò chuyện.",
+    completedButton: "Đã hoàn thành",
+    summaryPrompt:
+      "Tôi đã hoàn thành bài học. Hãy tự động tóm tắt toàn bộ buổi học này.",
+  },
   chat: {
     title: "VLearn Tutor",
     status: "Đang trực tuyến",
@@ -149,6 +162,7 @@ const vi = {
     scopeChanged: (scope: string) => `Phạm vi tìm: ${scope}`,
     aiNoKey: "Chưa cấu hình OPENAI_API_KEY — đang dùng câu trả lời dựng sẵn",
     aiFallback: "Không gọi được AI — đang dùng câu trả lời dựng sẵn",
+    lessonCompleted: "Đã hoàn thành bài học — VLearn Tutor đang tạo bản tóm tắt",
   },
 };
 
@@ -216,6 +230,19 @@ const en: typeof vi = {
     page: "Page",
     of: (total: number) => `/ ${total}`,
     jump: "Type a page number then press Enter",
+  },
+  lesson: {
+    readyTitle: "Finished this lesson?",
+    readyDescription:
+      "Mark it complete and VLearn Tutor will automatically summarise the whole lesson.",
+    completeButton: "Complete lesson",
+    summarizingButton: "Summarising...",
+    completedTitle: "Lesson completed",
+    completedDescription:
+      "VLearn Tutor has automatically added an end-of-lesson summary to the chat.",
+    completedButton: "Completed",
+    summaryPrompt:
+      "I have completed this lesson. Please automatically summarise the whole session.",
   },
   chat: {
     title: "VLearn Tutor",
@@ -301,6 +328,7 @@ const en: typeof vi = {
     scopeChanged: (scope: string) => `Search scope: ${scope}`,
     aiNoKey: "OPENAI_API_KEY not set — falling back to canned answers",
     aiFallback: "AI call failed — falling back to canned answers",
+    lessonCompleted: "Lesson completed — VLearn Tutor is creating your summary",
   },
 };
 
